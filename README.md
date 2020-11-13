@@ -1,5 +1,12 @@
 # Cryptopricebot
-A telegram bot to check your Crypto investments and keep track of your porfolio
+
+### What it is? 
+
+A telegram bot to check your Crypto investments and keep track of your porfolio.
+
+### Why C++? Python would fit 10000000 times better for that!
+
+I know, it's just because I want to have some practice outside the game engine programming context.
 
 ## Patform
 
