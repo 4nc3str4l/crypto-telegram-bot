@@ -12,6 +12,17 @@ I know, it's just because I want to have some practice outside the game engine p
 
 Linux (As I want it to run on my ubuntu server I'm just going to make sure that it works on Linux)
 
+## Third Party Keys:
+
+In order to use this project you will need **2 api keys**:
+
+1) **Telegram API KEY** (To be able to send messages to your users)
+2) **Nomics** key (To query crypto prices)
+
+Then in order to run the bot you will need to do:
+
+```./crypto_bot <telegram_key> <nomics_key> ```
+
 ## Dependencies 
 
 ```sudo apt-get install binutils libssl-dev libboost-system-dev zlib1g-dev libcurl4-openssl-dev```
