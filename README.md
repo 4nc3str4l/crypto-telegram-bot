@@ -4,7 +4,7 @@ A telegram bot to check your Crypto investments and keep track of your porfolio
 
 ## Dependnecies
 
-sudo apt-get install binutils libssl-dev libboost-system-dev zlib1g-dev libcurl4-openssl-dev
+```sudo apt-get install binutils libssl-dev libboost-system-dev zlib1g-dev libcurl4-openssl-dev```
 
 ## HOW TO Install telegram library
 Go to:
