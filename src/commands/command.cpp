@@ -18,7 +18,7 @@ void Command::execute(const std::vector<std::string> &arguments)
     if (!this->isNumArgmentsCorrect())
     {
         printError(
-            fmt::format("Incorrect number of arguments got {} expected", this->m_arguments.size() -1, this->m_numArguments),
+            fmt::format("Incorrect number of arguments got {} expected {}", this->m_arguments.size() -1, this->m_numArguments),
             true
         );
         return;
@@ -102,8 +102,8 @@ const std::string& Command::getTicker()
 
 void Command::printError(const std::string& error, bool send=false)
 {
-    std::string message = fmt::format("ERROR [{}] {}", this->m_command, error);
-    std::cout << message << std::endl;
+    std::string message = fmt::format("{}: {}", this->m_command, error);
+    std::cout << "[ERROR] " << message << std::endl;
     
     if(send)
     {
@@ -113,8 +113,8 @@ void Command::printError(const std::string& error, bool send=false)
 
 void Command::printMsg(const std::string& msg, bool send=false)
 {
-    std::string message = fmt::format("INFO [{}] {}", this->m_command, msg);
-    std::cout << message << std::endl;
+    std::string message = fmt::format("{}: {}", this->m_command, msg);
+    std::cout << "[INFO] " << message << std::endl;
 
     if(send)
     {
