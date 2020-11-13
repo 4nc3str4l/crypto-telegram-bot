@@ -12,5 +12,5 @@ protected:
     const std::string getDescription();
     void commandLogic();
 private: 
-  PriceChecker* m_priceChecker;
+    PriceChecker* m_priceChecker;
 };

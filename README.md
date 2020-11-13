@@ -40,7 +40,7 @@ Go to:
 ## TODO:
 
 1) [ ] Implement Persistence System
-2) [ ] Implement Base Command
+2) [x] Implement Base Command
 3) [ ] CheckConvertion
 4) [ ] CheckNPriceCommand
 5) [ ] CheckPortfolio
@@ -60,3 +60,11 @@ Go to:
 19) [ ] SetPortfolioAssetCommand
 20) [ ] TrackConvertionCommand
 21) [ ] UntrackConvertionCommnand
+
+## Commands
+
+### Check Price
+**Description**: Checks the price of a cryptocurrency in **€**
+```/price <ticker>```
+example:
+```/price BTC```
