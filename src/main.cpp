@@ -4,13 +4,14 @@
 
 #include "price_checker.h"
 #include "data/persistence.h"
+#include "commands/price_command.h"
 
 #include <fmt/core.h>
 
 PriceChecker priceChecker;
 Persistence persistence;
 
-std::vector<std::string> getCommandArguments(const std::string &command)
+const std::vector<std::string> getCommandArguments(const std::string &command)
 {
     std::istringstream iss(command);
     std::vector<std::string> results((std::istream_iterator<std::string>(iss)),
@@ -29,7 +30,7 @@ int main(int argc, char *argv[])
 
     std::string telegramKey(argv[1]);
 
-    priceChecker.SetApiKey(std::string(argv[2]));
+    priceChecker.setApiKey(std::string(argv[2]));
 
     TgBot::Bot bot(telegramKey);
 
@@ -43,24 +44,9 @@ int main(int argc, char *argv[])
         bot.getApi().sendMessage(message->chat->id, "Hi!");
     });
 
-    bot.getEvents().onCommand("price", [&bot](TgBot::Message::Ptr message) {
-        std::vector<std::string> params = getCommandArguments(message->text);
-        if (params.size() == 2)
-        {
-            std::string ticker = params[1];
-            std::transform(ticker.begin(), ticker.end(), ticker.begin(), ::toupper);
-            double price = priceChecker.FetchPrice(ticker);
-            if (price != -1)
-            {
-                bot.getApi().sendMessage(message->chat->id,
-                                         fmt::format("Price of {} is {} €", ticker, price));
-            }
-            else
-            {
-        bot.getApi().sendMessage(message->chat->id,
-                                 fmt::format("Could not check price of {}", ticker));
-            }
-        }
+    bot.getEvents().onCommand("price", [&bot](TgBot::Message::Ptr message) {    
+        PriceCommand cmd(bot, message->chat->id, &priceChecker);
+        cmd.execute(getCommandArguments(message->text));
     });
 
     bot.getEvents().onAnyMessage([&bot](TgBot::Message::Ptr message) {

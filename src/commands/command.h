@@ -7,28 +7,32 @@
 #include <tgbot/tgbot.h>
 
 struct Investor;
+class PriceChecker;
 
 class Command 
 {
 public:
 
   Command(const std::string& command, const unsigned short numArguments,
-   const TgBot::Bot& bot, const std::int64_t chatId);
+          TgBot::Bot& bot, const std::int64_t chatId);
+  virtual ~Command(){};
   bool isNumArgmentsCorrect();
-  void execute(const std::vector<std::string>& arguments, const Investor& caller);
+  void execute(const std::vector<std::string>& arguments);
 
 protected:
   void send(const std::string& message);
   double getDouble();
-  int getInteger();
+  int getInt();
   const std::string& getString();
+  const std::string& getTicker();
+  
 
   // Abstract functions
   virtual void sendInstructions() = 0;
-  virtual const std::string& getDescription() = 0;
+  virtual const std::string getDescription() = 0;
   virtual void commandLogic() = 0;
-  void printError(const std::string& error);
-  void printMsg(const std::string& msg);
+  void printError(const std::string& error, bool send);
+  void printMsg(const std::string& msg, bool send);
   
 protected:
   std::string m_command;
@@ -37,4 +41,5 @@ protected:
   unsigned short m_numArguments;
   unsigned short m_indexRead = 1;
   std::vector<std::string> m_arguments;
+
 };

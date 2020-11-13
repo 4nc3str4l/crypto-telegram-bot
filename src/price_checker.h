@@ -14,11 +14,11 @@ typedef std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::_V2
 class PriceChecker
 {
 public:
-    double FetchPrice(const std::string& ticker);
-    void SetApiKey(const std::string& apiKey);
+    double fetchPrice(const std::string& ticker);
+    void setApiKey(const std::string& apiKey);
 private:
-    bool ShouldFetchPrice(const std::string& ticker);
-    void CachePrice(const std::string& ticker, double price);
+    bool shouldFetchPrice(const std::string& ticker);
+    void cachePrice(const std::string& ticker, double price);
 private:
     std::string m_apiKey;
     std::map<std::string, double> m_cachedPrices;

@@ -9,15 +9,15 @@
 using json = nlohmann::json;
 
 
-void PriceChecker::SetApiKey(const std::string& apiKey)
+void PriceChecker::setApiKey(const std::string& apiKey)
 {
     this->m_apiKey = apiKey;
 }
 
 
-double PriceChecker::FetchPrice(const std::string& ticker)
+double PriceChecker::fetchPrice(const std::string& ticker)
 {
-    if(!this->ShouldFetchPrice(ticker))
+    if(!this->shouldFetchPrice(ticker))
     {
         std::cout << "Cached price " << ticker << std::endl;
         return this->m_cachedPrices[ticker];
@@ -40,7 +40,7 @@ double PriceChecker::FetchPrice(const std::string& ticker)
             std::string s = price.dump();
             s.erase(std::remove(s.begin(), s.end(), '\"'), s.end());
             double dPrice = std::stod(s);
-            this->CachePrice(ticker, dPrice);
+            this->cachePrice(ticker, dPrice);
             return dPrice;
         }else{
             return -1;
@@ -52,7 +52,7 @@ double PriceChecker::FetchPrice(const std::string& ticker)
     }
 }
 
-bool PriceChecker::ShouldFetchPrice(const std::string& ticker)
+bool PriceChecker::shouldFetchPrice(const std::string& ticker)
 {
     if(this->m_cachedPrices.find(ticker) == this->m_cachedPrices.end())
     {
@@ -65,7 +65,7 @@ bool PriceChecker::ShouldFetchPrice(const std::string& ticker)
 }
 
 
-void PriceChecker::CachePrice(const std::string& ticker, double price)
+void PriceChecker::cachePrice(const std::string& ticker, double price)
 {
     t to = Time::now();
     this->m_cachedPrices[ticker] = price;
