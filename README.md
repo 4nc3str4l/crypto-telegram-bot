@@ -1,8 +1,11 @@
 # Cryptopricebot
 A telegram bot to check your Crypto investments and keep track of your porfolio
 
+## Patform
 
-## Dependnecies
+Linux (As I want it to run on my ubuntu server I'm just going to make sure that it works on Linux)
+
+## Dependencies 
 
 ```sudo apt-get install binutils libssl-dev libboost-system-dev zlib1g-dev libcurl4-openssl-dev```
 
