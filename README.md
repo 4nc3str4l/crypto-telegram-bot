@@ -24,7 +24,7 @@ Go to:
 ```cd build```
 ```cmake ..```
 ```cmake --build .```
-```sudo make instal```
+```sudo make install```
 
 ## TODO:
 
