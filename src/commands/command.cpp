@@ -20,6 +20,7 @@ void Command::execute(const std::vector<std::string> &arguments, const Investor 
         printError(fmt::format("Incorrect number of arguments got {} expected", this->arguments.size() -1, this->m_numArguments));
         return;
     }
+
 }
 
 bool Command::isNumArgmentsCorrect()
@@ -74,7 +75,7 @@ std::string& Command::getString()
     if(this->m_indexRead >= m_arguments.size())
     {
         printError("Attempted to read int when no more params can be retreived.");
-        return -1;
+        return std::string::empty;
     }
 
     return this->m_arguments[this->m_indexRead++];
@@ -94,5 +95,12 @@ void Command::printMsg(const std::string& msg)
 
 void Command::send(const std::string& message)
 {
-    
+    try
+    {
+        this->m_bot->getApi().sendMessage(m_chatId, message);
+    }
+    catch(std::exception& e)
+    {
+        printError(fmt::format("Could not send message: {} to chat id {}", message, m_chatId));
+    }
 }

@@ -26,13 +26,13 @@ protected:
   // Abstract functions
   virtual void sendInstructions() = 0;
   virtual const std::string& getDescription() = 0;
-  virtual void commandLogic();
+  virtual void commandLogic() = 0;
   void printError(const std::string& error);
   void printMsg(const std::string& msg);
   
 protected:
   std::string m_command;
-  TgBot::Bot& bot* m_bot;
+  TgBot::Bot* m_bot;
   std::int64_t m_chatId;
   unsigned short m_numArguments;
   unsigned short m_indexRead = 1;
