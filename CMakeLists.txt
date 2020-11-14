@@ -83,5 +83,6 @@ target_link_libraries(${PROJECT_NAME}
   ${Boost_LIBRARIES}
   ${CURL_LIBRARIES}
   -lstdc++fs
+  -lpthread
 )
 

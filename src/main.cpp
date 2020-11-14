@@ -3,6 +3,7 @@
 #include <string>
 
 #include "price_checker.h"
+#include "price_watcher.h"
 #include "data/persistence.h"
 #include "commands/price_command.h"
 
@@ -27,6 +28,10 @@ int main(int argc, char *argv[])
         std::cout << "Invalid number or arguments" << std::endl;
         return 1;
     }
+
+
+    // Start the price watcher
+    PriceWatcher::shared_instance().start();
 
     std::string telegramKey(argv[1]);
 
