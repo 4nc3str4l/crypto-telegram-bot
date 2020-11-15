@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 
     bot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message) {
         std::cout << "User Id " << message->from->id << std::endl;
-        if (!persistence.IsWhiteListed(message->from->id))
+        if (!persistence.isWhiteListed(message->from->id))
         {
             bot.getApi().sendMessage(message->chat->id, "Unauthorized");
             return;

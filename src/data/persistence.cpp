@@ -9,25 +9,25 @@ namespace fs = std::experimental::filesystem;
 
 Persistence::Persistence()
 {
-  bool shouldCreateFile = !this->IsFilePresent();
+  bool shouldCreateFile = !this->isFilePresent();
   if (shouldCreateFile)
   {
     std::cout << "File should be created " << std::endl;
-    this->CreateInitialFile();
+    this->createInitialFile();
   }
   else
   {
     std::cout << "File is present" << std::endl;
   }
-  this->LoadData();
+  this->loadData();
 }
 
-bool Persistence::IsFilePresent()
+bool Persistence::isFilePresent()
 {
   return fs::exists(FILE_PATH);
 }
 
-void Persistence::CreateInitialFile()
+void Persistence::createInitialFile()
 {
   // Generate a JSON FILE
   json j;
@@ -39,16 +39,16 @@ void Persistence::CreateInitialFile()
   o.close();
 }
 
-void Persistence::LoadData()
+void Persistence::loadData()
 {
   std::ifstream i(FILE_PATH);
   json j;
   i >> j;
   i.close();
-  this->LoadWhiteListed(j);
+  this->loadWhiteListed(j);
 }
 
-void Persistence::LoadWhiteListed(const json &data)
+void Persistence::loadWhiteListed(const json &data)
 {
   // Load whitelisted Ips
   auto ids = data["whitelisted-ids"];
@@ -59,7 +59,7 @@ void Persistence::LoadWhiteListed(const json &data)
   std::cout << "Num whitelisted ids " << this->data.whitelisted_ids.size() << std::endl;
 }
 
-bool Persistence::IsWhiteListed(const std::int32_t id)
+bool Persistence::isWhiteListed(const std::int32_t id)
 {
   // If there is no one whitelisted this bot is publix
   if (this->data.whitelisted_ids.size() == 0)

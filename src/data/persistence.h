@@ -12,13 +12,13 @@ class Persistence
 {
 public:
     Persistence();
-    bool IsWhiteListed(const std::int32_t id);
+    bool isWhiteListed(const std::int32_t id);
 private:
-    bool IsFilePresent();
-    void CreateInitialFile();
-    void LoadData();
-    void LoadWhiteListed(const json& data);
-    void LoadUsers(const json& data);
+    bool isFilePresent();
+    void createInitialFile();
+    void loadData();
+    void loadWhiteListed(const json& data);
+    void loadUsers(const json& data);
 private:
     app_data data;
 };
