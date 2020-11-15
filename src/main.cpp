@@ -29,15 +29,14 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-
-    // Start the price watcher
-    PriceWatcher::shared_instance().start();
-
     std::string telegramKey(argv[1]);
-
+    
     priceChecker.setApiKey(std::string(argv[2]));
 
     TgBot::Bot bot(telegramKey);
+
+    // Start the price watcher
+    PriceWatcher::shared_instance().start(&bot);
 
     bot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message) {
         std::cout << "User Id " << message->from->id << std::endl;

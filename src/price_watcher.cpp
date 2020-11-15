@@ -3,8 +3,9 @@
 #include <chrono>
 #include <iostream>
 
-void PriceWatcher::start()
+void PriceWatcher::start(TgBot::Bot* bot)
 {
+    m_bot = bot;
     m_running = true;
     t = std::thread(&PriceWatcher::checkLoop, this);
 }
@@ -29,4 +30,5 @@ PriceWatcher::~PriceWatcher()
 {
     m_running = false;
     t.join();
+    
 }
