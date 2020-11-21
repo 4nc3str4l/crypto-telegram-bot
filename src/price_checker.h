@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 #include <chrono>
+#include <mutex>
 
 typedef std::chrono::high_resolution_clock Time;
 typedef std::chrono::milliseconds ms;
@@ -14,6 +15,7 @@ typedef std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::_V2
 class PriceChecker
 {
 public:
+    static PriceChecker &shared_instance() {static PriceChecker checker; return checker;}
     double fetchPrice(const std::string& ticker);
     void setApiKey(const std::string& apiKey);
 private:
@@ -21,6 +23,7 @@ private:
     void cachePrice(const std::string& ticker, double price);
 private:
     std::string m_apiKey;
+    std::mutex m_mutex;
     std::map<std::string, double> m_cachedPrices;
     std::map<std::string, t> m_cachedTimes;
 };

@@ -2,9 +2,9 @@
 #include <fmt/core.h>
 #include "../price_checker.h"
 
-PriceCommand::PriceCommand(TgBot::Bot& bot, const std::int64_t chatId, PriceChecker* priceCheker) :
+
+PriceCommand::PriceCommand(TgBot::Bot& bot, const std::int64_t chatId) :
 Command("price", 1, bot, chatId){
-    m_priceChecker = priceCheker;
 }
 
 void PriceCommand::sendInstructions()
@@ -25,7 +25,7 @@ PriceCommand::~PriceCommand()
 void PriceCommand::commandLogic()
 {
     std::string ticker = getTicker();
-    double price = m_priceChecker->fetchPrice(ticker);
+    double price = PriceChecker::shared_instance().fetchPrice(ticker);
     if (price != -1)
     {
         send(fmt::format("Price of {} is {} €", ticker, price));

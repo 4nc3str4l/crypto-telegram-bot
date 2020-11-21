@@ -1,15 +1,15 @@
 #include <iostream>
 #include <tgbot/tgbot.h>
 #include <string>
+#include <fmt/core.h>
+
 
 #include "price_checker.h"
 #include "price_watcher.h"
 #include "data/persistence.h"
 #include "commands/price_command.h"
+#include "constants.h"
 
-#include <fmt/core.h>
-
-PriceChecker priceChecker;
 Persistence persistence;
 
 const std::vector<std::string> getCommandArguments(const std::string &command)
@@ -30,15 +30,13 @@ int main(int argc, char *argv[])
     }
 
     std::string telegramKey(argv[1]);
-    
-    priceChecker.setApiKey(std::string(argv[2]));
-
+    PriceChecker::shared_instance().setApiKey(std::string(argv[2]));
     TgBot::Bot bot(telegramKey);
 
     // Start the price watcher
     PriceWatcher::shared_instance().start(&bot);
 
-    bot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message) {
+    bot.getEvents().onCommand(COMMAND_START, [&bot](TgBot::Message::Ptr message) {
         std::cout << "User Id " << message->from->id << std::endl;
         if (!persistence.isWhiteListed(message->from->id))
         {
@@ -48,8 +46,8 @@ int main(int argc, char *argv[])
         bot.getApi().sendMessage(message->chat->id, "Hi!");
     });
 
-    bot.getEvents().onCommand("price", [&bot](TgBot::Message::Ptr message) {    
-        PriceCommand cmd(bot, message->chat->id, &priceChecker);
+    bot.getEvents().onCommand(COMMAND_PRICE, [&bot](TgBot::Message::Ptr message) {    
+        PriceCommand cmd(bot, message->chat->id);
         cmd.execute(getCommandArguments(message->text));
     });
 

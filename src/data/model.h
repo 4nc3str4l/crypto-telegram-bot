@@ -21,6 +21,7 @@ struct tracking_convertion {
     double orQuantity;
     std::string tTicker;
     double targetQuantity;
+    std::int32_t investorId;
 };
 
 struct investor {
@@ -34,3 +35,5 @@ struct app_data {
     std::vector<long> whitelisted_ids;
     std::vector<investor> investors;
 };
+
+double compute_convertion(const tracking_convertion& conv);

@@ -13,6 +13,7 @@ class Persistence
 public:
     Persistence();
     bool isWhiteListed(const std::int32_t id);
+    investor* getInvestor(const std::int32_t id);
 private:
     bool isFilePresent();
     void createInitialFile();
