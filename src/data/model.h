@@ -36,4 +36,3 @@ struct app_data {
     std::vector<investor> investors;
 };
 
-double compute_convertion(const tracking_convertion& conv);

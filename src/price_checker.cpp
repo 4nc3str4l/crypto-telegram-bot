@@ -4,7 +4,7 @@
 #include <nlohmann/json.hpp>
 #include <algorithm>
 #include "cpr/cpr.h"
-
+#include "constants.h"
 
 using json = nlohmann::json;
 
@@ -33,7 +33,9 @@ double PriceChecker::fetchPrice(const std::string& ticker)
     this->m_apiKey + 
     std::string("&ids=") +
     std::string(ticker) +
-    std::string("&interval=1d,30d&convert=EUR&per-page=1&page=1").c_str()));
+    std::string("&interval=1d,30d&convert=") + 
+    std::string(CURRENCY) + 
+    std::string("&per-page=1&page=1").c_str()));
     int code = r.status_code;
     if(code == 200){
         auto jsdata = json::parse(r.text.c_str());

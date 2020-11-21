@@ -1,6 +1,7 @@
 #include "price_command.h"
 #include <fmt/core.h>
 #include "../price_checker.h"
+#include "../constants.h"
 
 
 PriceCommand::PriceCommand(TgBot::Bot& bot, const std::int64_t chatId) :
@@ -28,7 +29,7 @@ void PriceCommand::commandLogic()
     double price = PriceChecker::shared_instance().fetchPrice(ticker);
     if (price != -1)
     {
-        send(fmt::format("Price of {} is {} €", ticker, price));
+        send(fmt::format("Price of {} is {}{}", ticker, price, CURRENCY_TICKER));
     }
     else
     {

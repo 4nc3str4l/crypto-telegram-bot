@@ -44,7 +44,7 @@ Go to:
 3) [ ] CheckConvertion
 4) [ ] CheckNPriceCommand
 5) [ ] CheckPortfolio
-6) [ ] ChceckPriceCommand
+6) [x] ChceckPriceCommand
 7) [ ] CreatePortfolioCommand
 8) [ ] DecreaseInvestedCommand
 9) [ ] DecrementPortfollioAssetCommand
