@@ -66,12 +66,17 @@ Go to:
 ### Check Price
 **Description**: Checks the price of a cryptocurrency
 ```/price <ticker>```
-example:
+
+**example:**
+
 ```/price BTC```
 
-### Convert Cryptos
+### Convertion Command
 **Description**: Checks the price of a cryptocurrency
 ```/conv <amount> <ticker> <target_ticker>```
-example:
+
+**example:**
+
 ```/conv 10 BTC ETH```
+
 (Checks how many ethereum you could have with 10 Bitcoin)
