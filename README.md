@@ -85,10 +85,11 @@ Go to:
 ### Track Convertion Command
 **Description**: Periodically checks when an amount of a cryptocurrency will be worth another amount from another and
 sends a message to the user when the convertion is valid.
+
 ```/tconv <amount> <ticker> <target_amount> <target_ticker>```
 
 **example:**
 
 ```/tconv 1 BTC 1000000 USDT```
 
-(Periodically checks when 1 Bitcoin will be worth 1 milion USDT)
+(Periodically checks when 1 Bitcoin will be worth 1 milion USDT and when the condition will be true it will inform the user about it)
