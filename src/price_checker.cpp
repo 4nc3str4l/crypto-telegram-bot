@@ -19,7 +19,6 @@ double PriceChecker::fetchPrice(const std::string& ticker)
 {
     if(!this->shouldFetchPrice(ticker))
     {
-        std::cout << "Cached price " << ticker << std::endl;
         m_mutex.lock();
         double price = this->m_cachedPrices[ticker];
         m_mutex.unlock();
@@ -40,7 +39,9 @@ double PriceChecker::fetchPrice(const std::string& ticker)
     if(code == 200){
         auto jsdata = json::parse(r.text.c_str());
         if(jsdata.is_array() && jsdata.size() > 0){
+#if DEBUG_MODE
             std::cout << jsdata << std::endl;
+#endif
             auto price = jsdata[0]["price"];
             std::string s = price.dump();
             s.erase(std::remove(s.begin(), s.end(), '\"'), s.end());

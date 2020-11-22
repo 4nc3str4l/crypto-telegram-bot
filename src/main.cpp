@@ -7,8 +7,12 @@
 #include "price_checker.h"
 #include "price_watcher.h"
 #include "data/persistence.h"
-#include "commands/price_command.h"
 #include "constants.h"
+
+#include "commands/price_command.h"
+#include "commands/convertion_command.h"
+
+
 
 Persistence persistence;
 
@@ -48,6 +52,11 @@ int main(int argc, char *argv[])
 
     bot.getEvents().onCommand(COMMAND_PRICE, [&bot](TgBot::Message::Ptr message) {    
         PriceCommand cmd(bot, message->chat->id);
+        cmd.execute(getCommandArguments(message->text));
+    });
+
+    bot.getEvents().onCommand(COMMAND_CONV, [&bot](TgBot::Message::Ptr message) {    
+        ConvertionCommand cmd(bot, message->chat->id);
         cmd.execute(getCommandArguments(message->text));
     });
 

@@ -41,7 +41,7 @@ Go to:
 
 1) [ ] Implement Persistence System
 2) [x] Implement Base Command
-3) [ ] CheckConvertion
+3) [x] CheckConvertion
 4) [ ] CheckNPriceCommand
 5) [ ] CheckPortfolio
 6) [x] ChceckPriceCommand
@@ -64,7 +64,14 @@ Go to:
 ## Commands
 
 ### Check Price
-**Description**: Checks the price of a cryptocurrency in **€**
+**Description**: Checks the price of a cryptocurrency
 ```/price <ticker>```
 example:
 ```/price BTC```
+
+### Convert Cryptos
+**Description**: Checks the price of a cryptocurrency
+```/conv <amount> <ticker> <target_ticker>```
+example:
+```/conv 10 BTC ETH```
+(Checks how many ethereum you could have with 10 Bitcoin)

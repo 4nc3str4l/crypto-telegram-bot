@@ -5,7 +5,7 @@
 
 
 PriceCommand::PriceCommand(TgBot::Bot& bot, const std::int64_t chatId) :
-Command("price", 1, bot, chatId){
+Command(COMMAND_PRICE, 1, bot, chatId){
 }
 
 void PriceCommand::sendInstructions()

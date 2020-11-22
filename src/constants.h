@@ -1,7 +1,10 @@
 #pragma once
 
+#define DEBUG_MODE 0
+
 #define COMMAND_START "start"
 #define COMMAND_PRICE "price"
+#define COMMAND_CONV "conv"
 
 //#define CURRENCY "EUR"
 //#define CURRENCY_TICKER "€"
