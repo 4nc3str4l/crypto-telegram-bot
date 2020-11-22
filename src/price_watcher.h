@@ -8,6 +8,8 @@
 #include "data/model.h"
 #include <cstdint>
 
+#define INVALID_CONVERTION 0
+
 class PriceWatcher
 {
 public:
@@ -15,7 +17,7 @@ public:
     ~PriceWatcher();
     void start(TgBot::Bot* bot);
     void stop();
-    bool addConvertion( const double orAmount, const std::string& orTicker,
+    unsigned long addConvertion( const double orAmount, const std::string& orTicker,
                         const double targetAmount, const std::string& targetTicker,
                         const std::int32_t investorId);
 private:
@@ -24,8 +26,9 @@ private:
 private:
     TgBot::Bot* m_bot;
     bool m_running;
-    int m_checkInterval = 10;
+    int m_checkInterval = 60;
     std::thread t;
     std::mutex mtx;
     std::vector<tracking_convertion> m_trackingConvertions;
+    unsigned long tConvId = 1;
 };

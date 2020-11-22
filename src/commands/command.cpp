@@ -88,6 +88,7 @@ const std::string& Command::getString()
 
 const std::string& Command::getTicker()
 {
+    // TODO: We could check if a ticker is correct (need a way to validate tickers)
     if(this->m_indexRead >= m_arguments.size())
     {
         printError("Attempted to read int when no more params can be retreived.", false);

@@ -17,6 +17,7 @@ struct portfolio {
 };
 
 struct tracking_convertion {
+    unsigned long id;
     std::string orTicker;
     double orQuantity;
     std::string tTicker;

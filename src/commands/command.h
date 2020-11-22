@@ -26,7 +26,6 @@ protected:
   const std::string& getString();
   const std::string& getTicker();
   
-
   // Abstract functions
   virtual void sendInstructions() = 0;
   virtual const std::string getDescription() = 0;

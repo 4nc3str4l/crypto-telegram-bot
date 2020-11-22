@@ -58,7 +58,7 @@ Go to:
 17) [ ] RepeatLastCommand
 18) [ ] SetInvestedCommand
 19) [ ] SetPortfolioAssetCommand
-20) [ ] TrackConvertionCommand
+20) [x] TrackConvertionCommand
 21) [ ] UntrackConvertionCommnand
 
 ## Commands
@@ -72,7 +72,7 @@ Go to:
 ```/price BTC```
 
 ### Convertion Command
-**Description**: Checks the price of a cryptocurrency
+**Description**: Converts from one cryptocurrency to another
 ```/conv <amount> <ticker> <target_ticker>```
 
 **example:**
@@ -80,3 +80,15 @@ Go to:
 ```/conv 10 BTC ETH```
 
 (Checks how many ethereum you could have with 10 Bitcoin)
+
+
+### Track Convertion Command
+**Description**: Periodically checks when an amount of a cryptocurrency will be worth another amount from another and
+sends a message to the user when the convertion is valid.
+```/tconv <amount> <ticker> <target_amount> <target_ticker>```
+
+**example:**
+
+```/tconv 1 BTC 1000000 USDT```
+
+(Periodically checks when 1 Bitcoin will be worth 1 milion USDT)

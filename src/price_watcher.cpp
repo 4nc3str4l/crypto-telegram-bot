@@ -12,13 +12,6 @@ void PriceWatcher::start(TgBot::Bot* bot)
     m_bot = bot;
     m_running = true;
     t = std::thread(&PriceWatcher::checkLoop, this);
-    this->addConvertion(
-        1, 
-        std::string("BTC"),
-        18000,
-        std::string("USDT"),
-        579393170    
-    );
 }
 
 void PriceWatcher::stop()
@@ -35,7 +28,22 @@ void PriceWatcher::checkLoop()
         {
             std::string s = fmt::format("Or {} {} Target: {} {}\n", conv.orQuantity, conv.orTicker, conv.targetQuantity, conv.tTicker); 
             fmt::print(s);
-            fmt::print(fmt::format("Conversion {}% Ready {}\n", computeConvertionProgress(conv), isConvertionReady(conv)));   
+            bool convertionOk = isConvertionReady(conv);
+            double progress = computeConvertionProgress(conv);
+            fmt::print(fmt::format("Conversion {}% Ready {}\n", progress, convertionOk));
+            if(convertionOk)
+            {
+                double currentConv = computeConv(conv.orQuantity, conv.orTicker, conv.tTicker);
+                std::string msg = fmt::format("ID={} Now with {}{} you can have {}{} (you wanted {}{})",
+                                              conv.id,
+                                              conv.orQuantity,
+                                              conv.orTicker,
+                                              currentConv,
+                                              conv.tTicker,
+                                              conv.targetQuantity,
+                                              conv.tTicker);
+                m_bot->getApi().sendMessage(conv.investorId, msg);
+            }
         }
         mtx.unlock();
         std::this_thread::sleep_for(std::chrono::seconds(m_checkInterval)); 
@@ -43,13 +51,14 @@ void PriceWatcher::checkLoop()
     std::cout << "Thread Stopped" << std::endl;
 }
 
-bool PriceWatcher::addConvertion(const double orAmount, const std::string& orTicker, const double targetAmount, const std::string& targetTicker,
+unsigned long PriceWatcher::addConvertion(const double orAmount, const std::string& orTicker, const double targetAmount, const std::string& targetTicker,
                         const std::int32_t investorId)
 {
     mtx.lock();
-    m_trackingConvertions.push_back({orTicker, orAmount, targetTicker, targetAmount, investorId});
+    unsigned long newId = tConvId++;
+    m_trackingConvertions.push_back({newId, orTicker, orAmount, targetTicker, targetAmount, investorId});
     mtx.unlock();
-    return true;   
+    return newId;   
 }
 
 PriceWatcher::~PriceWatcher()
