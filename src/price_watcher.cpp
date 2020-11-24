@@ -69,7 +69,7 @@ int PriceWatcher::deleteConvertion(unsigned long convId, const std::int32_t inve
     mtx.lock();
     for(int i = m_trackingConvertions.size() -1; i >= 0; --i)
     {
-        tracking_convertion c = m_trackingConvertions[i];
+        const tracking_convertion& c = m_trackingConvertions[i];
         if(c.id == convId)
         {
             // If the user owns the convertion we can delete it
@@ -95,9 +95,24 @@ int PriceWatcher::deleteConvertion(unsigned long convId, const std::int32_t inve
     return result;
 }
 
+const std::string PriceWatcher::getConvertionListFor(std::int32_t investorId)
+{
+    std::string cList;
+    mtx.lock();
+    for(int i = 0; i < m_trackingConvertions.size(); ++i)
+    {
+        const tracking_convertion& c = m_trackingConvertions[i];
+        if(c.investorId == investorId)
+        {
+            cList += fmt::format("ID={} {} {} to {} {}\n", c.id, c.orQuantity, c.orTicker, c.targetQuantity, c.tTicker);
+        }
+    }
+    mtx.unlock();
+    return cList;
+}
+
 PriceWatcher::~PriceWatcher()
 {
     m_running = false;
-    t.join();
-    
+    t.join();   
 }

@@ -7,7 +7,7 @@
 #define COMMAND_CONV "conv"
 #define COMMAND_TRACK_CONV "tconv"
 #define COMMAND_UNTRACK_CONV "tconvdel"
-
+#define COMMAND_LIST_CONV "tconvlist"
 
 //#define CURRENCY "EUR"
 //#define CURRENCY_TICKER "€"

@@ -3,6 +3,7 @@
 #include <thread>
 #include <mutex>
 #include <vector>
+#include <string>
 
 #include <tgbot/tgbot.h>
 #include "data/model.h"
@@ -25,6 +26,8 @@ public:
                         const double targetAmount, const std::string& targetTicker,
                         const std::int32_t investorId);
     int deleteConvertion(unsigned long convId, const std::int32_t investorId);
+    const std::string getConvertionListFor(std::int32_t investorId);
+    
 private:
     PriceWatcher(){};
     void checkLoop();

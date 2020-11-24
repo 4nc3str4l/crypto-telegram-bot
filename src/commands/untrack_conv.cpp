@@ -8,7 +8,7 @@
 
 
 UnTrackConvertionCommand::UnTrackConvertionCommand(TgBot::Bot& bot, const std::int64_t chatId) :
-Command(COMMAND_TRACK_CONV, 1, bot, chatId){
+Command(COMMAND_UNTRACK_CONV, 1, bot, chatId){
 }
 
 void UnTrackConvertionCommand::sendInstructions()

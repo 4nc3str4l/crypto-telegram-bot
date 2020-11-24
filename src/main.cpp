@@ -13,6 +13,7 @@
 #include "commands/convertion.h"
 #include "commands/track_conv.h"
 #include "commands/untrack_conv.h"
+#include "commands/list_conv.h"
 
 Persistence persistence;
 
@@ -67,6 +68,11 @@ int main(int argc, char *argv[])
 
     bot.getEvents().onCommand(COMMAND_UNTRACK_CONV, [&bot](TgBot::Message::Ptr message) {    
         UnTrackConvertionCommand cmd(bot, message->chat->id);
+        cmd.execute(getCommandArguments(message->text));
+    });
+
+    bot.getEvents().onCommand(COMMAND_LIST_CONV, [&bot](TgBot::Message::Ptr message) {    
+        ListTrackingConvertions cmd(bot, message->chat->id);
         cmd.execute(getCommandArguments(message->text));
     });
 

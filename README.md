@@ -106,3 +106,15 @@ sends a message to the user when the convertion is valid.
 ```/tconvdel 1```
 
 (Deletes the tracking convertion 1)
+
+
+### Get Tracking Convertion List Command
+**Description**: Returns all the tracking convertions.
+
+```/tconvlist```
+
+**example:**
+
+```/tconvlist```
+
+(Retuns all the convertions that the user is tracking)
