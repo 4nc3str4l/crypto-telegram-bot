@@ -61,6 +61,40 @@ unsigned long PriceWatcher::addConvertion(const double orAmount, const std::stri
     return newId;   
 }
 
+int PriceWatcher::deleteConvertion(unsigned long convId, const std::int32_t investorId)
+{
+    int idx = -1;
+    int result = NOT_FOUND;
+
+    mtx.lock();
+    for(int i = m_trackingConvertions.size() -1; i >= 0; --i)
+    {
+        tracking_convertion c = m_trackingConvertions[i];
+        if(c.id == convId)
+        {
+            // If the user owns the convertion we can delete it
+            if(c.investorId == investorId)
+            {
+                result = OK;
+                idx = i;
+            }
+            else
+            {
+                result = UNAUTHORIZED_OPERATION;
+            }
+            break;
+        }
+    }
+
+    if(result == OK)
+    {
+        m_trackingConvertions.erase(m_trackingConvertions.begin() + idx);
+    }
+
+    mtx.unlock();
+    return result;
+}
+
 PriceWatcher::~PriceWatcher()
 {
     m_running = false;

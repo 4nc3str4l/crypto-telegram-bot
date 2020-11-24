@@ -12,6 +12,7 @@
 #include "commands/price_command.h"
 #include "commands/convertion_command.h"
 #include "commands/track_conv_command.h"
+#include "commands/untrack_conv_command.h"
 
 
 
@@ -63,6 +64,11 @@ int main(int argc, char *argv[])
 
     bot.getEvents().onCommand(COMMAND_TRACK_CONV, [&bot](TgBot::Message::Ptr message) {    
         TrackConvertionCommand cmd(bot, message->chat->id);
+        cmd.execute(getCommandArguments(message->text));
+    });
+
+    bot.getEvents().onCommand(COMMAND_UNTRACK_CONV, [&bot](TgBot::Message::Ptr message) {    
+        UnTrackConvertionCommand cmd(bot, message->chat->id);
         cmd.execute(getCommandArguments(message->text));
     });
 

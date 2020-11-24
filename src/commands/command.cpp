@@ -73,6 +73,27 @@ int Command::getInt()
     return value;
 }
 
+unsigned long Command::getUnsignedLong()
+{
+    if(this->m_indexRead >= m_arguments.size())
+    {
+        printError("Attempted to read int when no more params can be retreived.", false);
+        return 0;
+    }
+
+    unsigned long value = 0;
+    try
+    {
+        value = std::stoul(this->m_arguments[this->m_indexRead]);
+        ++this->m_indexRead;
+    }
+    catch(std::exception& e)
+    {
+        printError(fmt::format("Could not convert {} to unsigned long", this->m_arguments[this->m_indexRead]), false);
+    }
+    return value;
+}
+
 const std::string& Command::getString()
 {
 

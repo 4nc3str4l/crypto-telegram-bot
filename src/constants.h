@@ -6,6 +6,8 @@
 #define COMMAND_PRICE "price"
 #define COMMAND_CONV "conv"
 #define COMMAND_TRACK_CONV "tconv"
+#define COMMAND_UNTRACK_CONV "tconvdel"
+
 
 //#define CURRENCY "EUR"
 //#define CURRENCY_TICKER "€"

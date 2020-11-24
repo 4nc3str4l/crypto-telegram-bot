@@ -23,6 +23,7 @@ protected:
   void send(const std::string& message);
   double getDouble();
   int getInt();
+  unsigned long getUnsignedLong();
   const std::string& getString();
   const std::string& getTicker();
   

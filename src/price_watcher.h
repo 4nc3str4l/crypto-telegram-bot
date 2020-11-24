@@ -10,6 +10,10 @@
 
 #define INVALID_CONVERTION 0
 
+#define UNAUTHORIZED_OPERATION 1
+#define NOT_FOUND 2
+#define OK 3
+
 class PriceWatcher
 {
 public:
@@ -17,9 +21,10 @@ public:
     ~PriceWatcher();
     void start(TgBot::Bot* bot);
     void stop();
-    unsigned long addConvertion( const double orAmount, const std::string& orTicker,
+    unsigned long addConvertion(const double orAmount, const std::string& orTicker,
                         const double targetAmount, const std::string& targetTicker,
                         const std::int32_t investorId);
+    int deleteConvertion(unsigned long convId, const std::int32_t investorId);
 private:
     PriceWatcher(){};
     void checkLoop();

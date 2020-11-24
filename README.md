@@ -94,3 +94,15 @@ sends a message to the user when the convertion is valid.
 ```/tconv 1 BTC 1000000 USDT```
 
 (Periodically checks when 1 Bitcoin will be worth 1 milion USDT and when the condition will be true it will inform the user about it)
+
+
+### Untrack Convertion Command
+**Description**: Deletes a tracking convertion.
+
+```/tconvdel <id>```
+
+**example:**
+
+```/tconvdel 1```
+
+(Deletes the tracking convertion 1)
