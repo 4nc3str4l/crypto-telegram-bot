@@ -1,4 +1,4 @@
-#include "price_command.h"
+#include "price.h"
 #include <fmt/core.h>
 #include "../price_checker.h"
 #include "../constants.h"

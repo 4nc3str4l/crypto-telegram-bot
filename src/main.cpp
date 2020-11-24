@@ -9,12 +9,10 @@
 #include "data/persistence.h"
 #include "constants.h"
 
-#include "commands/price_command.h"
-#include "commands/convertion_command.h"
-#include "commands/track_conv_command.h"
-#include "commands/untrack_conv_command.h"
-
-
+#include "commands/price.h"
+#include "commands/convertion.h"
+#include "commands/track_conv.h"
+#include "commands/untrack_conv.h"
 
 Persistence persistence;
 
