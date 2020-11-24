@@ -59,7 +59,7 @@ Go to:
 18) [ ] SetInvestedCommand
 19) [ ] SetPortfolioAssetCommand
 20) [x] TrackConvertionCommand
-21) [ ] UntrackConvertionCommnand
+21) [x] UntrackConvertionCommnand
 22) [ ] Persist Tracking Convertions making sure of updating id counter when loading the app.
 
 ## Commands
