@@ -39,10 +39,10 @@ Go to:
 
 ## TODO:
 
-1) [ ] Implement Persistence System
+1) [x] Implement Persistence System
 2) [x] Implement Base Command
 3) [x] CheckConvertion
-4) [ ] CheckNPriceCommand
+4) [x] CheckNPriceCommand
 5) [ ] CheckPortfolio
 6) [x] ChceckPriceCommand
 7) [ ] CreatePortfolioCommand
@@ -60,7 +60,8 @@ Go to:
 19) [ ] SetPortfolioAssetCommand
 20) [x] TrackConvertionCommand
 21) [x] UntrackConvertionCommnand
-22) [ ] Persist Tracking Convertions making sure of updating id counter when loading the app.
+22) [x] Persist Tracking Convertions making sure of updating id counter when loading the app.
+23) [ ] Unify files for persistence.
 
 ## Commands
 
@@ -71,6 +72,16 @@ Go to:
 **example:**
 
 ```/price BTC```
+
+### Check Price of N tokens
+**Description**: Checks the price of a cryptocurrency
+```/pricen <amount> <ticker>```
+
+**example:**
+
+```/pricen 12 BTC```
+
+(Checks the price of N BTC)
 
 ### Convertion Command
 **Description**: Converts from one cryptocurrency to another
@@ -107,7 +118,6 @@ sends a message to the user when the convertion is valid.
 
 (Deletes the tracking convertion 1)
 
-
 ### Get Tracking Convertion List Command
 **Description**: Returns all the tracking convertions.
 
@@ -118,3 +128,14 @@ sends a message to the user when the convertion is valid.
 ```/tconvlist```
 
 (Retuns all the convertions that the user is tracking)
+
+### Check Tracking Convertion
+**Description**: Checks the status of a given convertion returning the percentage to be done and the current convertion.
+
+```/tconvcheck <id>```
+
+**example:**
+
+```/tconvcheck 1```
+
+(Checks the convertion with id 1)

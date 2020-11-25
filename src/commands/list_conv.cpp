@@ -24,7 +24,7 @@ ListTrackingConvertions::~ListTrackingConvertions(){}
 
 void ListTrackingConvertions::commandLogic()
 {
-    const std::string& toSend = PriceWatcher::shared_instance().getConvertionListFor(m_chatId);
+    std::string toSend = PriceWatcher::shared_instance().getConvertionListFor(m_chatId);
     if(toSend.size() == 0)
     {
         send("No Convertions Found!");

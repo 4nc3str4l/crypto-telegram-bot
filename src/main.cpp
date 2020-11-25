@@ -10,12 +10,12 @@
 #include "constants.h"
 
 #include "commands/price.h"
+#include "commands/pricen.h"
 #include "commands/convertion.h"
 #include "commands/track_conv.h"
 #include "commands/untrack_conv.h"
 #include "commands/list_conv.h"
-
-Persistence persistence;
+#include "commands/check_conv.h"
 
 const std::vector<std::string> getCommandArguments(const std::string &command)
 {
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 
     bot.getEvents().onCommand(COMMAND_START, [&bot](TgBot::Message::Ptr message) {
         std::cout << "User Id " << message->from->id << std::endl;
-        if (!persistence.isWhiteListed(message->from->id))
+        if (!Persistence::shared_instance().isWhiteListed(message->from->id))
         {
             bot.getApi().sendMessage(message->chat->id, "Unauthorized");
             return;
@@ -53,6 +53,11 @@ int main(int argc, char *argv[])
 
     bot.getEvents().onCommand(COMMAND_PRICE, [&bot](TgBot::Message::Ptr message) {    
         PriceCommand cmd(bot, message->chat->id);
+        cmd.execute(getCommandArguments(message->text));
+    });
+
+    bot.getEvents().onCommand(COMMAND_PRICEN, [&bot](TgBot::Message::Ptr message) {    
+        PricenCommand cmd(bot, message->chat->id);
         cmd.execute(getCommandArguments(message->text));
     });
 
@@ -75,6 +80,14 @@ int main(int argc, char *argv[])
         ListTrackingConvertions cmd(bot, message->chat->id);
         cmd.execute(getCommandArguments(message->text));
     });
+
+    bot.getEvents().onCommand(COMMAND_CHECK_CONV, [&bot](TgBot::Message::Ptr message) {    
+        ConvertionCheckCommand cmd(bot, message->chat->id);
+        cmd.execute(getCommandArguments(message->text));
+    });
+
+    
+
 
     bot.getEvents().onAnyMessage([&bot](TgBot::Message::Ptr message) {
         printf("User wrote %s\n", message->text.c_str());

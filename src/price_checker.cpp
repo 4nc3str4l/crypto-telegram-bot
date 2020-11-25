@@ -15,6 +15,7 @@ void PriceChecker::setApiKey(const std::string& apiKey)
 }
 
 
+
 double PriceChecker::fetchPrice(const std::string& ticker)
 {
     if(!this->shouldFetchPrice(ticker))

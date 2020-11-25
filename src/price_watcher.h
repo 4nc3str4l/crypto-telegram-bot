@@ -26,11 +26,13 @@ public:
                         const double targetAmount, const std::string& targetTicker,
                         const std::int32_t investorId);
     int deleteConvertion(unsigned long convId, const std::int32_t investorId);
-    const std::string getConvertionListFor(std::int32_t investorId);
-    
+    std::string getConvertionListFor(std::int32_t investorId);
+
+    tracking_convertion getConvertionWithId(unsigned long convId);
 private:
     PriceWatcher(){};
     void checkLoop();
+    void loadInitialData();
 private:
     TgBot::Bot* m_bot;
     bool m_running;

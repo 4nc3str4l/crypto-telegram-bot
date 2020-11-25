@@ -35,5 +35,6 @@ struct investor {
 struct app_data {
     std::vector<long> whitelisted_ids;
     std::vector<investor> investors;
+    std::vector<tracking_convertion> convertions;
 };
 
