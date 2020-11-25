@@ -43,25 +43,24 @@ Go to:
 2) [x] Implement Base Command
 3) [x] CheckConvertion
 4) [x] CheckNPriceCommand
-5) [ ] CheckPortfolio
-6) [x] ChceckPriceCommand
-7) [ ] CreatePortfolioCommand
-8) [ ] DecreaseInvestedCommand
-9) [ ] DecrementPortfollioAssetCommand
-10) [ ] DeletePortfolioCommand
-11) [ ] HelpCommand
-12) [ ] IncreaseInvestedCommand
-13) [ ] IncrementPortfolioAssetCommand
-14) [ ] ListPortfoliosCommand
-15) [ ] ListTrackingConvertions
-16) [ ] RemoveAssetCommand
-17) [ ] RepeatLastCommand
-18) [ ] SetInvestedCommand
-19) [ ] SetPortfolioAssetCommand
-20) [x] TrackConvertionCommand
-21) [x] UntrackConvertionCommnand
-22) [x] Persist Tracking Convertions making sure of updating id counter when loading the app.
-23) [ ] Unify files for persistence.
+5) [x] ChceckPriceCommand
+6) [x] TrackConvertionCommand
+7) [x] UntrackConvertionCommnand
+8) [x] ListTrackingConvertions
+9) [x] Persist Tracking Convertions making sure of updating id counter when loading the app.
+10) [ ] CheckPortfolio
+11) [ ] CreatePortfolioCommand
+12) [ ] DecreaseInvestedCommand
+13) [ ] DecrementPortfollioAssetCommand
+14) [ ] DeletePortfolioCommand
+15) [ ] IncreaseInvestedCommand
+16) [ ] IncrementPortfolioAssetCommand
+17) [ ] ListPortfoliosCommand
+18) [ ] RemoveAssetCommand
+19) [ ] SetInvestedCommand
+20) [ ] SetPortfolioAssetCommand
+21) [ ] HelpCommand
+22) [ ] Unify files for persistence.
 
 ## Commands
 
