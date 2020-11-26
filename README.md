@@ -48,19 +48,21 @@ Go to:
 7) [x] UntrackConvertionCommnand
 8) [x] ListTrackingConvertions
 9) [x] Persist Tracking Convertions making sure of updating id counter when loading the app.
-10) [x] CreatePortfolioCommand
-11) [x] ListPortfoliosCommand
-12) [x] CheckPortfolio
-13) [ ] DecreaseInvestedCommand
-14) [ ] DecrementPortfollioAssetCommand
-15) [ ] DeletePortfolioCommand
-16) [ ] IncreaseInvestedCommand
-17) [ ] IncrementPortfolioAssetCommand
-18) [ ] RemoveAssetCommand
-19) [ ] SetInvestedCommand
-20) [ ] SetPortfolioAssetCommand
-21) [ ] HelpCommand
+10) [x] HelpCommand
+11) [x] CreatePortfolioCommand
+12) [x] ListPortfoliosCommand
+13) [x] CheckPortfolio
+14) [ ] DecreaseInvestedCommand
+15) [ ] DecrementPortfollioAssetCommand
+16) [ ] DeletePortfolioCommand
+17) [ ] IncreaseInvestedCommand
+18) [ ] IncrementPortfolioAssetCommand
+19) [ ] RemoveAssetCommand
+20) [ ] SetInvestedCommand
+21) [ ] SetPortfolioAssetCommand
 22) [ ] Unify files for persistence.
+23) [ ] Send Help when no command is input
+24) [ ] Send command usage when error is detected
 
 
 ## Commands
