@@ -48,8 +48,8 @@ Go to:
 7) [x] UntrackConvertionCommnand
 8) [x] ListTrackingConvertions
 9) [x] Persist Tracking Convertions making sure of updating id counter when loading the app.
-10) [ ] CheckPortfolio
-11) [ ] CreatePortfolioCommand
+10) [x] CreatePortfolioCommand
+11) [ ] CheckPortfolio
 12) [ ] DecreaseInvestedCommand
 13) [ ] DecrementPortfollioAssetCommand
 14) [ ] DeletePortfolioCommand
@@ -139,3 +139,14 @@ sends a message to the user when the convertion is valid.
 ```/tconvcheck 1```
 
 (Checks the convertion with id 1)
+
+### Create New Portfolio
+**Description**: Creates a new portfolio (don't use spaces for the names)
+
+```/pnew <name>```
+
+**example:**
+
+```/pnew staking_coins```
+
+(Creates a potfolio named "Staking Coins")

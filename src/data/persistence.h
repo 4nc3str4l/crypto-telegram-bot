@@ -21,7 +21,7 @@ public:
     static Persistence &shared_instance() {static Persistence persistence; return persistence;}
     bool isWhiteListed(const std::int32_t id);
     void saveConvertions(const std::vector<tracking_convertion>& convertions);
-    void savePortfolios(std::vector<portfolio>& portfolios);
+    void savePortfolios(const std::vector<portfolio>& portfolios);
 private:
     Persistence();
     bool isFilePresent();

@@ -3,6 +3,7 @@
 #include <string>
 
 struct tracking_convertion;
+struct portfolio;
 
 double computeConv(const double amount, const std::string& ticker, const std::string& targetTicker);
 double getFiatValue(const double amount, const std::string& ticker);

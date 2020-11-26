@@ -5,7 +5,7 @@
 
 #include "data/model.h"
 #include "price_checker.h"
-#include "constants"
+#include "constants.h"
 
 
 double computeConv(const double amount, const std::string& ticker, const std::string& targetTicker)
@@ -48,12 +48,12 @@ std::string getPorfolioInformation(const portfolio& p)
     std::string assetString;
     for(const asset& a : p.assets)
     {
-        double assetValue = getFiatValue(a.quantity, a.name);
+        double assetValue = getFiatValue(a.quantity, a.ticker);
         totalHoldings += assetValue;
-        assetString += fmt::format("*{}:* {} ({}{})\n", a.name, a.quantity, assetValue, CURRENCY_TICKER);
+        assetString += fmt::format("*{}:* {} ({}{})\n", a.ticker, a.quantity, assetValue, CURRENCY_TICKER);
     }
     gains = totalHoldings - p.invested;
-    performace = ((totalHoldings / invested) - 1) * 100;
+    performace = ((totalHoldings / p.invested) - 1) * 100;
     std::string info(fmt::format("*{}*\n", p.name));
     info += fmt::format("Invested: {}{}\n", p.invested, CURRENCY_TICKER);
     info += fmt::format("Tota Holdings: {}{}\n", totalHoldings, CURRENCY_TICKER);
