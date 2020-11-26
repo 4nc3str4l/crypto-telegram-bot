@@ -63,6 +63,7 @@ Go to:
 22) [ ] Unify files for persistence.
 23) [ ] Send Help when no command is input
 24) [ ] Send command usage when error is detected
+25) [ ] Detect if a ticker can be queried by the system to avoid problems on getTicker()
 
 
 ## Commands
