@@ -1,6 +1,6 @@
 #include "portfolio_inv_decrease.h"
 #include <fmt/core.h>
-#include "../price_checker.h"
+#include "../portfolio_manager.h"
 #include "../constants.h"
 
 

@@ -1,7 +1,7 @@
 #include "portfolio_inv_set.h"
 #include <fmt/core.h>
-#include "../price_checker.h"
 #include "../constants.h"
+#include "../portfolio_manager.h"
 
 
 PortfolioInversionSet::PortfolioInversionSet(TgBot::Bot& bot, const std::int64_t chatId) :

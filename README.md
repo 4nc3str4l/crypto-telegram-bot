@@ -150,3 +150,14 @@ sends a message to the user when the convertion is valid.
 ```/pnew staking_coins```
 
 (Creates a potfolio named "Staking Coins")
+
+### List Portfolios
+**Description**: Lists all your portfolios with some metrics about it
+
+```/plist```
+
+**example:**
+
+```/plist```
+
+(A list with all your portfolios should be visible)

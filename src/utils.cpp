@@ -59,7 +59,7 @@ std::string getPorfolioInformation(const portfolio& p)
     info += fmt::format("Tota Holdings: {}{}\n", totalHoldings, CURRENCY_TICKER);
     info += fmt::format("Gains: {}{}\n", gains, CURRENCY_TICKER);
     info += fmt::format("Performance: {}%\n", performace);
-    info += fmt::format("*Assets:*\n");
+    info += fmt::format("*Assets:*\n\n");
     info += assetString;
     return info;
 }

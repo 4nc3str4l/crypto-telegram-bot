@@ -159,13 +159,21 @@ std::string PortfolioManager::listPortfolios(const std::int32_t investorId)
 {
     std::string portfolios;
     m_Mtx.lock();
+    int numPortfolios = 0;
     for(const portfolio& p : m_Portfolios)
     {
         if(p.investorId == investorId)
         {
             portfolios += getPorfolioInformation(p);
+            numPortfolios++;
         }
     }
     m_Mtx.unlock();
+    
+    if(numPortfolios == 0)
+    {
+        return std::string("You haven't created a portfolio yet use /pnew <name> to create 1.");
+    }
+
     return portfolios;
 }

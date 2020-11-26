@@ -1,6 +1,6 @@
 #include "portfolio_remove.h"
 #include <fmt/core.h>
-#include "../price_checker.h"
+#include "../portfolio_manager.h"
 #include "../constants.h"
 
 
