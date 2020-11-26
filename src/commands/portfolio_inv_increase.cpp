@@ -25,5 +25,11 @@ PortfolioInversionIncrease::~PortfolioInversionIncrease()
 
 void PortfolioInversionIncrease::commandLogic()
 {
-   send(fmt::format("Command not implemented yet"));
+    unsigned long id = getUnsignedLong();
+    if(!PortfolioManager::shared_instance().isOwnerOf(m_chatId, id))
+    {
+        send(fmt::format("Could not find portfolio with id {}", id));
+        return;
+    }
+    send(fmt::format("Command not implemented yet"));
 }
