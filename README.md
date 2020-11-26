@@ -50,7 +50,7 @@ Go to:
 9) [x] Persist Tracking Convertions making sure of updating id counter when loading the app.
 10) [x] CreatePortfolioCommand
 11) [x] ListPortfoliosCommand
-12) [ ] CheckPortfolio
+12) [x] CheckPortfolio
 13) [ ] DecreaseInvestedCommand
 14) [ ] DecrementPortfollioAssetCommand
 15) [ ] DeletePortfolioCommand
