@@ -54,7 +54,7 @@ std::string getPorfolioInformation(const portfolio& p)
     }
     gains = totalHoldings - p.invested;
     performace = ((totalHoldings / p.invested) - 1) * 100;
-    std::string info(fmt::format("*{}*\n", p.name));
+    std::string info(fmt::format("ID=*{}* *{}*\n", p.id,  p.name));
     info += fmt::format("Invested: {}{}\n", p.invested, CURRENCY_TICKER);
     info += fmt::format("Tota Holdings: {}{}\n", totalHoldings, CURRENCY_TICKER);
     info += fmt::format("Gains: {}{}\n", gains, CURRENCY_TICKER);

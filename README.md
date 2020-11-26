@@ -49,13 +49,13 @@ Go to:
 8) [x] ListTrackingConvertions
 9) [x] Persist Tracking Convertions making sure of updating id counter when loading the app.
 10) [x] CreatePortfolioCommand
-11) [ ] CheckPortfolio
-12) [ ] DecreaseInvestedCommand
-13) [ ] DecrementPortfollioAssetCommand
-14) [ ] DeletePortfolioCommand
-15) [ ] IncreaseInvestedCommand
-16) [ ] IncrementPortfolioAssetCommand
-17) [ ] ListPortfoliosCommand
+11) [x] ListPortfoliosCommand
+12) [ ] CheckPortfolio
+13) [ ] DecreaseInvestedCommand
+14) [ ] DecrementPortfollioAssetCommand
+15) [ ] DeletePortfolioCommand
+16) [ ] IncreaseInvestedCommand
+17) [ ] IncrementPortfolioAssetCommand
 18) [ ] RemoveAssetCommand
 19) [ ] SetInvestedCommand
 20) [ ] SetPortfolioAssetCommand
@@ -161,3 +161,14 @@ sends a message to the user when the convertion is valid.
 ```/plist```
 
 (A list with all your portfolios should be visible)
+
+### Check Portfolio
+**Description**: Returns the information about a given portfolio
+
+```/pcheck <id>```
+
+**example:**
+
+```/pcheck 1```
+
+(Returns the information of the portfolio with id 1)

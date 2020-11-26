@@ -14,6 +14,7 @@
 #define COMMAND_CHECK_CONV              "tconvcheck"
 
 // PORTFOLIO MANAGEMENT
+#define COMMAND_PORTFOLIO_NEW           "pnew"
 #define COMMAND_PORTFOLIO_CHECK         "pcheck"
 #define COMMAND_PORTFOLIO_DECREASE      "pdec"
 #define COMMAND_PORTFOLIO_DELETE        "pdel"
@@ -22,7 +23,6 @@
 #define COMMAND_PORTFOLIO_INV_INCREASE  "pinvinc"
 #define COMMAND_PORTFOLIO_INV_SET       "pinvset"
 #define COMMAND_PORTFOLIO_LIST          "plist"
-#define COMMAND_PORTFOLIO_NEW           "pnew"
 #define COMMAND_PORTFOLIO_REMOVE        "prem"
 
 // HELP AND MYSC
