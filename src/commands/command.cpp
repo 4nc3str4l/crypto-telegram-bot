@@ -1,6 +1,9 @@
 #include "command.h"
 
+#include "tgbot/types/GenericReply.h"
 #include <fmt/core.h>
+#include <memory>
+
 
 Command::Command(const std::string &command, const unsigned short numArguments,
                     TgBot::Bot& bot, const std::int64_t chatId)
@@ -148,10 +151,11 @@ void Command::send(const std::string& message)
 {
     try
     {
-        this->m_bot->getApi().sendMessage(m_chatId, message);
+        this->m_bot->getApi().sendMessage(m_chatId, message, false, 0, std::make_shared<TgBot::GenericReply>(), "Markdown");
     }
     catch(std::exception& e)
     {
-        printError(fmt::format("Could not send message: {} to chat id {}", message, m_chatId));
+        printError(fmt::format("Could not send message: {} to chat id {}:\n", message, m_chatId));
+        std::cout << e.what() << std::endl;
     }
 }

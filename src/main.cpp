@@ -17,6 +17,21 @@
 #include "commands/list_conv.h"
 #include "commands/check_conv.h"
 
+#include "commands/help.h"
+
+#include "commands/portfolio_check.h"
+#include "commands/portfolio_decrease.h"
+#include "commands/portfolio_delete.h"
+#include "commands/portfolio_increase.h"
+#include "commands/portfolio_inv_decrease.h"
+#include "commands/portfolio_inv_increase.h"
+#include "commands/portfolio_inv_set.h"
+#include "commands/portfolio_list.h"
+#include "commands/portfolio_new.h"
+#include "commands/portfolio_remove.h"
+#include "commands/repeat.h"
+
+
 const std::vector<std::string> getCommandArguments(const std::string &command)
 {
     std::istringstream iss(command);
@@ -84,6 +99,66 @@ int main(int argc, char *argv[])
 
     bot.getEvents().onCommand(COMMAND_CHECK_CONV, [&bot](TgBot::Message::Ptr message) {    
         ConvertionCheckCommand cmd(bot, message->chat->id);
+        exec(bot, cmd, message);
+    });
+
+    bot.getEvents().onCommand(COMMAND_HELP, [&bot](TgBot::Message::Ptr message) {    
+        HelpCommand cmd(bot, message->chat->id);
+        exec(bot, cmd, message);
+    });
+
+    bot.getEvents().onCommand(COMMAND_PORTFOLIO_CHECK, [&bot](TgBot::Message::Ptr message) {    
+        PortfolioCheck cmd(bot, message->chat->id);
+        exec(bot, cmd, message);
+    });
+
+    bot.getEvents().onCommand(COMMAND_PORTFOLIO_DECREASE, [&bot](TgBot::Message::Ptr message) {    
+        PortfolioDecrease cmd(bot, message->chat->id);
+        exec(bot, cmd, message);
+    });
+
+    bot.getEvents().onCommand(COMMAND_PORTFOLIO_DELETE, [&bot](TgBot::Message::Ptr message) {    
+        PortfolioDelete cmd(bot, message->chat->id);
+        exec(bot, cmd, message);
+    });
+
+    bot.getEvents().onCommand(COMMAND_PORTFOLIO_INC, [&bot](TgBot::Message::Ptr message) {    
+        PortfolioIncrease cmd(bot, message->chat->id);
+        exec(bot, cmd, message);
+    });
+
+    bot.getEvents().onCommand(COMMAND_PORTFOLIO_INV_DECREASE, [&bot](TgBot::Message::Ptr message) {    
+        PortfolioInversionDecrease cmd(bot, message->chat->id);
+        exec(bot, cmd, message);
+    });
+
+    bot.getEvents().onCommand(COMMAND_PORTFOLIO_INV_INCREASE, [&bot](TgBot::Message::Ptr message) {    
+        PortfolioInversionIncrease cmd(bot, message->chat->id);
+        exec(bot, cmd, message);
+    });
+
+    bot.getEvents().onCommand(COMMAND_PORTFOLIO_INV_SET, [&bot](TgBot::Message::Ptr message) {    
+        PortfolioInversionSet cmd(bot, message->chat->id);
+        exec(bot, cmd, message);
+    });
+
+    bot.getEvents().onCommand(COMMAND_PORTFOLIO_LIST, [&bot](TgBot::Message::Ptr message) {    
+        PortfolioList cmd(bot, message->chat->id);
+        exec(bot, cmd, message);
+    });
+
+    bot.getEvents().onCommand(COMMAND_PORTFOLIO_NEW, [&bot](TgBot::Message::Ptr message) {    
+        PortfolioNew cmd(bot, message->chat->id);
+        exec(bot, cmd, message);
+    });
+
+    bot.getEvents().onCommand(COMMAND_PORTFOLIO_REMOVE, [&bot](TgBot::Message::Ptr message) {    
+        PortfolioRemove cmd(bot, message->chat->id);
+        exec(bot, cmd, message);
+    });
+
+    bot.getEvents().onCommand(COMMAND_REPEAT, [&bot](TgBot::Message::Ptr message) {    
+        RepeatCommand cmd(bot, message->chat->id);
         exec(bot, cmd, message);
     });
 

@@ -6,6 +6,7 @@
 
 #include "utils.h"
 #include "data/persistence.h"
+#include "constants.h"
 
 
 void PriceWatcher::start(TgBot::Bot* bot)

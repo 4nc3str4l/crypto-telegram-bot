@@ -11,10 +11,6 @@
 
 #define INVALID_CONVERTION 0
 
-#define UNAUTHORIZED_OPERATION 1
-#define NOT_FOUND 2
-#define OK 3
-
 class PriceWatcher
 {
 public:

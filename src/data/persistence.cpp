@@ -44,6 +44,14 @@ void Persistence::createInitialFile()
     std::ofstream o2(CONVERTIONS_PATH);
     o2 << std::setw(4) << tConvs << std::endl;
     o2.close();
+
+    // Generate the portfolios file
+    json portfolios;
+    portfolios["portfolios"] = json::array();
+    std::ofstream o3(PORTFOLIOS_PATH);
+    o3 << std::setw(4) << portfolios << std::endl;
+    o3.close();
+    
 }
 
 void Persistence::saveConvertions(const std::vector<tracking_convertion>& convertions)
@@ -73,6 +81,41 @@ void Persistence::saveConvertions(const std::vector<tracking_convertion>& conver
     m_mut.unlock();
 }
 
+void Persistence::savePortfolios(const std::vector<portfolio>& portfolios)
+{
+    auto arr = json::array();
+    for(const portfolio& c : portfolios)
+    {
+        json portolioObj = {
+            {"id", c.id},
+            {"investorId", c.investorId},
+            {"invested", c.invested},
+            {"name", c.name},
+        };
+
+        auto assets = json::array();
+        for(asset a : c.assets)
+        {
+            json asset = {
+                {"ticker", a.ticker},
+                {"quantity", a.quantity}
+            };
+
+            assets.push_back(asset);
+        }
+        portolioObj["assets"] = assets;
+        arr.push_back(portolioObj);
+    }
+    
+    json toPersist;
+    toPersist["portfolios"] = arr;
+    m_mut.lock();
+    std::ofstream o(PORTFOLIOS_PATH);
+    o << std::setw(4) << toPersist << std::endl;
+    o.close();
+    m_mut.unlock();
+}
+
 void Persistence::loadData()
 {
     std::ifstream i(FILE_PATH);
@@ -86,7 +129,14 @@ void Persistence::loadData()
     i2 >> j2;
     i2.close();
     this->loadTrackingConvertions(j2);
+
+    std::ifstream i3(PORTFOLIOS_PATH);
+    json j3;
+    i3 >> j3;
+    i3.close();
+    this->loadTrackingPortfolios(j3);
 }
+
 
 void Persistence::loadWhiteListed(const json &data)
 {
@@ -115,6 +165,30 @@ void Persistence::loadTrackingConvertions(const json& data)
     }
 }
 
+void Persistence::loadTrackingPortfolios(const json& d)
+{
+    auto savedPortfolios = d["portfolios"];
+    for(auto p : savedPortfolios)
+    {
+        portfolio portfolio = { 
+            p["id"], 
+            p["investorId"], 
+            p["invested"], 
+            p["name"], 
+        };
+        
+        auto assets = p["assets"];
+        for(auto a : assets)
+        {
+            portfolio.assets.push_back({
+                a["ticker"],
+                a["quantity"]
+            });
+        }
+        data.portfolios.push_back(portfolio);
+    }
+}
+
 bool Persistence::isWhiteListed(const std::int32_t id)
 {
     // If there is no one whitelisted this bot is public
@@ -131,9 +205,4 @@ bool Persistence::isWhiteListed(const std::int32_t id)
         }
     }
     return false;
-}
-
-investor* Persistence::getInvestor(const std::int32_t id)
-{
-    return nullptr;
 }

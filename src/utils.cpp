@@ -1,8 +1,12 @@
 
 #include "utils.h"
 
+#include <fmt/core.h>
+
 #include "data/model.h"
 #include "price_checker.h"
+#include "constants"
+
 
 double computeConv(const double amount, const std::string& ticker, const std::string& targetTicker)
 {
@@ -34,4 +38,28 @@ double computeConvertionProgress(const tracking_convertion& conv)
 double computeConvertion(const tracking_convertion& conv)
 {
     return computeConv(conv.orQuantity, conv.orTicker, conv.tTicker);
+}
+
+std::string getPorfolioInformation(const portfolio& p)
+{
+    double totalHoldings = 0;
+    double gains = 0;
+    double performace = 0;
+    std::string assetString;
+    for(const asset& a : p.assets)
+    {
+        double assetValue = getFiatValue(a.quantity, a.name);
+        totalHoldings += assetValue;
+        assetString += fmt::format("*{}:* {} ({}{})\n", a.name, a.quantity, assetValue, CURRENCY_TICKER);
+    }
+    gains = totalHoldings - p.invested;
+    performace = ((totalHoldings / invested) - 1) * 100;
+    std::string info(fmt::format("*{}*\n", p.name));
+    info += fmt::format("Invested: {}{}\n", p.invested, CURRENCY_TICKER);
+    info += fmt::format("Tota Holdings: {}{}\n", totalHoldings, CURRENCY_TICKER);
+    info += fmt::format("Gains: {}{}\n", gains, CURRENCY_TICKER);
+    info += fmt::format("Performance: {}%\n", performace);
+    info += fmt::format("*Assets:*\n");
+    info += assetString;
+    return info;
 }

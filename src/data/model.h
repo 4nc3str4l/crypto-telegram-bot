@@ -11,6 +11,7 @@ struct asset {
 
 struct portfolio {
     unsigned long id;
+    std::int32_t investorId;
     double invested;
     std::string name;
     std::vector<asset> assets;
@@ -25,16 +26,9 @@ struct tracking_convertion {
     std::int32_t investorId;
 };
 
-struct investor {
-    std::int32_t id;
-    std::string name;
-    std::vector<portfolio> portfolios;
-    std::vector<tracking_convertion> convertions;
-};
-
 struct app_data {
     std::vector<long> whitelisted_ids;
-    std::vector<investor> investors;
     std::vector<tracking_convertion> convertions;
+    std::vector<portfolio> portfolios;
 };
 
