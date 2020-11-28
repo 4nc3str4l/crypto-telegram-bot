@@ -53,8 +53,8 @@ Go to:
 12) [x] ListPortfoliosCommand
 13) [x] CheckPortfolio
 14) [x] SetInvestedCommand
-15) [ ] DecreaseInvestedCommand
-16) [ ] IncreaseInvestedCommand
+15) [x] DecreaseInvestedCommand
+16) [x] IncreaseInvestedCommand
 17) [ ] DecrementPortfollioAssetCommand
 18) [ ] DeletePortfolioCommand
 19) [ ] IncrementPortfolioAssetCommand
@@ -187,3 +187,26 @@ sends a message to the user when the convertion is valid.
 ```/pset 1 1000```
 
 (Sets the the FIAT invested on a the portfolio 1 to 1000€)
+
+
+### Increase Invested in Portfolio
+**Description**: Increases  how much FIAT currency has been invested on the portfolio
+
+```/pinvinc <id> <fiat_quantity>```
+
+**example:**
+
+```/pinvinc 1 1000```
+
+(Increase  the the FIAT invested on a the portfolio 1 to 1000€ if the porfolio had 10000$ now it has 11000$)
+
+### Decrease Invested in Portfolio
+**Description**: Decreases how much FIAT currency has been invested on the portfolio
+
+```/pinvdec <id> <fiat_quantity>```
+
+**example:**
+
+```/pinvdec 1 1000```
+
+(Decreases the the FIAT invested on a the portfolio 1 to 1000€ if the porfolio had 10000$ now it has 9000$)
