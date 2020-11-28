@@ -60,7 +60,7 @@ Go to:
 Command
 19) [x] DecrementPortfollioAssetCommand
 20) [x] RemoveAssetCommand
-21) [ ] DeletePortfolioCommand
+21) [x] DeletePortfolioCommand
 22) [ ] Unify files for persistence.
 23) [ ] Send Help when no command is input
 24) [ ] Send command usage when error is detected
