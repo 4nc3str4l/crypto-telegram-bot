@@ -98,6 +98,7 @@ void PortfolioManager::updateInvested(const unsigned long id, double amount)
             break;
         }
     }
+    Persistence::shared_instance().savePortfolios(m_Portfolios);
     m_Mtx.unlock();
 }
 
@@ -134,6 +135,7 @@ void PortfolioManager::setAsset(std::string ticker, double amount, const unsigne
             p->assets.push_back({ticker, amount});
         }
     }
+    Persistence::shared_instance().savePortfolios(m_Portfolios);
     m_Mtx.unlock();
 }
 

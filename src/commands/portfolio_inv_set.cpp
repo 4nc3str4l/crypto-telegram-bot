@@ -5,7 +5,7 @@
 
 
 PortfolioInversionSet::PortfolioInversionSet(TgBot::Bot& bot, const std::int64_t chatId) :
-Command(COMMAND_PORTFOLIO_INV_SET, 1, bot, chatId){
+Command(COMMAND_PORTFOLIO_INV_SET, 2, bot, chatId){
 }
 
 void PortfolioInversionSet::sendInstructions()
@@ -25,11 +25,18 @@ PortfolioInversionSet::~PortfolioInversionSet()
 
 void PortfolioInversionSet::commandLogic()
 {
-    unsigned long id = getUnsignedLong();
-    if(!PortfolioManager::shared_instance().isOwnerOf(m_chatId, id))
+    unsigned long pid = getUnsignedLong();
+    double invested = getDouble(); 
+
+    if(!PortfolioManager::shared_instance().isOwnerOf(m_chatId, pid))
     {
-        send(fmt::format("Could not find portfolio with id {}", id));
+        send(fmt::format("Could not find portfolio with id {}", pid));
         return;
     }
-    send(fmt::format("Command not implemented yet"));
+
+    portfolio p = PortfolioManager::shared_instance().getPortfolio(pid);
+    PortfolioManager::shared_instance().updateInvested(pid, invested);
+    double lastInvested = p.invested;
+    send(fmt::format("Portfolio {} with id {} invested set from {}{} to {}{}.",
+            p.name, p.id, lastInvested, CURRENCY_TICKER, invested, CURRENCY_TICKER));
 }

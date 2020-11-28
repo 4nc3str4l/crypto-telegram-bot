@@ -52,13 +52,13 @@ Go to:
 11) [x] CreatePortfolioCommand
 12) [x] ListPortfoliosCommand
 13) [x] CheckPortfolio
-14) [ ] DecreaseInvestedCommand
-15) [ ] DecrementPortfollioAssetCommand
-16) [ ] DeletePortfolioCommand
-17) [ ] IncreaseInvestedCommand
-18) [ ] IncrementPortfolioAssetCommand
-19) [ ] RemoveAssetCommand
-20) [ ] SetInvestedCommand
+14) [ ] SetInvestedCommand
+15) [ ] DecreaseInvestedCommand
+16) [ ] IncreaseInvestedCommand
+17) [ ] DecrementPortfollioAssetCommand
+18) [ ] DeletePortfolioCommand
+19) [ ] IncrementPortfolioAssetCommand
+20) [ ] RemoveAssetCommand
 21) [ ] SetPortfolioAssetCommand
 22) [ ] Unify files for persistence.
 23) [ ] Send Help when no command is input
@@ -175,3 +175,15 @@ sends a message to the user when the convertion is valid.
 ```/pcheck 1```
 
 (Returns the information of the portfolio with id 1)
+
+
+### Set Invested in Portfolio
+**Description**: Sets how much FIAT currency has been invested on the portfolio
+
+```/pset <id> <fiat_quantity>```
+
+**example:**
+
+```/pset 1 1000```
+
+(Sets the the FIAT invested on a the portfolio 1 to 1000€)
