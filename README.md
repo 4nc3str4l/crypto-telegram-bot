@@ -52,7 +52,7 @@ Go to:
 11) [x] CreatePortfolioCommand
 12) [x] ListPortfoliosCommand
 13) [x] CheckPortfolio
-14) [ ] SetInvestedCommand
+14) [x] SetInvestedCommand
 15) [ ] DecreaseInvestedCommand
 16) [ ] IncreaseInvestedCommand
 17) [ ] DecrementPortfollioAssetCommand
