@@ -5,7 +5,7 @@
 
 
 PortfolioDecrease::PortfolioDecrease(TgBot::Bot& bot, const std::int64_t chatId) :
-Command(COMMAND_PORTFOLIO_DECREASE, 1, bot, chatId){
+Command(COMMAND_PORTFOLIO_DECREASE, 3, bot, chatId){
 }
 
 void PortfolioDecrease::sendInstructions()
@@ -26,10 +26,25 @@ PortfolioDecrease::~PortfolioDecrease()
 void PortfolioDecrease::commandLogic()
 {
     unsigned long id = getUnsignedLong();
+    double quantity = getDouble();
+    std::string ticker = getTicker();
+
     if(!PortfolioManager::shared_instance().isOwnerOf(m_chatId, id))
     {
         send(fmt::format("Could not find portfolio with id {}", id));
         return;
     }
-   send(fmt::format("Command not implemented yet"));
+
+    asset a = PortfolioManager::shared_instance().getPortfolioAsset(id, ticker);
+    if(a.quantity == INVALID_ASSET)
+    {
+        send(fmt::format("There is no {} in portfolio with id={}.", ticker, id));
+        return;
+    }
+
+    double lastQuantity = a.quantity;
+    double newQuantity = lastQuantity - quantity;
+    newQuantity = newQuantity < 0 ? 0 : newQuantity;
+    PortfolioManager::shared_instance().setAsset(ticker, newQuantity, id);
+    send(fmt::format("Asset for portfolio {} set from {}{} to {}{}", id, lastQuantity, ticker, newQuantity, ticker));
 }

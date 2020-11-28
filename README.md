@@ -55,11 +55,12 @@ Go to:
 14) [x] SetInvestedCommand
 15) [x] DecreaseInvestedCommand
 16) [x] IncreaseInvestedCommand
-17) [ ] DecrementPortfollioAssetCommand
-18) [ ] DeletePortfolioCommand
-19) [ ] IncrementPortfolioAssetCommand
+17) [x] SetPortfolioAssetCommand
+18) [x] IncrementPortfolioAsse
+Command
+19) [x] DecrementPortfollioAssetCommand
 20) [ ] RemoveAssetCommand
-21) [ ] SetPortfolioAssetCommand
+21) [ ] DeletePortfolioCommand
 22) [ ] Unify files for persistence.
 23) [ ] Send Help when no command is input
 24) [ ] Send command usage when error is detected
@@ -210,3 +211,36 @@ sends a message to the user when the convertion is valid.
 ```/pinvdec 1 1000```
 
 (Decreases the the FIAT invested on a the portfolio 1 to 1000€ if the porfolio had 10000$ now it has 9000$)
+
+### Set portfolio asset
+**Description**: Sets the ammount of an asset for a portfolio
+
+```/pset <id> <quantity> <ticker>```
+
+**example:**
+
+```/pset 1 1000 ADA```
+
+(Sets the amount of ADA for the portfolio with ID 1 to 1000 ADA)
+
+### Increase portfolio asset
+**Description**: Increases the ammount of an asset for a portfolio
+
+```/pinc <id> <quantity> <ticker>```
+
+**example:**
+
+```/pinc 1 1000 ADA```
+
+(Increases the amount of ADA for the portfolio with ID 1 for 1000 ADA)
+
+### Decrease portfolio asset
+**Description**: Decreases the ammount of an asset for a portfolio
+
+```/pdec <id> <quantity> <ticker>```
+
+**example:**
+
+```/pdec 1 1000 ADA```
+
+(Decreases the amount of ADA for the portfolio with ID 1 to 1000 ADA)

@@ -19,6 +19,7 @@
 #define COMMAND_PORTFOLIO_DECREASE      "pdec"
 #define COMMAND_PORTFOLIO_DELETE        "pdel"
 #define COMMAND_PORTFOLIO_INC           "pinc"
+#define COMMAND_PORTFOLIO_SET           "pset"
 #define COMMAND_PORTFOLIO_INV_DECREASE  "pinvdec"
 #define COMMAND_PORTFOLIO_INV_INCREASE  "pinvinc"
 #define COMMAND_PORTFOLIO_INV_SET       "pinvset"

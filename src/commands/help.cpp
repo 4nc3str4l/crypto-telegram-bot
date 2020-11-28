@@ -38,7 +38,7 @@ void HelpCommand::commandLogic()
         "*/pinvset:* Sets the amount of money inested in portfolio.\n"
         "*/plist:* Returns a list with all portfolios.\n"
         "*/pnew:* Creates a new portfolio (avoid using spaces).\n"
-        "*/prem:* Sets the ammount of a current asset for a portfolio.\n"
+        "*/prem:* Removes an asset from a portfolio.\n"
         "*/price:* Checks the price of a given asset.\n"
         "*/pricen:* Checks the price of N tokens of a given asset.\n"
         "*/pset:* Sets the ammount of a current asset for a portfolio.\n"

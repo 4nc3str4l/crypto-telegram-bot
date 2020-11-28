@@ -139,6 +139,31 @@ void PortfolioManager::setAsset(std::string ticker, double amount, const unsigne
     m_Mtx.unlock();
 }
 
+asset PortfolioManager::getPortfolioAsset(const unsigned long id, const std::string& ticker)
+{
+    m_Mtx.lock();
+    asset toReturn;
+    toReturn.quantity = INVALID_ASSET;
+    for(int i = m_Portfolios.size() -1; i >= 0; --i)
+    {
+        portfolio& p = m_Portfolios[i];
+        if(p.id == id)
+        {
+            for(asset& a : p.assets)
+            {
+                if(a.ticker == ticker)
+                {
+                    toReturn = {a.ticker, a.quantity};
+                    break;
+                }
+            }
+        }
+    }
+    m_Mtx.unlock();
+    return toReturn;
+}
+
+
 portfolio PortfolioManager::getPortfolio(const unsigned long id)
 {
     m_Mtx.lock();

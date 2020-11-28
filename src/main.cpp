@@ -23,6 +23,7 @@
 #include "commands/portfolio_decrease.h"
 #include "commands/portfolio_delete.h"
 #include "commands/portfolio_increase.h"
+#include "commands/portfolio_set.h"
 #include "commands/portfolio_inv_decrease.h"
 #include "commands/portfolio_inv_increase.h"
 #include "commands/portfolio_inv_set.h"
@@ -127,6 +128,11 @@ int main(int argc, char *argv[])
         exec(bot, cmd, message);
     });
 
+    bot.getEvents().onCommand(COMMAND_PORTFOLIO_SET, [&bot](TgBot::Message::Ptr message) {    
+        PortfolioSet cmd(bot, message->chat->id);
+        exec(bot, cmd, message);
+    });
+
     bot.getEvents().onCommand(COMMAND_PORTFOLIO_INV_DECREASE, [&bot](TgBot::Message::Ptr message) {    
         PortfolioInversionDecrease cmd(bot, message->chat->id);
         exec(bot, cmd, message);
@@ -161,6 +167,8 @@ int main(int argc, char *argv[])
         RepeatCommand cmd(bot, message->chat->id);
         exec(bot, cmd, message);
     });
+
+
 
     bot.getEvents().onAnyMessage([&bot](TgBot::Message::Ptr message) {
         // TODO: Reply with help command if text is not a valid command

@@ -6,6 +6,7 @@
 #include "./data/model.h"
 
 #define INVALID_PORTFOLIO 0
+#define INVALID_ASSET -1
 
 class PortfolioManager 
 {
@@ -17,7 +18,8 @@ public:
     void updateInvested(const unsigned long id, double amount);
     void setAsset(std::string ticker, double amount, const unsigned long portfolioId);
     portfolio getPortfolio(const unsigned long id);
-    std::string listPortfolios(const std::int32_t investorId);    
+    std::string listPortfolios(const std::int32_t investorId);
+    asset getPortfolioAsset(const unsigned long id, const std::string& ticker);    
 private: 
     PortfolioManager();
     void loadPortfolios();
