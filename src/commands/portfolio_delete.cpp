@@ -10,12 +10,12 @@ Command(COMMAND_PORTFOLIO_DELETE, 1, bot, chatId){
 
 void PortfolioDelete::sendInstructions()
 {
-    send(fmt::format("Invalid Command usage /{} <>. Example: /{} ada", m_command, m_command));
+    send(fmt::format("Invalid Command usage /{} <portfolio_id>. Example: /{} 1", m_command, m_command));
 }
 
 const std::string PortfolioDelete::getDescription()
 {
-    return std::string("Checks the price of a given asset.");
+    return std::string("Deletes a portfolio");
 }
 
 PortfolioDelete::~PortfolioDelete()
@@ -25,11 +25,14 @@ PortfolioDelete::~PortfolioDelete()
 
 void PortfolioDelete::commandLogic()
 {
-    unsigned long id = getUnsignedLong();
-    if(!PortfolioManager::shared_instance().isOwnerOf(m_chatId, id))
+    unsigned long pid = getUnsignedLong();
+
+    if(!PortfolioManager::shared_instance().isOwnerOf(m_chatId, pid))
     {
-        send(fmt::format("Could not find portfolio with id {}", id));
+        send(fmt::format("Could not find portfolio with id {}", pid));
         return;
     }
-   send(fmt::format("Command not implemented yet"));
+
+    PortfolioManager::shared_instance().removePortfolio(pid, m_chatId);
+    send(fmt::format("Portfolio with id={} deleted", pid));
 }

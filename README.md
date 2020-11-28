@@ -59,7 +59,7 @@ Go to:
 18) [x] IncrementPortfolioAsse
 Command
 19) [x] DecrementPortfollioAssetCommand
-20) [ ] RemoveAssetCommand
+20) [x] RemoveAssetCommand
 21) [ ] DeletePortfolioCommand
 22) [ ] Unify files for persistence.
 23) [ ] Send Help when no command is input
@@ -244,3 +244,25 @@ sends a message to the user when the convertion is valid.
 ```/pdec 1 1000 ADA```
 
 (Decreases the amount of ADA for the portfolio with ID 1 to 1000 ADA)
+
+### Remove Asset From Portfolio
+**Description**: Removes an asset from a portfolio
+
+```/prem <id> <ticker>```
+
+**example:**
+
+```/prem 1 ADA```
+
+(Removes ADA from portfolio 1)
+
+### Delete Portfolio
+**Description**: Deletees a portfolio
+
+```/pdel <id> ```
+
+**example:**
+
+```/pdel 1 ```
+
+(Deletes the portfolio 1)

@@ -104,9 +104,16 @@ void PortfolioManager::updateInvested(const unsigned long id, double amount)
 
 void PortfolioManager::setAsset(std::string ticker, double amount, const unsigned long portfolioId)
 {
+    if(amount < 0)
+    {
+        return;
+    }
+
     m_Mtx.lock();
     portfolio* p;
     bool found = false;
+
+   
     for(int i = m_Portfolios.size() -1; i >= 0; --i)
     {
         p = &m_Portfolios[i];
@@ -120,6 +127,7 @@ void PortfolioManager::setAsset(std::string ticker, double amount, const unsigne
     if(found)
     {
         bool assetFound = false;
+        int idx = 0;
         for(asset& a : p->assets)
         {
             if(a.ticker == ticker)
@@ -128,11 +136,14 @@ void PortfolioManager::setAsset(std::string ticker, double amount, const unsigne
                 assetFound = true;
                 break;
             }
+            ++idx;
         }
-
-        if(!assetFound)
+        if(!assetFound && amount > 0)
         {
             p->assets.push_back({ticker, amount});
+        }else if(amount == 0)
+        {
+            p->assets.erase(p->assets.begin() + idx);
         }
     }
     Persistence::shared_instance().savePortfolios(m_Portfolios);
