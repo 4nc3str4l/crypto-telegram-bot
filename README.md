@@ -266,3 +266,14 @@ sends a message to the user when the convertion is valid.
 ```/pdel 1 ```
 
 (Deletes the portfolio 1)
+
+### Repeat Last Command
+**Description**: Repeats the last command
+
+```/repeat ```
+
+or
+
+```/r ```
+
+
