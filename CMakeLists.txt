@@ -17,6 +17,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 set(Boost_USE_MULTITHREADED ON)
 
+# DEBUG
+set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE RelWithDebInfo)
+
 # JSON LIB
 set(JSON_BuildTests OFF CACHE INTERNAL "")
 add_subdirectory(${JSON_LIB})
