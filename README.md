@@ -64,6 +64,7 @@ Go to:
 23) [x] Send Help when no command is input
 24) [x] Send command usage when error is detected
 25) [ ] Detect if a ticker can be queried by the system to avoid problems on getTicker()
+26) [ ] Return double with only 5 decimals
 
 
 ## Commands
