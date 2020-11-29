@@ -172,7 +172,10 @@ void parseMessage(TgBot::Bot& bot, std::string message, const std::int64_t& chat
         exec(bot, cmd, chatId, message);
         return;
     }
-    lastMessage[chatId] = message;
+    if(foundMessage)
+    {
+	lastMessage[chatId] = message;
+    }
 }
 
 int main(int argc, char *argv[])
