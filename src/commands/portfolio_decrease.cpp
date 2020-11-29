@@ -10,7 +10,7 @@ Command(COMMAND_PORTFOLIO_DECREASE, 3, bot, chatId){
 
 void PortfolioDecrease::sendInstructions()
 {
-    send(fmt::format("Invalid Command usage /{} <>. Example: /{} ada", m_command, m_command));
+    send(fmt::format("Invalid Command usage {} <>. Example: {} ada", m_command, m_command));
 }
 
 const std::string PortfolioDecrease::getDescription()

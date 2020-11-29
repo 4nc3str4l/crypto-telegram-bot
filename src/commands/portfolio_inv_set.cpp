@@ -10,7 +10,7 @@ Command(COMMAND_PORTFOLIO_INV_SET, 2, bot, chatId){
 
 void PortfolioInversionSet::sendInstructions()
 {
-    send(fmt::format("Invalid Command usage /{} <>. Example: /{} ada", m_command, m_command));
+    send(fmt::format("Invalid Command usage {} <>. Example: {} ada", m_command, m_command));
 }
 
 const std::string PortfolioInversionSet::getDescription()

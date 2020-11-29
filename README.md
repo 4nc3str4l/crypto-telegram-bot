@@ -56,16 +56,14 @@ Go to:
 15) [x] DecreaseInvestedCommand
 16) [x] IncreaseInvestedCommand
 17) [x] SetPortfolioAssetCommand
-18) [x] IncrementPortfolioAsse
-Command
+18) [x] IncrementPortfolioAssetCommand
 19) [x] DecrementPortfollioAssetCommand
 20) [x] RemoveAssetCommand
 21) [x] DeletePortfolioCommand
-22) [ ] Repeat Command
-23) [ ] Unify files for persistence.
-24) [ ] Send Help when no command is input
-25) [ ] Send command usage when error is detected
-26) [ ] Detect if a ticker can be queried by the system to avoid problems on getTicker()
+22) [x] Repeat Command
+23) [x] Send Help when no command is input
+24) [x] Send command usage when error is detected
+25) [ ] Detect if a ticker can be queried by the system to avoid problems on getTicker()
 
 
 ## Commands

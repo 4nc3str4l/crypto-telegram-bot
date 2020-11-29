@@ -10,7 +10,7 @@ Command(COMMAND_PRICE, 1, bot, chatId){
 
 void PriceCommand::sendInstructions()
 {
-    send(fmt::format("Invalid Command usage /{} <>. Example: /{} ada", m_command, m_command));
+    send(fmt::format("Invalid Command usage {} <ticker>. Example: {} ada", m_command, m_command));
 }
 
 const std::string PriceCommand::getDescription()

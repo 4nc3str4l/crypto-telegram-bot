@@ -12,7 +12,7 @@ Command(COMMAND_LIST_CONV, 0, bot, chatId){
 
 void ListTrackingConvertions::sendInstructions()
 {
-    send(fmt::format("Invalid Command usage /{} <id>. Example: /{} ", m_command, m_command));
+    send(fmt::format("Invalid Command usage {} <id>. Example: {} ", m_command, m_command));
 }
 
 const std::string ListTrackingConvertions::getDescription()

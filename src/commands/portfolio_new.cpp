@@ -10,7 +10,7 @@ Command(COMMAND_PORTFOLIO_NEW, 1, bot, chatId){
 
 void PortfolioNew::sendInstructions()
 {
-    send(fmt::format("Invalid Command usage /{} <name>. Example: /{} staking", m_command, m_command));
+    send(fmt::format("Invalid Command usage {} <name>. Example: {} staking", m_command, m_command));
 }
 
 const std::string PortfolioNew::getDescription()

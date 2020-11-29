@@ -12,7 +12,7 @@ Command(COMMAND_PORTFOLIO_CHECK, 1, bot, chatId){
 
 void PortfolioCheck::sendInstructions()
 {
-    send(fmt::format("Invalid Command usage /{} <id>. Example: /{} 1", m_command, m_command));
+    send(fmt::format("Invalid Command usage {} <id>. Example: {} 1", m_command, m_command));
 }
 
 const std::string PortfolioCheck::getDescription()

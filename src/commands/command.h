@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <cstdint>
+#include <map>
 
 #include <tgbot/tgbot.h>
 
@@ -41,5 +42,4 @@ protected:
   unsigned short m_numArguments;
   unsigned short m_indexRead = 1;
   std::vector<std::string> m_arguments;
-
 };

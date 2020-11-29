@@ -4,6 +4,8 @@
 #include <fmt/core.h>
 #include <memory>
 
+#include "../price_checker.h"
+
 
 Command::Command(const std::string &command, const unsigned short numArguments,
                     TgBot::Bot& bot, const std::int64_t chatId)
@@ -24,6 +26,7 @@ void Command::execute(const std::vector<std::string> &arguments)
             fmt::format("Incorrect number of arguments got {} expected {}", this->m_arguments.size() -1, this->m_numArguments),
             true
         );
+        sendInstructions();
         return;
     }
     commandLogic();
@@ -39,6 +42,7 @@ double Command::getDouble()
     if(this->m_indexRead >= m_arguments.size())
     {
         printError("Attempted to read double when no more params can be retreived.", true);
+        sendInstructions();
         return -1;
     }
 
@@ -51,6 +55,7 @@ double Command::getDouble()
     catch(std::exception& e)
     {
         printError(fmt::format("Could not convert {} to double", this->m_arguments[this->m_indexRead]), true);
+        sendInstructions();
     }
     return value;
 }
@@ -60,6 +65,7 @@ int Command::getInt()
     if(this->m_indexRead >= m_arguments.size())
     {
         printError("Attempted to read int when no more params can be retreived.", false);
+        sendInstructions();
         return -1;
     }
 
@@ -72,6 +78,7 @@ int Command::getInt()
     catch(std::exception& e)
     {
         printError(fmt::format("Could not convert {} to integer", this->m_arguments[this->m_indexRead]), false);
+        sendInstructions();
     }
     return value;
 }
@@ -81,6 +88,7 @@ unsigned long Command::getUnsignedLong()
     if(this->m_indexRead >= m_arguments.size())
     {
         printError("Attempted to read int when no more params can be retreived.", false);
+        sendInstructions();
         return 0;
     }
 
@@ -93,6 +101,7 @@ unsigned long Command::getUnsignedLong()
     catch(std::exception& e)
     {
         printError(fmt::format("Could not convert {} to unsigned long", this->m_arguments[this->m_indexRead]), false);
+        sendInstructions();
     }
     return value;
 }
@@ -112,16 +121,26 @@ const std::string& Command::getString()
 
 const std::string& Command::getTicker()
 {
+    static const std::string empty = "";
     // TODO: We could check if a ticker is correct (need a way to validate tickers)
     if(this->m_indexRead >= m_arguments.size())
     {
         printError("Attempted to read int when no more params can be retreived.", false);
-        static const std::string empty = "";
+        sendInstructions();
         return empty;
     }
 
     std::string& ticker = this->m_arguments[this->m_indexRead++];
     std::transform(ticker.begin(), ticker.end(), ticker.begin(), ::toupper);
+
+    double price = PriceChecker::shared_instance().fetchPrice(ticker);
+    if(price == -1)
+    {
+        printError("Incorrect Ticker", false);
+        sendInstructions();
+        return empty;
+    }
+
     return ticker;
 }
 

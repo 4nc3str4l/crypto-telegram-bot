@@ -11,7 +11,7 @@ Command(COMMAND_PORTFOLIO_SET, 3, bot, chatId){
 
 void PortfolioSet::sendInstructions()
 {
-    send(fmt::format("Invalid Command usage /{} <p_id> <quantity> <ticker>. Example: /{} 1 100 ADA", m_command, m_command));
+    send(fmt::format("Invalid Command usage {} <p_id> <quantity> <ticker>. Example: {} 1 100 ADA", m_command, m_command));
 }
 
 const std::string PortfolioSet::getDescription()

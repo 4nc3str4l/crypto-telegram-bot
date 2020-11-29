@@ -10,12 +10,12 @@ Command(COMMAND_REPEAT, 1, bot, chatId){
 
 void RepeatCommand::sendInstructions()
 {
-    send(fmt::format("Invalid Command usage /{} <>. Example: /{} ada", m_command, m_command));
+    send(fmt::format("Invalid Command usage {}", m_command));
 }
 
 const std::string RepeatCommand::getDescription()
 {
-    return std::string("Checks the price of a given asset.");
+    return std::string("Repeats the last command");
 }
 
 RepeatCommand::~RepeatCommand()
@@ -25,5 +25,4 @@ RepeatCommand::~RepeatCommand()
 
 void RepeatCommand::commandLogic()
 {
-   send(fmt::format("Command not implemented yet"));
 }

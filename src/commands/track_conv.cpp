@@ -13,7 +13,7 @@ Command(COMMAND_TRACK_CONV, 4, bot, chatId){
 
 void TrackConvertionCommand::sendInstructions()
 {
-    send(fmt::format("Invalid Command usage /{} <>. Example: /{} 1 btc 1000000 USDT", m_command, m_command));
+    send(fmt::format("Invalid Command usage {} <quanity> <ticker> <target_quantity> <target_ticker>. Example: {} 1 btc 1000000 USDT", m_command, m_command));
 }
 
 const std::string TrackConvertionCommand::getDescription()
