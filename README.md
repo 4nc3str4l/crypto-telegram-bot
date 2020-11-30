@@ -37,34 +37,6 @@ Go to:
 ```cmake --build .```
 ```sudo make install```
 
-## TODO:
-
-1) [x] Implement Persistence System
-2) [x] Implement Base Command
-3) [x] CheckConvertion
-4) [x] CheckNPriceCommand
-5) [x] ChceckPriceCommand
-6) [x] TrackConvertionCommand
-7) [x] UntrackConvertionCommnand
-8) [x] ListTrackingConvertions
-9) [x] Persist Tracking Convertions making sure of updating id counter when loading the app.
-10) [x] HelpCommand
-11) [x] CreatePortfolioCommand
-12) [x] ListPortfoliosCommand
-13) [x] CheckPortfolio
-14) [x] SetInvestedCommand
-15) [x] DecreaseInvestedCommand
-16) [x] IncreaseInvestedCommand
-17) [x] SetPortfolioAssetCommand
-18) [x] IncrementPortfolioAssetCommand
-19) [x] DecrementPortfollioAssetCommand
-20) [x] RemoveAssetCommand
-21) [x] DeletePortfolioCommand
-22) [x] Repeat Command
-23) [x] Send Help when no command is input
-24) [x] Send command usage when error is detected
-25) [x] Detect if a ticker can be queried by the system to avoid problems on getTicker()
-
 ## Commands
 
 ### Check Price
