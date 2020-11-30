@@ -1,8 +1,8 @@
 #pragma once
 
-#include "command.h"
+#include "portfolio.h"
 
-class PortfolioDelete : public Command
+class PortfolioDelete : public PortfolioCommand
 {
 public:
     PortfolioDelete(TgBot::Bot& bot, const std::int64_t chatId);

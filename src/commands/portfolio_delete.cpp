@@ -5,7 +5,7 @@
 
 
 PortfolioDelete::PortfolioDelete(TgBot::Bot& bot, const std::int64_t chatId) :
-Command(COMMAND_PORTFOLIO_DELETE, 1, bot, chatId){
+PortfolioCommand(COMMAND_PORTFOLIO_DELETE, 1, bot, chatId){
 }
 
 void PortfolioDelete::sendInstructions()
@@ -25,14 +25,10 @@ PortfolioDelete::~PortfolioDelete()
 
 void PortfolioDelete::commandLogic()
 {
-    unsigned long pid = getUnsignedLong();
-
-    if(!PortfolioManager::shared_instance().isOwnerOf(m_chatId, pid))
-    {
-        send(fmt::format("Could not find portfolio with id {}", pid));
+    if(!getPortfolioId()){
         return;
     }
 
-    PortfolioManager::shared_instance().removePortfolio(pid, m_chatId);
-    send(fmt::format("Portfolio with id={} deleted", pid));
+    PortfolioManager::shared_instance().removePortfolio(m_Id, m_chatId);
+    send(fmt::format("Portfolio with id={} deleted", m_Id));
 }

@@ -5,7 +5,7 @@
 
 
 PortfolioRemove::PortfolioRemove(TgBot::Bot& bot, const std::int64_t chatId) :
-Command(COMMAND_PORTFOLIO_REMOVE, 2, bot, chatId){
+PortfolioCommand(COMMAND_PORTFOLIO_REMOVE, 2, bot, chatId){
 }
 
 void PortfolioRemove::sendInstructions()
@@ -25,21 +25,17 @@ PortfolioRemove::~PortfolioRemove()
 
 void PortfolioRemove::commandLogic()
 {
-    unsigned long id = getUnsignedLong();
-    std::string ticker = getTicker();
-
-    if(!PortfolioManager::shared_instance().isOwnerOf(m_chatId, id))
-    {
-        send(fmt::format("Could not find portfolio with id {}", id));
+    if(!getPortfolioId()){
         return;
     }
 
-    asset a = PortfolioManager::shared_instance().getPortfolioAsset(id, ticker);
+    std::string ticker = getTicker();
+    asset a = PortfolioManager::shared_instance().getPortfolioAsset(m_Id, ticker);
     if(a.quantity == INVALID_ASSET)
     {
         send(fmt::format("Asset not found"));
         return;
     }
-    PortfolioManager::shared_instance().setAsset(ticker, 0, id);
-    send(fmt::format("Asset {} for portfolio {} removed", ticker, id));
+    PortfolioManager::shared_instance().setAsset(ticker, 0, m_Id);
+    send(fmt::format("Asset {} for portfolio {} removed", ticker, m_Id));
 }

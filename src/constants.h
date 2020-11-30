@@ -37,6 +37,9 @@
 #define NOT_FOUND 2
 #define OK 3
 
+#define INVALID_PORTFOLIO 0
+#define INVALID_ASSET -1
+
 //#define CURRENCY "EUR"
 //#define CURRENCY_TICKER "€"
 

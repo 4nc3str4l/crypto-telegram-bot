@@ -7,7 +7,7 @@
 
 
 PortfolioCheck::PortfolioCheck(TgBot::Bot& bot, const std::int64_t chatId) :
-Command(COMMAND_PORTFOLIO_CHECK, 1, bot, chatId){
+PortfolioCommand(COMMAND_PORTFOLIO_CHECK, 1, bot, chatId){
 }
 
 void PortfolioCheck::sendInstructions()
@@ -27,12 +27,9 @@ PortfolioCheck::~PortfolioCheck()
 
 void PortfolioCheck::commandLogic()
 {
-    unsigned long id = getUnsignedLong();
-    if(!PortfolioManager::shared_instance().isOwnerOf(m_chatId, id))
-    {
-        send(fmt::format("Could not find portfolio with id {}", id));
+    if(!getPortfolioId()){
         return;
     }
-    portfolio p = PortfolioManager::shared_instance().getPortfolio(id);
+    portfolio p = PortfolioManager::shared_instance().getPortfolio(m_Id);
     send(getPorfolioInformation(p));
 }

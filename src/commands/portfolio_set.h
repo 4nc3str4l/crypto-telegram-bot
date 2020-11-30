@@ -1,8 +1,8 @@
 #pragma once
 
-#include "command.h"
+#include "portfolio.h"
 
-class PortfolioSet : public Command
+class PortfolioSet : public PortfolioCommand
 {
 public:
     PortfolioSet(TgBot::Bot& bot, const std::int64_t chatId);

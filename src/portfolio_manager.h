@@ -5,9 +5,6 @@
 #include <cstdint>
 #include "./data/model.h"
 
-#define INVALID_PORTFOLIO 0
-#define INVALID_ASSET -1
-
 class PortfolioManager 
 {
 public:

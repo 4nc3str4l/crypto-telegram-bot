@@ -1,8 +1,8 @@
 #pragma once
 
-#include "command.h"
+#include "portfolio.h"
 
-class PortfolioInversionIncrease : public Command
+class PortfolioInversionIncrease : public PortfolioCommand
 {
 public:
     PortfolioInversionIncrease(TgBot::Bot& bot, const std::int64_t chatId);

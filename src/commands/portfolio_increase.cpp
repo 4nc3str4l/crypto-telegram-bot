@@ -5,7 +5,7 @@
 
 
 PortfolioIncrease::PortfolioIncrease(TgBot::Bot& bot, const std::int64_t chatId) :
-Command(COMMAND_PORTFOLIO_INC, 3, bot, chatId){
+PortfolioCommand(COMMAND_PORTFOLIO_INC, 3, bot, chatId){
 }
 
 void PortfolioIncrease::sendInstructions()
@@ -25,25 +25,22 @@ PortfolioIncrease::~PortfolioIncrease()
 
 void PortfolioIncrease::commandLogic()
 {
-    unsigned long id = getUnsignedLong();
-    double quantity = getDouble();
-    std::string ticker = getTicker();
-
-    if(!PortfolioManager::shared_instance().isOwnerOf(m_chatId, id))
-    {
-        send(fmt::format("Could not find portfolio with id {}", id));
+    if(!getPortfolioId()){
         return;
     }
 
-    asset a = PortfolioManager::shared_instance().getPortfolioAsset(id, ticker);
+    double quantity = getDouble();
+    std::string ticker = getTicker();
+
+    asset a = PortfolioManager::shared_instance().getPortfolioAsset(m_Id, ticker);
     if(a.quantity == INVALID_ASSET)
     {
-        PortfolioManager::shared_instance().setAsset(ticker, quantity, id);
-        send(fmt::format("Asset for portfolio {} set to {}{}", id, quantity, ticker));
+        PortfolioManager::shared_instance().setAsset(ticker, quantity, m_Id);
+        send(fmt::format("Asset for portfolio {} set to {}{}", m_Id, quantity, ticker));
         return;
     }
     double lastQuantity = a.quantity;
     double newQuantity = lastQuantity + quantity;
-    PortfolioManager::shared_instance().setAsset(ticker, newQuantity, id);
-    send(fmt::format("Asset for portfolio {} set from {}{} to {}{}", id, lastQuantity, ticker, newQuantity, ticker));
+    PortfolioManager::shared_instance().setAsset(ticker, newQuantity, m_Id);
+    send(fmt::format("Asset for portfolio {} set from {}{} to {}{}", m_Id, lastQuantity, ticker, newQuantity, ticker));
 }
