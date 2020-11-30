@@ -24,6 +24,10 @@ void PriceWatcher::loadInitialData()
         this->tConvId = tc.id > this->tConvId ? tc.id : this->tConvId;
         m_trackingConvertions.push_back(tc);
     }
+    if(this->tConvId > 1){
+        this->tConvId++;
+    }
+
     fmt::print(fmt::format("Loaded {} convertions, current id {}\n", m_trackingConvertions.size(), this->tConvId));
 }
 
