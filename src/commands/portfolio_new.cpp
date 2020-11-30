@@ -4,8 +4,8 @@
 #include "../constants.h"
 #include "../portfolio_manager.h"
 
-PortfolioNew::PortfolioNew(TgBot::Bot& bot, const std::int64_t chatId) :
-Command(COMMAND_PORTFOLIO_NEW, 1, bot, chatId){
+PortfolioNew::PortfolioNew(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_PORTFOLIO_NEW, 1, bot, chatId)
+{
 }
 
 void PortfolioNew::sendInstructions()
@@ -20,7 +20,6 @@ const std::string PortfolioNew::getDescription()
 
 PortfolioNew::~PortfolioNew()
 {
-
 }
 
 void PortfolioNew::commandLogic()

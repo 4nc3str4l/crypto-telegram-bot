@@ -37,8 +37,7 @@ const std::vector<std::string> getCommandArguments(const std::string &command)
     return results;
 }
 
-
-void exec(TgBot::Bot& bot, Command &c, const std::int64_t& chatId, const std::string& message)
+void exec(TgBot::Bot &bot, Command &c, const std::int64_t &chatId, const std::string &message)
 {
     if (!Persistence::shared_instance().isWhiteListed(chatId))
     {
@@ -48,110 +47,110 @@ void exec(TgBot::Bot& bot, Command &c, const std::int64_t& chatId, const std::st
     c.execute(getCommandArguments(message));
 }
 
-void parseMessage(TgBot::Bot& bot, std::string message, const std::int64_t& chatId)
+void parseMessage(TgBot::Bot &bot, std::string message, const std::int64_t &chatId)
 {
     bool foundMessage = true;
     std::string command = getCommandArguments(message)[0];
-    
-    if(command == COMMAND_PRICE)
+
+    if (command == COMMAND_PRICE)
     {
         PriceCommand cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_PRICEN)
+    else if (command == COMMAND_PRICEN)
     {
         PricenCommand cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_CONV)
+    else if (command == COMMAND_CONV)
     {
         ConvertionCommand cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_TRACK_CONV)
+    else if (command == COMMAND_TRACK_CONV)
     {
         TrackConvertionCommand cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_UNTRACK_CONV)
+    else if (command == COMMAND_UNTRACK_CONV)
     {
         UnTrackConvertionCommand cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_LIST_CONV)
+    else if (command == COMMAND_LIST_CONV)
     {
         ListTrackingConvertions cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_CHECK_CONV)
+    else if (command == COMMAND_CHECK_CONV)
     {
         ConvertionCheckCommand cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_HELP)
+    else if (command == COMMAND_HELP)
     {
         HelpCommand cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_PORTFOLIO_CHECK)
+    else if (command == COMMAND_PORTFOLIO_CHECK)
     {
         PortfolioCheck cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_PORTFOLIO_DECREASE)
+    else if (command == COMMAND_PORTFOLIO_DECREASE)
     {
         PortfolioDecrease cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_PORTFOLIO_DELETE)
+    else if (command == COMMAND_PORTFOLIO_DELETE)
     {
         PortfolioDelete cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_PORTFOLIO_INC)
+    else if (command == COMMAND_PORTFOLIO_INC)
     {
         PortfolioIncrease cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_PORTFOLIO_SET)
+    else if (command == COMMAND_PORTFOLIO_SET)
     {
         PortfolioSet cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_PORTFOLIO_INV_DECREASE)
+    else if (command == COMMAND_PORTFOLIO_INV_DECREASE)
     {
         PortfolioInversionDecrease cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_PORTFOLIO_INV_INCREASE)
+    else if (command == COMMAND_PORTFOLIO_INV_INCREASE)
     {
         PortfolioInversionIncrease cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_PORTFOLIO_INV_SET)
+    else if (command == COMMAND_PORTFOLIO_INV_SET)
     {
         PortfolioInversionSet cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_PORTFOLIO_LIST)
+    else if (command == COMMAND_PORTFOLIO_LIST)
     {
         PortfolioList cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_PORTFOLIO_NEW)
+    else if (command == COMMAND_PORTFOLIO_NEW)
     {
         PortfolioNew cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_PORTFOLIO_REMOVE)
+    else if (command == COMMAND_PORTFOLIO_REMOVE)
     {
         PortfolioRemove cmd(bot, chatId);
         exec(bot, cmd, chatId, message);
     }
-    else if(command == COMMAND_REPEAT ||
-            command == COMMAND_REPEAT_SHORT)
+    else if (command == COMMAND_REPEAT ||
+             command == COMMAND_REPEAT_SHORT)
     {
-        if(lastMessage.find(chatId) == lastMessage.end())
+        if (lastMessage.find(chatId) == lastMessage.end())
         {
             bot.getApi().sendMessage(chatId, "Repeat command not available due to a server restart");
             return;
@@ -166,9 +165,9 @@ void parseMessage(TgBot::Bot& bot, std::string message, const std::int64_t& chat
         exec(bot, cmd, chatId, message);
         return;
     }
-    
-    if(foundMessage)
+
+    if (foundMessage)
     {
-	    lastMessage[chatId] = message;
+        lastMessage[chatId] = message;
     }
 }

@@ -3,9 +3,8 @@
 #include "../portfolio_manager.h"
 #include "../constants.h"
 
-
-PortfolioInversionDecrease::PortfolioInversionDecrease(TgBot::Bot& bot, const std::int64_t chatId) :
-PortfolioCommand(COMMAND_PORTFOLIO_INV_DECREASE, 2, bot, chatId){
+PortfolioInversionDecrease::PortfolioInversionDecrease(TgBot::Bot &bot, const std::int64_t chatId) : PortfolioCommand(COMMAND_PORTFOLIO_INV_DECREASE, 2, bot, chatId)
+{
 }
 
 void PortfolioInversionDecrease::sendInstructions()
@@ -20,21 +19,21 @@ const std::string PortfolioInversionDecrease::getDescription()
 
 PortfolioInversionDecrease::~PortfolioInversionDecrease()
 {
-
 }
 
 void PortfolioInversionDecrease::commandLogic()
 {
-    if(!getPortfolioId()){
+    if (!getPortfolioId())
+    {
         return;
     }
-    
-    double invested = getDouble(); 
+
+    double invested = getDouble();
     portfolio p = PortfolioManager::shared_instance().getPortfolio(m_Id);
     double lastInvested = p.invested;
     double newInvested = p.invested - invested;
     newInvested = newInvested <= 0 ? 0 : newInvested;
     PortfolioManager::shared_instance().updateInvested(m_Id, newInvested);
     send(fmt::format("Portfolio {} with id {} invested set from {}{} to {}{}.",
-            p.name, p.id, lastInvested, CURRENCY_TICKER, newInvested, CURRENCY_TICKER));
+                     p.name, p.id, lastInvested, CURRENCY_TICKER, newInvested, CURRENCY_TICKER));
 }

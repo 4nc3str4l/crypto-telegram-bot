@@ -4,9 +4,8 @@
 #include "../utils.h"
 #include "../constants.h"
 
-
-ConvertionCommand::ConvertionCommand(TgBot::Bot& bot, const std::int64_t chatId) :
-Command(COMMAND_CONV, 3, bot, chatId){
+ConvertionCommand::ConvertionCommand(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_CONV, 3, bot, chatId)
+{
 }
 
 void ConvertionCommand::sendInstructions()
@@ -21,24 +20,25 @@ const std::string ConvertionCommand::getDescription()
 
 ConvertionCommand::~ConvertionCommand()
 {
-
 }
 
 void ConvertionCommand::commandLogic()
 {
     double orAmount = getDouble();
-    if(orAmount < 0)
+    if (orAmount < 0)
     {
         send(fmt::format("Could not convert negative amounts"));
     }
 
     std::string ticker = getTicker();
-    if(ticker.size() == 0){
+    if (ticker.size() == 0)
+    {
         return;
     }
 
     std::string targetTicker = getTicker();
-    if(targetTicker.size() == 0){
+    if (targetTicker.size() == 0)
+    {
         return;
     }
     double convertion = computeConv(orAmount, ticker, targetTicker);

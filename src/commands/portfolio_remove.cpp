@@ -3,9 +3,8 @@
 #include "../portfolio_manager.h"
 #include "../constants.h"
 
-
-PortfolioRemove::PortfolioRemove(TgBot::Bot& bot, const std::int64_t chatId) :
-PortfolioCommand(COMMAND_PORTFOLIO_REMOVE, 2, bot, chatId){
+PortfolioRemove::PortfolioRemove(TgBot::Bot &bot, const std::int64_t chatId) : PortfolioCommand(COMMAND_PORTFOLIO_REMOVE, 2, bot, chatId)
+{
 }
 
 void PortfolioRemove::sendInstructions()
@@ -20,22 +19,23 @@ const std::string PortfolioRemove::getDescription()
 
 PortfolioRemove::~PortfolioRemove()
 {
-
 }
 
 void PortfolioRemove::commandLogic()
 {
-    if(!getPortfolioId()){
+    if (!getPortfolioId())
+    {
         return;
     }
 
     std::string ticker = getTicker();
-    if(ticker.size() == 0){
+    if (ticker.size() == 0)
+    {
         return;
     }
-    
+
     asset a = PortfolioManager::shared_instance().getPortfolioAsset(m_Id, ticker);
-    if(a.quantity == INVALID_ASSET)
+    if (a.quantity == INVALID_ASSET)
     {
         send(fmt::format("Asset not found"));
         return;

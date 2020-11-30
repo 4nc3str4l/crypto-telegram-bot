@@ -4,12 +4,14 @@
 #include <string>
 #include <cstdint>
 
-struct asset {
+struct asset
+{
     std::string ticker;
     double quantity;
 };
 
-struct portfolio {
+struct portfolio
+{
     unsigned long id;
     std::int32_t investorId;
     double invested;
@@ -17,7 +19,8 @@ struct portfolio {
     std::vector<asset> assets;
 };
 
-struct tracking_convertion {
+struct tracking_convertion
+{
     unsigned long id;
     std::string orTicker;
     double orQuantity;
@@ -26,9 +29,9 @@ struct tracking_convertion {
     std::int32_t investorId;
 };
 
-struct app_data {
+struct app_data
+{
     std::vector<long> whitelisted_ids;
     std::vector<tracking_convertion> convertions;
     std::vector<portfolio> portfolios;
 };
-

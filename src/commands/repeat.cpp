@@ -3,9 +3,8 @@
 #include "../price_checker.h"
 #include "../constants.h"
 
-
-RepeatCommand::RepeatCommand(TgBot::Bot& bot, const std::int64_t chatId) :
-Command(COMMAND_REPEAT, 1, bot, chatId){
+RepeatCommand::RepeatCommand(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_REPEAT, 1, bot, chatId)
+{
 }
 
 void RepeatCommand::sendInstructions()
@@ -20,7 +19,6 @@ const std::string RepeatCommand::getDescription()
 
 RepeatCommand::~RepeatCommand()
 {
-
 }
 
 void RepeatCommand::commandLogic()

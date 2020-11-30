@@ -51,14 +51,13 @@ void Persistence::createInitialFile()
     std::ofstream o3(PORTFOLIOS_PATH);
     o3 << std::setw(4) << portfolios << std::endl;
     o3.close();
-    
 }
 
-void Persistence::saveConvertions(const std::vector<tracking_convertion>& convertions)
+void Persistence::saveConvertions(const std::vector<tracking_convertion> &convertions)
 {
 
     auto arr = json::array();
-    for(const tracking_convertion& c : convertions)
+    for (const tracking_convertion &c : convertions)
     {
         json obj = {
             {"id", c.id},
@@ -66,12 +65,11 @@ void Persistence::saveConvertions(const std::vector<tracking_convertion>& conver
             {"orQuantity", c.orQuantity},
             {"tTicker", c.tTicker},
             {"targetQuantity", c.targetQuantity},
-            {"investorId", c.investorId}
-        };
+            {"investorId", c.investorId}};
 
         arr.push_back(obj);
     }
-    
+
     json toPersist;
     toPersist["tracking_convertions"] = arr;
     m_mut.lock();
@@ -81,10 +79,10 @@ void Persistence::saveConvertions(const std::vector<tracking_convertion>& conver
     m_mut.unlock();
 }
 
-void Persistence::savePortfolios(const std::vector<portfolio>& portfolios)
+void Persistence::savePortfolios(const std::vector<portfolio> &portfolios)
 {
     auto arr = json::array();
-    for(const portfolio& c : portfolios)
+    for (const portfolio &c : portfolios)
     {
         json portolioObj = {
             {"id", c.id},
@@ -94,19 +92,18 @@ void Persistence::savePortfolios(const std::vector<portfolio>& portfolios)
         };
 
         auto assets = json::array();
-        for(asset a : c.assets)
+        for (asset a : c.assets)
         {
             json asset = {
                 {"ticker", a.ticker},
-                {"quantity", a.quantity}
-            };
+                {"quantity", a.quantity}};
 
             assets.push_back(asset);
         }
         portolioObj["assets"] = assets;
         arr.push_back(portolioObj);
     }
-    
+
     json toPersist;
     toPersist["portfolios"] = arr;
     m_mut.lock();
@@ -137,7 +134,6 @@ void Persistence::loadData()
     this->loadTrackingPortfolios(j3);
 }
 
-
 void Persistence::loadWhiteListed(const json &data)
 {
     // Load whitelisted Ips
@@ -149,41 +145,37 @@ void Persistence::loadWhiteListed(const json &data)
     std::cout << "Num whitelisted ids " << this->data.whitelisted_ids.size() << std::endl;
 }
 
-void Persistence::loadTrackingConvertions(const json& data)
+void Persistence::loadTrackingConvertions(const json &data)
 {
     auto savedConvertions = data["tracking_convertions"];
-    for(auto c : savedConvertions)
+    for (auto c : savedConvertions)
     {
-        this->data.convertions.push_back({
-            c["id"], 
-            c["orTicker"], 
-            c["orQuantity"], 
-            c["tTicker"], 
-            c["targetQuantity"], 
-            c["investorId"]
-        });
+        this->data.convertions.push_back({c["id"],
+                                          c["orTicker"],
+                                          c["orQuantity"],
+                                          c["tTicker"],
+                                          c["targetQuantity"],
+                                          c["investorId"]});
     }
 }
 
-void Persistence::loadTrackingPortfolios(const json& d)
+void Persistence::loadTrackingPortfolios(const json &d)
 {
     auto savedPortfolios = d["portfolios"];
-    for(auto p : savedPortfolios)
+    for (auto p : savedPortfolios)
     {
-        portfolio portfolio = { 
-            p["id"], 
-            p["investorId"], 
-            p["invested"], 
-            p["name"], 
+        portfolio portfolio = {
+            p["id"],
+            p["investorId"],
+            p["invested"],
+            p["name"],
         };
-        
+
         auto assets = p["assets"];
-        for(auto a : assets)
+        for (auto a : assets)
         {
-            portfolio.assets.push_back({
-                a["ticker"],
-                a["quantity"]
-            });
+            portfolio.assets.push_back({a["ticker"],
+                                        a["quantity"]});
         }
         data.portfolios.push_back(portfolio);
     }

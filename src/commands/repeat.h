@@ -5,8 +5,9 @@
 class RepeatCommand : public Command
 {
 public:
-    RepeatCommand(TgBot::Bot& bot, const std::int64_t chatId);
+    RepeatCommand(TgBot::Bot &bot, const std::int64_t chatId);
     ~RepeatCommand();
+
 protected:
     void saveLastCommand();
     void sendInstructions();

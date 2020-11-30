@@ -5,9 +5,8 @@
 #include "../constants.h"
 #include "../utils.h"
 
-
-PortfolioCheck::PortfolioCheck(TgBot::Bot& bot, const std::int64_t chatId) :
-PortfolioCommand(COMMAND_PORTFOLIO_CHECK, 1, bot, chatId){
+PortfolioCheck::PortfolioCheck(TgBot::Bot &bot, const std::int64_t chatId) : PortfolioCommand(COMMAND_PORTFOLIO_CHECK, 1, bot, chatId)
+{
 }
 
 void PortfolioCheck::sendInstructions()
@@ -22,12 +21,12 @@ const std::string PortfolioCheck::getDescription()
 
 PortfolioCheck::~PortfolioCheck()
 {
-
 }
 
 void PortfolioCheck::commandLogic()
 {
-    if(!getPortfolioId()){
+    if (!getPortfolioId())
+    {
         return;
     }
     portfolio p = PortfolioManager::shared_instance().getPortfolio(m_Id);

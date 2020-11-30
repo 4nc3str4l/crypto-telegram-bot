@@ -6,8 +6,8 @@
 #include "../constants.h"
 #include "../price_watcher.h"
 
-ListTrackingConvertions::ListTrackingConvertions(TgBot::Bot& bot, const std::int64_t chatId) :
-Command(COMMAND_LIST_CONV, 0, bot, chatId){
+ListTrackingConvertions::ListTrackingConvertions(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_LIST_CONV, 0, bot, chatId)
+{
 }
 
 void ListTrackingConvertions::sendInstructions()
@@ -20,12 +20,12 @@ const std::string ListTrackingConvertions::getDescription()
     return std::string("Lists all the tracking convertions");
 }
 
-ListTrackingConvertions::~ListTrackingConvertions(){}
+ListTrackingConvertions::~ListTrackingConvertions() {}
 
 void ListTrackingConvertions::commandLogic()
 {
     std::string toSend = PriceWatcher::shared_instance().getConvertionListFor(m_chatId);
-    if(toSend.size() == 0)
+    if (toSend.size() == 0)
     {
         send("No Convertions Found!");
         return;

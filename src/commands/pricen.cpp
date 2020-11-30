@@ -3,9 +3,8 @@
 #include "../price_checker.h"
 #include "../constants.h"
 
-
-PricenCommand::PricenCommand(TgBot::Bot& bot, const std::int64_t chatId) :
-Command(COMMAND_PRICEN, 2, bot, chatId){
+PricenCommand::PricenCommand(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_PRICEN, 2, bot, chatId)
+{
 }
 
 void PricenCommand::sendInstructions()
@@ -20,14 +19,14 @@ const std::string PricenCommand::getDescription()
 
 PricenCommand::~PricenCommand()
 {
-
 }
 
 void PricenCommand::commandLogic()
 {
     double quantity = getDouble();
     std::string ticker = getTicker();
-    if(ticker.size() == 0){
+    if (ticker.size() == 0)
+    {
         return;
     }
     double price = PriceChecker::shared_instance().fetchPrice(ticker);

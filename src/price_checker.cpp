@@ -8,38 +8,37 @@
 
 using json = nlohmann::json;
 
-
-void PriceChecker::setApiKey(const std::string& apiKey)
+void PriceChecker::setApiKey(const std::string &apiKey)
 {
     this->m_apiKey = apiKey;
 }
 
-
-
-double PriceChecker::fetchPrice(const std::string& ticker)
+double PriceChecker::fetchPrice(const std::string &ticker)
 {
-    if(!this->shouldFetchPrice(ticker))
+    if (!this->shouldFetchPrice(ticker))
     {
         m_mutex.lock();
         double price = this->m_cachedPrices[ticker];
         m_mutex.unlock();
         return price;
     }
-    
+
     std::cout << "Fetching price " << ticker << std::endl;
-     
+
     cpr::Response r = cpr::Get(cpr::Url(
-    std::string("https://api.nomics.com/v1/currencies/ticker?key=") + 
-    this->m_apiKey + 
-    std::string("&ids=") +
-    std::string(ticker) +
-    std::string("&interval=1d,30d&convert=") + 
-    std::string(CURRENCY) + 
-    std::string("&per-page=1&page=1").c_str()));
+        std::string("https://api.nomics.com/v1/currencies/ticker?key=") +
+        this->m_apiKey +
+        std::string("&ids=") +
+        std::string(ticker) +
+        std::string("&interval=1d,30d&convert=") +
+        std::string(CURRENCY) +
+        std::string("&per-page=1&page=1").c_str()));
     int code = r.status_code;
-    if(code == 200){
+    if (code == 200)
+    {
         auto jsdata = json::parse(r.text.c_str());
-        if(jsdata.is_array() && jsdata.size() > 0){
+        if (jsdata.is_array() && jsdata.size() > 0)
+        {
 #if DEBUG_MODE
             std::cout << jsdata << std::endl;
 #endif
@@ -49,23 +48,26 @@ double PriceChecker::fetchPrice(const std::string& ticker)
             double dPrice = std::stod(s);
             this->cachePrice(ticker, dPrice);
             return dPrice;
-        }else{
+        }
+        else
+        {
             return -1;
         }
-
-    }else{
+    }
+    else
+    {
         printf("Error in request %s\n", r.text.c_str());
         return -1;
     }
 }
 
-bool PriceChecker::shouldFetchPrice(const std::string& ticker)
+bool PriceChecker::shouldFetchPrice(const std::string &ticker)
 {
     m_mutex.lock();
-    if(this->m_cachedPrices.find(ticker) == this->m_cachedPrices.end())
+    if (this->m_cachedPrices.find(ticker) == this->m_cachedPrices.end())
     {
         m_mutex.unlock();
-        return true;    
+        return true;
     }
 
     fsec delta = Time::now() - this->m_cachedTimes[ticker];
@@ -74,8 +76,7 @@ bool PriceChecker::shouldFetchPrice(const std::string& ticker)
     return duration > std::chrono::seconds(CACHE_PRICE_SECS);
 }
 
-
-void PriceChecker::cachePrice(const std::string& ticker, double price)
+void PriceChecker::cachePrice(const std::string &ticker, double price)
 {
     t to = Time::now();
     m_mutex.lock();

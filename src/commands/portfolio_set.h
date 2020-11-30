@@ -5,8 +5,9 @@
 class PortfolioSet : public PortfolioCommand
 {
 public:
-    PortfolioSet(TgBot::Bot& bot, const std::int64_t chatId);
+    PortfolioSet(TgBot::Bot &bot, const std::int64_t chatId);
     ~PortfolioSet();
+
 protected:
     void sendInstructions();
     const std::string getDescription();

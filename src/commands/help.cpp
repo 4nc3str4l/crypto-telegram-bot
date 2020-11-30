@@ -3,9 +3,8 @@
 #include "../price_checker.h"
 #include "../constants.h"
 
-
-HelpCommand::HelpCommand(TgBot::Bot& bot, const std::int64_t chatId) :
-Command(COMMAND_HELP, 0, bot, chatId){
+HelpCommand::HelpCommand(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_HELP, 0, bot, chatId)
+{
 }
 
 void HelpCommand::sendInstructions()
@@ -20,7 +19,6 @@ const std::string HelpCommand::getDescription()
 
 HelpCommand::~HelpCommand()
 {
-
 }
 
 void HelpCommand::commandLogic()
@@ -47,6 +45,5 @@ void HelpCommand::commandLogic()
         "*/tconv:* Sets an alarm when a certain conversion rate is reached.\n"
         "*/tconvcheck:* Check the status of a convertion.\n"
         "*/tconvdel:* Stops a tracking alarm.\n"
-        "*/tconvlist:* Lists convertions being tracked.\n"
-    ));
+        "*/tconvlist:* Lists convertions being tracked.\n"));
 }

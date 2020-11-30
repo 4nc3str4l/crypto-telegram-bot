@@ -3,9 +3,8 @@
 #include "../portfolio_manager.h"
 #include "../constants.h"
 
-
-PortfolioList::PortfolioList(TgBot::Bot& bot, const std::int64_t chatId) :
-Command(COMMAND_PORTFOLIO_LIST, 0, bot, chatId){
+PortfolioList::PortfolioList(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_PORTFOLIO_LIST, 0, bot, chatId)
+{
 }
 
 void PortfolioList::sendInstructions()
@@ -20,10 +19,9 @@ const std::string PortfolioList::getDescription()
 
 PortfolioList::~PortfolioList()
 {
-
 }
 
 void PortfolioList::commandLogic()
 {
-   send(PortfolioManager::shared_instance().listPortfolios(m_chatId));
+    send(PortfolioManager::shared_instance().listPortfolios(m_chatId));
 }

@@ -3,9 +3,8 @@
 #include "../portfolio_manager.h"
 #include "../constants.h"
 
-
-PortfolioIncrease::PortfolioIncrease(TgBot::Bot& bot, const std::int64_t chatId) :
-PortfolioCommand(COMMAND_PORTFOLIO_INC, 3, bot, chatId){
+PortfolioIncrease::PortfolioIncrease(TgBot::Bot &bot, const std::int64_t chatId) : PortfolioCommand(COMMAND_PORTFOLIO_INC, 3, bot, chatId)
+{
 }
 
 void PortfolioIncrease::sendInstructions()
@@ -20,23 +19,24 @@ const std::string PortfolioIncrease::getDescription()
 
 PortfolioIncrease::~PortfolioIncrease()
 {
-
 }
 
 void PortfolioIncrease::commandLogic()
 {
-    if(!getPortfolioId()){
+    if (!getPortfolioId())
+    {
         return;
     }
 
     double quantity = getDouble();
     std::string ticker = getTicker();
-    if(ticker.size() == 0){
+    if (ticker.size() == 0)
+    {
         return;
     }
 
     asset a = PortfolioManager::shared_instance().getPortfolioAsset(m_Id, ticker);
-    if(a.quantity == INVALID_ASSET)
+    if (a.quantity == INVALID_ASSET)
     {
         PortfolioManager::shared_instance().setAsset(ticker, quantity, m_Id);
         send(fmt::format("Asset for portfolio {} set to {}{}", m_Id, quantity, ticker));

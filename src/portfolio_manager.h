@@ -5,10 +5,14 @@
 #include <cstdint>
 #include "./data/model.h"
 
-class PortfolioManager 
+class PortfolioManager
 {
 public:
-    static PortfolioManager &shared_instance() {static PortfolioManager manager; return manager;}
+    static PortfolioManager &shared_instance()
+    {
+        static PortfolioManager manager;
+        return manager;
+    }
     unsigned long addPortfolio(const std::int32_t investorId, const std::string name);
     int removePortfolio(const unsigned long id, const std::int32_t investorId);
     bool isOwnerOf(const std::int32_t investorId, const unsigned long id);
@@ -16,8 +20,9 @@ public:
     void setAsset(std::string ticker, double amount, const unsigned long portfolioId);
     portfolio getPortfolio(const unsigned long id);
     std::string listPortfolios(const std::int32_t investorId);
-    asset getPortfolioAsset(const unsigned long id, const std::string& ticker);    
-private: 
+    asset getPortfolioAsset(const unsigned long id, const std::string &ticker);
+
+private:
     PortfolioManager();
     void loadPortfolios();
     unsigned long m_PortfolioIdCounter = 0;

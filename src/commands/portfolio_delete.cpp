@@ -3,9 +3,8 @@
 #include "../portfolio_manager.h"
 #include "../constants.h"
 
-
-PortfolioDelete::PortfolioDelete(TgBot::Bot& bot, const std::int64_t chatId) :
-PortfolioCommand(COMMAND_PORTFOLIO_DELETE, 1, bot, chatId){
+PortfolioDelete::PortfolioDelete(TgBot::Bot &bot, const std::int64_t chatId) : PortfolioCommand(COMMAND_PORTFOLIO_DELETE, 1, bot, chatId)
+{
 }
 
 void PortfolioDelete::sendInstructions()
@@ -20,12 +19,12 @@ const std::string PortfolioDelete::getDescription()
 
 PortfolioDelete::~PortfolioDelete()
 {
-
 }
 
 void PortfolioDelete::commandLogic()
 {
-    if(!getPortfolioId()){
+    if (!getPortfolioId())
+    {
         return;
     }
 

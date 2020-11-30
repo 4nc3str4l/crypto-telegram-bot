@@ -5,8 +5,9 @@
 class PortfolioRemove : public PortfolioCommand
 {
 public:
-    PortfolioRemove(TgBot::Bot& bot, const std::int64_t chatId);
+    PortfolioRemove(TgBot::Bot &bot, const std::int64_t chatId);
     ~PortfolioRemove();
+
 protected:
     void sendInstructions();
     const std::string getDescription();

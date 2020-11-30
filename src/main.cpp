@@ -8,7 +8,6 @@
 #include "price_watcher.h"
 #include "command_parsing.h"
 
-
 int main(int argc, char *argv[])
 {
 
@@ -24,7 +23,6 @@ int main(int argc, char *argv[])
 
     // Start the price watcher
     PriceWatcher::shared_instance().start(&bot);
-
 
     bot.getEvents().onAnyMessage([&bot](TgBot::Message::Ptr message) {
         parseMessage(bot, message->text, message->chat->id);

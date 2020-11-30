@@ -7,8 +7,8 @@
 #include "../price_watcher.h"
 #include "../utils.h"
 
-ConvertionCheckCommand::ConvertionCheckCommand(TgBot::Bot& bot, const std::int64_t chatId) :
-Command(COMMAND_CHECK_CONV, 1, bot, chatId){
+ConvertionCheckCommand::ConvertionCheckCommand(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_CHECK_CONV, 1, bot, chatId)
+{
 }
 
 void ConvertionCheckCommand::sendInstructions()
@@ -21,7 +21,7 @@ const std::string ConvertionCheckCommand::getDescription()
     return std::string("Deletes a tracking convertion by id");
 }
 
-ConvertionCheckCommand::~ConvertionCheckCommand(){}
+ConvertionCheckCommand::~ConvertionCheckCommand() {}
 
 void ConvertionCheckCommand::commandLogic()
 {
@@ -29,7 +29,7 @@ void ConvertionCheckCommand::commandLogic()
 
     tracking_convertion c = PriceWatcher::shared_instance().getConvertionWithId(id);
 
-    if(c.id == INVALID_CONVERTION || c.investorId != m_chatId)
+    if (c.id == INVALID_CONVERTION || c.investorId != m_chatId)
     {
         send(fmt::format("Convertion {} not found", id));
         return;

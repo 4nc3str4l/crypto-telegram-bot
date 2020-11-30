@@ -4,9 +4,8 @@
 #include "../portfolio_manager.h"
 #include "../constants.h"
 
-
-PortfolioSet::PortfolioSet(TgBot::Bot& bot, const std::int64_t chatId) :
-PortfolioCommand(COMMAND_PORTFOLIO_SET, 3, bot, chatId){
+PortfolioSet::PortfolioSet(TgBot::Bot &bot, const std::int64_t chatId) : PortfolioCommand(COMMAND_PORTFOLIO_SET, 3, bot, chatId)
+{
 }
 
 void PortfolioSet::sendInstructions()
@@ -21,18 +20,19 @@ const std::string PortfolioSet::getDescription()
 
 PortfolioSet::~PortfolioSet()
 {
-
 }
 
 void PortfolioSet::commandLogic()
 {
-    if(!getPortfolioId()){
+    if (!getPortfolioId())
+    {
         return;
     }
 
     double quantity = getDouble();
     std::string ticker = getTicker();
-    if(ticker.size() == 0){
+    if (ticker.size() == 0)
+    {
         return;
     }
 

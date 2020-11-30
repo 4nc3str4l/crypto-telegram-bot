@@ -6,9 +6,8 @@
 #include "../constants.h"
 #include "../price_watcher.h"
 
-
-TrackConvertionCommand::TrackConvertionCommand(TgBot::Bot& bot, const std::int64_t chatId) :
-Command(COMMAND_TRACK_CONV, 4, bot, chatId){
+TrackConvertionCommand::TrackConvertionCommand(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_TRACK_CONV, 4, bot, chatId)
+{
 }
 
 void TrackConvertionCommand::sendInstructions()
@@ -21,27 +20,29 @@ const std::string TrackConvertionCommand::getDescription()
     return std::string("Sets and alarm that will alert you when a certain conversion is met.");
 }
 
-TrackConvertionCommand::~TrackConvertionCommand(){}
+TrackConvertionCommand::~TrackConvertionCommand() {}
 
 void TrackConvertionCommand::commandLogic()
 {
     double amount = getDouble();
     std::string ticker = getTicker();
-    if(ticker.size() == 0){
+    if (ticker.size() == 0)
+    {
         return;
     }
 
     double tAmount = getDouble();
     std::string tTicker = getTicker();
-    if(tTicker.size() == 0){
+    if (tTicker.size() == 0)
+    {
         return;
     }
 
-    unsigned long convId = PriceWatcher::shared_instance().addConvertion(amount, 
-                                                                        ticker, 
-                                                                        tAmount, 
-                                                                        tTicker,
-                                                                        m_chatId);
+    unsigned long convId = PriceWatcher::shared_instance().addConvertion(amount,
+                                                                         ticker,
+                                                                         tAmount,
+                                                                         tTicker,
+                                                                         m_chatId);
 
     double price = PriceChecker::shared_instance().fetchPrice(ticker);
     if (convId != INVALID_CONVERTION)
