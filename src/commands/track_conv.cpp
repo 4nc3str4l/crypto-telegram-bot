@@ -27,8 +27,15 @@ void TrackConvertionCommand::commandLogic()
 {
     double amount = getDouble();
     std::string ticker = getTicker();
+    if(ticker.size() == 0){
+        return;
+    }
+
     double tAmount = getDouble();
     std::string tTicker = getTicker();
+    if(tTicker.size() == 0){
+        return;
+    }
 
     unsigned long convId = PriceWatcher::shared_instance().addConvertion(amount, 
                                                                         ticker, 

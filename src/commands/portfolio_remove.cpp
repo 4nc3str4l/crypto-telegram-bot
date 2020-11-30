@@ -30,6 +30,10 @@ void PortfolioRemove::commandLogic()
     }
 
     std::string ticker = getTicker();
+    if(ticker.size() == 0){
+        return;
+    }
+    
     asset a = PortfolioManager::shared_instance().getPortfolioAsset(m_Id, ticker);
     if(a.quantity == INVALID_ASSET)
     {

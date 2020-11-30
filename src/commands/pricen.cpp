@@ -27,6 +27,9 @@ void PricenCommand::commandLogic()
 {
     double quantity = getDouble();
     std::string ticker = getTicker();
+    if(ticker.size() == 0){
+        return;
+    }
     double price = PriceChecker::shared_instance().fetchPrice(ticker);
     double nPrice = price * quantity;
     if (price != -1)

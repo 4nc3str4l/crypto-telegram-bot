@@ -134,9 +134,10 @@ const std::string& Command::getTicker()
     std::transform(ticker.begin(), ticker.end(), ticker.begin(), ::toupper);
 
     double price = PriceChecker::shared_instance().fetchPrice(ticker);
+    std::cout << price << std::endl;
     if(price == -1)
     {
-        printError("Incorrect Ticker", false);
+        printError("Incorrect Ticker", true);
         sendInstructions();
         return empty;
     }

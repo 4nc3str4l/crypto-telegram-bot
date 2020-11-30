@@ -33,7 +33,14 @@ void ConvertionCommand::commandLogic()
     }
 
     std::string ticker = getTicker();
+    if(ticker.size() == 0){
+        return;
+    }
+
     std::string targetTicker = getTicker();
+    if(targetTicker.size() == 0){
+        return;
+    }
     double convertion = computeConv(orAmount, ticker, targetTicker);
 
     if (convertion >= 0)

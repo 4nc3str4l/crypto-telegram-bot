@@ -32,6 +32,9 @@ void PortfolioSet::commandLogic()
 
     double quantity = getDouble();
     std::string ticker = getTicker();
+    if(ticker.size() == 0){
+        return;
+    }
 
     PortfolioManager::shared_instance().setAsset(ticker, quantity, m_Id);
     send(fmt::format("Asset for portfolio {} set to {}{}", m_Id, quantity, ticker));

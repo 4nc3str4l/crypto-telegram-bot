@@ -26,6 +26,10 @@ PriceCommand::~PriceCommand()
 void PriceCommand::commandLogic()
 {
     std::string ticker = getTicker();
+    if(ticker.size() == 0){
+        return;
+    }
+    
     double price = PriceChecker::shared_instance().fetchPrice(ticker);
     if (price != -1)
     {

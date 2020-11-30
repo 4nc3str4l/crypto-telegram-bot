@@ -24,7 +24,8 @@ void PriceWatcher::loadInitialData()
         this->tConvId = tc.id > this->tConvId ? tc.id : this->tConvId;
         m_trackingConvertions.push_back(tc);
     }
-    if(this->tConvId > 1){
+
+    if(Persistence::shared_instance().data.convertions.size() > 0 && this->tConvId >= 1){
         this->tConvId++;
     }
 
