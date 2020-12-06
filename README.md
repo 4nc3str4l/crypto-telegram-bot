@@ -2,7 +2,9 @@
 
 ### What it is? 
 
-A telegram bot to check your Crypto investments and keep track of your porfolio.
+A telegram bot to check your Crypto investments and keep track of your porfolio. Also is usefull to set convertion alarms, perfect when you want to perform something like:
+
+Send an alert when 2 ETH will be worth 1 BTC which is something that not a lot of exchanges do.
 
 ### Why C++? Python would fit 10000000 times better for that!
 
