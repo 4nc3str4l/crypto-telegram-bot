@@ -45,7 +45,7 @@ void ConvertionCommand::commandLogic()
 
     if (convertion >= 0)
     {
-        send(fmt::format("{} {} = {} {}", orAmount, ticker, convertion, targetTicker));
+        send(fmt::format("{} {} = {} {}", orAmount, ticker, roundTo(convertion, 2), targetTicker));
     }
     else
     {

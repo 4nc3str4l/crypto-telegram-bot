@@ -37,8 +37,9 @@ void ConvertionCheckCommand::commandLogic()
 
     double curr = computeConvertion(c);
     double progress = computeConvertionProgress(c);
+
     std::string toSend = fmt::format(
         "ID={} Progress={}%. Now with {}{} you could have {}{} (you wanted {})",
-        id, progress, c.orQuantity, c.orTicker, curr, c.tTicker, c.targetQuantity, c.tTicker);
+        id, roundTo(progress, 2), c.orQuantity, c.orTicker, roundTo(curr, 2), c.tTicker, c.targetQuantity, c.tTicker);
     send(toSend);
 }

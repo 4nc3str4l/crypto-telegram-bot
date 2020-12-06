@@ -1,7 +1,9 @@
 #include "pricen.h"
 #include <fmt/core.h>
+
 #include "../price_checker.h"
 #include "../constants.h"
+#include "../utils.h"
 
 PricenCommand::PricenCommand(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_PRICEN, 2, bot, chatId)
 {
@@ -33,7 +35,7 @@ void PricenCommand::commandLogic()
     double nPrice = price * quantity;
     if (price != -1)
     {
-        send(fmt::format("Price of {} {} is {}{}", quantity, ticker, nPrice, CURRENCY_TICKER));
+        send(fmt::format("Price of {} {} is {}{}", quantity, ticker, roundTo(nPrice, 2), CURRENCY_TICKER));
     }
     else
     {

@@ -11,3 +11,4 @@ bool isConvertionReady(const tracking_convertion &conv);
 double computeConvertionProgress(const tracking_convertion &conv);
 double computeConvertion(const tracking_convertion &conv);
 std::string getPorfolioInformation(const portfolio &p);
+std::string roundTo(const double x, const unsigned int decimals);
