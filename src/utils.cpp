@@ -22,11 +22,13 @@ double getFiatValue(const double amount, const std::string &ticker)
 
 bool isConvertionReady(const tracking_convertion &conv)
 {
-    double orFiat = getFiatValue(conv.orQuantity, conv.orTicker);
-    double targetFiat = getFiatValue(conv.targetQuantity, conv.tTicker);
-    bool readyToSell = computeConvertionProgress(conv) >= 100;
-    // Buy convertions should be the oposite in progress than sell convertions
-    return conv.isSell ? readyToSell : !readyToSell;
+    double progress = computeConvertionProgress(conv);
+    if(conv.isSell){
+        return progress >= 100;
+    }else{
+        return progress > 0;
+    }
+
 }
 
 double computeConvertionProgress(const tracking_convertion &conv)
