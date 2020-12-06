@@ -74,7 +74,10 @@ unsigned long PriceWatcher::addConvertion(const double orAmount, const std::stri
 {
     mtx.lock();
     unsigned long newId = tConvId++;
-    m_trackingConvertions.push_back({newId, orTicker, orAmount, targetTicker, targetAmount, investorId});
+
+    // NOTE: Checks if the user is tracking convertions to higher values (to sell) or to lower (to buy)
+    bool isSell = computeConv(orAmount, orTicker, targetTicker) < targetAmount; 
+    m_trackingConvertions.push_back({newId, orTicker, orAmount, targetTicker, targetAmount, investorId, isSell});
     Persistence::shared_instance().saveConvertions(m_trackingConvertions);
     mtx.unlock();
     return newId;

@@ -44,7 +44,6 @@ void TrackConvertionCommand::commandLogic()
                                                                          tTicker,
                                                                          m_chatId);
 
-    double price = PriceChecker::shared_instance().fetchPrice(ticker);
     if (convId != INVALID_CONVERTION)
     {
         send(fmt::format("ID={} Tracking when {}{} will be worth {}{}", convId, amount, ticker, tAmount, tTicker));

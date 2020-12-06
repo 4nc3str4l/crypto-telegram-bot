@@ -27,6 +27,7 @@ struct tracking_convertion
     std::string tTicker;
     double targetQuantity;
     std::int32_t investorId;
+    bool isSell;
 };
 
 struct app_data

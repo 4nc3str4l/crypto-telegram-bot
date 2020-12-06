@@ -65,7 +65,9 @@ void Persistence::saveConvertions(const std::vector<tracking_convertion> &conver
             {"orQuantity", c.orQuantity},
             {"tTicker", c.tTicker},
             {"targetQuantity", c.targetQuantity},
-            {"investorId", c.investorId}};
+            {"investorId", c.investorId},
+            {"isSell", c.isSell}
+        };
 
         arr.push_back(obj);
     }
@@ -155,7 +157,8 @@ void Persistence::loadTrackingConvertions(const json &data)
                                           c["orQuantity"],
                                           c["tTicker"],
                                           c["targetQuantity"],
-                                          c["investorId"]});
+                                          c["investorId"],
+                                          c["isSell"]});
     }
 }
 

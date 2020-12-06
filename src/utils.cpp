@@ -24,14 +24,23 @@ bool isConvertionReady(const tracking_convertion &conv)
 {
     double orFiat = getFiatValue(conv.orQuantity, conv.orTicker);
     double targetFiat = getFiatValue(conv.targetQuantity, conv.tTicker);
-    return computeConvertionProgress(conv) >= 100;
+    bool readyToSell = computeConvertionProgress(conv) >= 100;
+    // Buy convertions should be the oposite in progress than sell convertions
+    return conv.isSell ? readyToSell : !readyToSell;
 }
 
 double computeConvertionProgress(const tracking_convertion &conv)
 {
     double orFiat = getFiatValue(conv.orQuantity, conv.orTicker);
     double targetFiat = getFiatValue(conv.targetQuantity, conv.tTicker);
-    return orFiat / targetFiat * 100;
+    double progress =  orFiat / targetFiat * 100;
+
+    if(conv.isSell){
+        return progress;
+    }else{
+        // If the convertion is to buy we need to change a bit the progress
+        return 100 - progress; // 100 - 130 = -30%
+    }
 }
 
 double computeConvertion(const tracking_convertion &conv)
