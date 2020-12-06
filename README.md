@@ -1,4 +1,4 @@
-# Cryptopricebot
+# Crypto Currency Bot for Telegram
 
 ### What it is? 
 
