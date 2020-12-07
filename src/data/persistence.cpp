@@ -94,7 +94,7 @@ void Persistence::savePortfolios(const std::vector<portfolio> &portfolios)
         };
 
         auto assets = json::array();
-        for (asset a : c.assets)
+        for (const asset& a : c.assets)
         {
             json asset = {
                 {"ticker", a.ticker},
@@ -150,7 +150,7 @@ void Persistence::loadWhiteListed(const json &data)
 void Persistence::loadTrackingConvertions(const json &data)
 {
     auto savedConvertions = data["tracking_convertions"];
-    for (auto c : savedConvertions)
+    for (const auto& c : savedConvertions)
     {
         this->data.convertions.push_back({c["id"],
                                           c["orTicker"],
@@ -165,7 +165,7 @@ void Persistence::loadTrackingConvertions(const json &data)
 void Persistence::loadTrackingPortfolios(const json &d)
 {
     auto savedPortfolios = d["portfolios"];
-    for (auto p : savedPortfolios)
+    for (const auto& p : savedPortfolios)
     {
         portfolio portfolio = {
             p["id"],

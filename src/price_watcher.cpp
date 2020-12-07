@@ -42,7 +42,7 @@ void PriceWatcher::checkLoop()
     while (m_running)
     {
         std::lock_guard<std::mutex> guard(mtx);
-        for (tracking_convertion& conv : m_trackingConvertions)
+        for (const tracking_convertion& conv : m_trackingConvertions)
         {
             std::string s = fmt::format("Or {} {} Target: {} {}\n", conv.orQuantity, conv.orTicker, conv.targetQuantity, conv.tTicker);
             fmt::print(s);
