@@ -4,6 +4,7 @@
 #include <mutex>
 #include <vector>
 #include <string>
+#include <optional>
 
 #include <tgbot/tgbot.h>
 #include "data/model.h"
@@ -28,7 +29,7 @@ public:
     int deleteConvertion(unsigned long convId, const std::int32_t investorId);
     std::string getConvertionListFor(std::int32_t investorId);
 
-    tracking_convertion getConvertionWithId(unsigned long convId);
+    std::optional<tracking_convertion> getConvertionWithId(unsigned long convId);
 
 private:
     PriceWatcher(){};

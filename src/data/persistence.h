@@ -13,8 +13,6 @@ using json = nlohmann::json;
 
 #define VERSION "1.0.0"
 
-struct tracking_convertion;
-
 class Persistence
 {
 public:

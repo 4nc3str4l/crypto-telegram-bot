@@ -5,6 +5,7 @@
 #include <algorithm>
 #include "cpr/cpr.h"
 #include "constants.h"
+#include "fmt/core.h"
 
 using json = nlohmann::json;
 
@@ -56,7 +57,7 @@ double PriceChecker::fetchPrice(const std::string &ticker)
     }
     else
     {
-        printf("Error in request %s\n", r.text.c_str());
+        fmt::print("Error in request code={} {}\n\n {} \n", r.status_code, r.text.c_str(), r.url.c_str());
         return -1;
     }
 }

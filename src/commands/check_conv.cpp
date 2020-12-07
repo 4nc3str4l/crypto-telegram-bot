@@ -1,6 +1,7 @@
 #include "check_conv.h"
 
 #include <fmt/core.h>
+#include <optional>
 
 #include "../price_checker.h"
 #include "../constants.h"
@@ -27,13 +28,15 @@ void ConvertionCheckCommand::commandLogic()
 {
     unsigned long id = getUnsignedLong();
 
-    tracking_convertion c = PriceWatcher::shared_instance().getConvertionWithId(id);
+    std::optional<tracking_convertion> optC = PriceWatcher::shared_instance().getConvertionWithId(id);
 
-    if (c.id == INVALID_CONVERTION || c.investorId != m_chatId)
+    if (!optC.has_value() || optC.value().investorId != m_chatId)
     {
         send(fmt::format("Convertion {} not found", id));
         return;
     }
+
+    tracking_convertion& c = optC.value();
 
     double curr = computeConvertion(c);
     double progress = computeConvertionProgress(c);

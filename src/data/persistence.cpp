@@ -69,7 +69,7 @@ void Persistence::saveConvertions(const std::vector<tracking_convertion> &conver
             {"isSell", c.isSell}
         };
 
-        arr.push_back(obj);
+        arr.push_back(std::move(obj));
     }
 
     json toPersist;
@@ -175,7 +175,7 @@ void Persistence::loadTrackingPortfolios(const json &d)
         };
 
         auto assets = p["assets"];
-        for (auto a : assets)
+        for (const auto& a : assets)
         {
             portfolio.assets.push_back({a["ticker"],
                                         a["quantity"]});
@@ -192,12 +192,5 @@ bool Persistence::isWhiteListed(const std::int32_t id)
         return true;
     }
 
-    for (long wid : this->data.whitelisted_ids)
-    {
-        if (wid == id)
-        {
-            return true;
-        }
-    }
-    return false;
+    return std::find(data.whitelisted_ids.cbegin(), data.whitelisted_ids.cend(), id) != data.whitelisted_ids.cend();
 }

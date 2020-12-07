@@ -18,7 +18,7 @@ void PriceWatcher::start(TgBot::Bot *bot)
 
 void PriceWatcher::loadInitialData()
 {
-    for (tracking_convertion tc : Persistence::shared_instance().data.convertions)
+    for (const tracking_convertion& tc : Persistence::shared_instance().data.convertions)
     {
         this->tConvId = tc.id > this->tConvId ? tc.id : this->tConvId;
         m_trackingConvertions.push_back(tc);
@@ -89,29 +89,22 @@ int PriceWatcher::deleteConvertion(unsigned long convId, const std::int32_t inve
     int result = NOT_FOUND;
 
     mtx.lock();
-    for (int i = m_trackingConvertions.size() - 1; i >= 0; --i)
-    {
-        const tracking_convertion &c = m_trackingConvertions[i];
-        if (c.id == convId)
-        {
-            // If the user owns the convertion we can delete it
-            if (c.investorId == investorId)
-            {
-                result = OK;
-                idx = i;
-            }
-            else
-            {
-                result = UNAUTHORIZED_OPERATION;
-            }
-            break;
+    auto it = std::find_if(m_trackingConvertions.begin(), m_trackingConvertions.end(), 
+        [convId, investorId](const tracking_convertion &c){
+            return c.id == convId;
         }
+    );
+
+    if(it != m_trackingConvertions.end())
+    {
+        result = (*it).investorId == investorId ? OK : UNAUTHORIZED_OPERATION;
     }
 
     if (result == OK)
     {
-        m_trackingConvertions.erase(m_trackingConvertions.begin() + idx);
+        m_trackingConvertions.erase(it);
     }
+
     Persistence::shared_instance().saveConvertions(m_trackingConvertions);
     mtx.unlock();
     return result;
@@ -133,22 +126,18 @@ std::string PriceWatcher::getConvertionListFor(std::int32_t investorId)
     return cList;
 }
 
-tracking_convertion PriceWatcher::getConvertionWithId(unsigned long convId)
+std::optional<tracking_convertion> PriceWatcher::getConvertionWithId(unsigned long convId)
 {
-    mtx.lock();
-    tracking_convertion conv;
-    conv.id = INVALID_CONVERTION;
+    std::lock_guard<std::mutex> guard(mtx);
     for (int i = 0; i < m_trackingConvertions.size(); ++i)
     {
-        const tracking_convertion c = m_trackingConvertions[i];
+        const tracking_convertion& c = m_trackingConvertions[i];
         if (c.id == convId)
         {
-            conv = c;
-            break;
+            return c;
         }
     }
-    mtx.unlock();
-    return conv;
+    return std::nullopt;;
 }
 
 PriceWatcher::~PriceWatcher()

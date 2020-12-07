@@ -37,7 +37,7 @@ const std::vector<std::string> getCommandArguments(const std::string &command)
     return results;
 }
 
-void exec(TgBot::Bot &bot, Command &c, const std::int64_t &chatId, const std::string &message)
+void exec(TgBot::Bot &bot, Command &c, const std::int64_t chatId, const std::string &message)
 {
     if (!Persistence::shared_instance().isWhiteListed(chatId))
     {
@@ -47,7 +47,7 @@ void exec(TgBot::Bot &bot, Command &c, const std::int64_t &chatId, const std::st
     c.execute(getCommandArguments(message));
 }
 
-void parseMessage(TgBot::Bot &bot, std::string message, const std::int64_t &chatId)
+void parseMessage(TgBot::Bot &bot, const std::string& message, const std::int64_t chatId)
 {
     bool foundMessage = true;
     std::string command = getCommandArguments(message)[0];

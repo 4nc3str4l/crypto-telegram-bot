@@ -5,17 +5,16 @@ set(PROJECT_NAME "crypto_bot")
 project(${PROJECT_NAME})
 
 # USEFULL PATHS AND DEFINITIONS
-set(TELEGRAM_LIB ${PROJECT_SOURCE_DIR}/externals/tgbot-cpp)
 set(JSON_LIB ${PROJECT_SOURCE_DIR}/externals/json)
 set(SRC_PATH ${CMAKE_SOURCE_DIR}/src)
 
 # CPP 17
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_BUILD_TYPE debug)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 set(Boost_USE_MULTITHREADED ON)
+
 
 # DEBUG
 set(CMAKE_BUILD_TYPE Debug)
@@ -36,7 +35,7 @@ find_package(Boost COMPONENTS system REQUIRED)
 find_package(CURL)
 
 # INCLUDE DIRECTORIES
-include_directories(/usr/local/include ${OPENSSL_INCLUDE_DIR} ${Boost_INCLUDE_DIR} ${TELEGRAM_LIB}/include)
+include_directories(/usr/local/include ${OPENSSL_INCLUDE_DIR} ${Boost_INCLUDE_DIR})
 
 if (CURL_FOUND)
     include_directories(${CURL_INCLUDE_DIRS})
@@ -58,7 +57,21 @@ if(NOT fmt_POPULATED)
     FetchContent_Populate(fmt)
     add_subdirectory(${fmt_SOURCE_DIR} ${fmt_BINARY_DIR})
 endif()
-  
+
+# TGBOT
+
+FetchContent_Declare(
+    tgbot
+    GIT_REPOSITORY https://github.com/reo7sp/tgbot-cpp.git
+    GIT_TAG        v1.2.1
+)
+
+FetchContent_GetProperties(tgbot)
+if(NOT tgbot_POPULATED)
+    FetchContent_Populate(tgbot)
+    add_subdirectory(${tgbot_SOURCE_DIR} ${tgbot_BINARY_DIR})
+endif()
+
 
 # ADD ALL THE SOURCE AND HEADERS
 file(GLOB src_files
@@ -80,7 +93,8 @@ add_executable(${PROJECT_NAME}
 # LINK THE LIBARRIES
 target_link_libraries(${PROJECT_NAME}
   PRIVATE nlohmann_json::nlohmann_json
-  PRIVATE cpr::cpr /usr/local/lib/libTgBot.a
+  PRIVATE TgBot
+  PRIVATE cpr::cpr
   PRIVATE fmt
   ${CMAKE_THREAD_LIBS_INIT}
   ${OPENSSL_LIBRARIES}

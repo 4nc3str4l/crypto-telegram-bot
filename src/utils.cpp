@@ -82,5 +82,5 @@ std::string getPorfolioInformation(const portfolio &p)
 std::string roundTo(const double x, const unsigned int decimals){
     std::stringstream stream;
     stream << std::fixed << std::setprecision(decimals) << x;
-    return stream.str();   
+    return stream.str();
 }
