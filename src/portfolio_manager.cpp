@@ -13,7 +13,7 @@ PortfolioManager::PortfolioManager()
 
 void PortfolioManager::loadPortfolios()
 {
-    for (portfolio p : Persistence::shared_instance().data.portfolios)
+    for (const portfolio& p : Persistence::shared_instance().data.portfolios)
     {
         m_Portfolios.push_back(p);
         m_PortfolioIdCounter = p.id > m_PortfolioIdCounter ? p.id : m_PortfolioIdCounter;
@@ -150,10 +150,10 @@ asset PortfolioManager::getPortfolioAsset(const unsigned long id, const std::str
     toReturn.quantity = INVALID_ASSET;
     for (int i = m_Portfolios.size() - 1; i >= 0; --i)
     {
-        portfolio &p = m_Portfolios[i];
+        const portfolio &p = m_Portfolios[i];
         if (p.id == id)
         {
-            for (asset &a : p.assets)
+            for (const asset &a : p.assets)
             {
                 if (a.ticker == ticker)
                 {
