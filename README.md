@@ -29,6 +29,27 @@ Then in order to run the bot you will need to do:
 
 ```sudo apt-get install binutils libssl-dev libboost-system-dev zlib1g-dev libcurl4-openssl-dev```
 
+## Build
+
+**Debug:**
+
+```mkdir build```
+
+```cd build```
+
+```cmake -DCMAKE_BUILD_TYPE=Debug ..```
+
+```lldb -b -o 'run' -o 'thread backtrace all' -k 'thread backtrace all' -- ./crypto_bot  <telegram_key> <nomics_key> ```
+
+**Release:**
+
+```mkdir build```
+
+```cd build```
+
+```cmake -DCMAKE_BUILD_TYPE=Release ..```
+
+
 ## Commands
 
 ### Check Price

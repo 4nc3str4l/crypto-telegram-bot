@@ -17,7 +17,7 @@ set(Boost_USE_MULTITHREADED ON)
 
 
 # DEBUG
-set(CMAKE_BUILD_TYPE Debug)
+# set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_BUILD_TYPE RelWithDebInfo)
 
 # JSON LIB
