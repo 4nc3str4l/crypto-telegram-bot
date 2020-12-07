@@ -9,7 +9,7 @@ public:
     ~PortfolioNew();
 
 protected:
-    void sendInstructions();
-    const std::string getDescription();
-    void commandLogic();
+    void sendInstructions() override;
+    const std::string getDescription() override;
+    void commandLogic() override;
 };
