@@ -18,9 +18,8 @@ double PriceChecker::fetchPrice(const std::string &ticker)
 {
     if (!this->shouldFetchPrice(ticker))
     {
-        m_mutex.lock();
+        std::lock_guard<std::mutex> guard(m_mutex);
         double price = this->m_cachedPrices[ticker];
-        m_mutex.unlock();
         return price;
     }
 
@@ -64,7 +63,7 @@ double PriceChecker::fetchPrice(const std::string &ticker)
 
 bool PriceChecker::shouldFetchPrice(const std::string &ticker)
 {
-    m_mutex.lock();
+    std::lock_guard<std::mutex> guard(m_mutex);
     if (this->m_cachedPrices.find(ticker) == this->m_cachedPrices.end())
     {
         m_mutex.unlock();
@@ -72,7 +71,6 @@ bool PriceChecker::shouldFetchPrice(const std::string &ticker)
     }
 
     fsec delta = Time::now() - this->m_cachedTimes[ticker];
-    m_mutex.unlock();
     ms duration = std::chrono::duration_cast<ms>(delta);
     return duration > std::chrono::seconds(CACHE_PRICE_SECS);
 }
@@ -80,8 +78,7 @@ bool PriceChecker::shouldFetchPrice(const std::string &ticker)
 void PriceChecker::cachePrice(const std::string &ticker, double price)
 {
     t to = Time::now();
-    m_mutex.lock();
+    std::lock_guard<std::mutex> guard(m_mutex);
     this->m_cachedPrices[ticker] = price;
     this->m_cachedTimes[ticker] = to;
-    m_mutex.unlock();
 }

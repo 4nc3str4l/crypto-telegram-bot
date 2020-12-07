@@ -41,7 +41,7 @@ void PriceWatcher::checkLoop()
 {
     while (m_running)
     {
-        mtx.lock();
+        std::lock_guard<std::mutex> guard(mtx);
         for (tracking_convertion& conv : m_trackingConvertions)
         {
             std::string s = fmt::format("Or {} {} Target: {} {}\n", conv.orQuantity, conv.orTicker, conv.targetQuantity, conv.tTicker);
@@ -63,7 +63,6 @@ void PriceWatcher::checkLoop()
                 m_bot->getApi().sendMessage(conv.investorId, msg);
             }
         }
-        mtx.unlock();
         std::this_thread::sleep_for(std::chrono::seconds(m_checkInterval));
     }
     std::cout << "Thread Stopped" << std::endl;
@@ -72,14 +71,13 @@ void PriceWatcher::checkLoop()
 unsigned long PriceWatcher::addConvertion(const double orAmount, const std::string &orTicker, const double targetAmount, const std::string &targetTicker,
                                           const std::int32_t investorId)
 {
-    mtx.lock();
+    std::lock_guard<std::mutex> guard(mtx);
     unsigned long newId = tConvId++;
 
     // NOTE: Checks if the user is tracking convertions to higher values (to sell) or to lower (to buy)
     bool isSell = computeConv(orAmount, orTicker, targetTicker) < targetAmount; 
     m_trackingConvertions.push_back({newId, orTicker, orAmount, targetTicker, targetAmount, investorId, isSell});
     Persistence::shared_instance().saveConvertions(m_trackingConvertions);
-    mtx.unlock();
     return newId;
 }
 
@@ -88,7 +86,7 @@ int PriceWatcher::deleteConvertion(unsigned long convId, const std::int32_t inve
     int idx = -1;
     int result = NOT_FOUND;
 
-    mtx.lock();
+    std::lock_guard<std::mutex> guard(mtx);
     auto it = std::find_if(m_trackingConvertions.begin(), m_trackingConvertions.end(), 
         [convId, investorId](const tracking_convertion &c){
             return c.id == convId;
@@ -106,14 +104,13 @@ int PriceWatcher::deleteConvertion(unsigned long convId, const std::int32_t inve
     }
 
     Persistence::shared_instance().saveConvertions(m_trackingConvertions);
-    mtx.unlock();
     return result;
 }
 
 std::string PriceWatcher::getConvertionListFor(std::int32_t investorId)
 {
     std::string cList;
-    mtx.lock();
+    std::lock_guard<std::mutex> guard(mtx);
     for (int i = 0; i < m_trackingConvertions.size(); ++i)
     {
         const tracking_convertion &c = m_trackingConvertions[i];
@@ -122,7 +119,6 @@ std::string PriceWatcher::getConvertionListFor(std::int32_t investorId)
             cList += fmt::format("ID={} {} {} to {} {}\n", c.id, c.orQuantity, c.orTicker, c.targetQuantity, c.tTicker);
         }
     }
-    mtx.unlock();
     return cList;
 }
 

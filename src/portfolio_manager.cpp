@@ -23,21 +23,20 @@ void PortfolioManager::loadPortfolios()
 
 unsigned long PortfolioManager::addPortfolio(const std::int32_t investorId, const std::string name)
 {
-    m_Mtx.lock();
+    std::lock_guard<std::mutex> guard(m_Mtx);
     unsigned int id = m_PortfolioIdCounter++;
     m_Portfolios.push_back({id,
                             investorId,
                             0,
                             name});
     Persistence::shared_instance().savePortfolios(m_Portfolios);
-    m_Mtx.unlock();
     return id;
 }
 
 int PortfolioManager::removePortfolio(const unsigned long id, const std::int32_t investorId)
 {
     int result = NOT_FOUND;
-    m_Mtx.lock();
+    std::lock_guard<std::mutex> guard(m_Mtx);
     int idx = -1;
     for (int i = m_Portfolios.size() - 1; i >= 0; --i)
     {
@@ -63,14 +62,13 @@ int PortfolioManager::removePortfolio(const unsigned long id, const std::int32_t
     }
 
     Persistence::shared_instance().savePortfolios(m_Portfolios);
-    m_Mtx.unlock();
     return result;
 }
 
 bool PortfolioManager::isOwnerOf(const std::int32_t investorId, const unsigned long id)
 {
     bool isOwner = false;
-    m_Mtx.lock();
+    std::lock_guard<std::mutex> guard(m_Mtx);
     for (int i = m_Portfolios.size() - 1; i >= 0; --i)
     {
         const portfolio &p = m_Portfolios[i];
@@ -80,13 +78,12 @@ bool PortfolioManager::isOwnerOf(const std::int32_t investorId, const unsigned l
             break;
         }
     }
-    m_Mtx.unlock();
     return isOwner;
 }
 
 void PortfolioManager::updateInvested(const unsigned long id, double amount)
 {
-    m_Mtx.lock();
+    std::lock_guard<std::mutex> guard(m_Mtx);
     for (int i = m_Portfolios.size() - 1; i >= 0; --i)
     {
         portfolio &p = m_Portfolios[i];
@@ -97,7 +94,6 @@ void PortfolioManager::updateInvested(const unsigned long id, double amount)
         }
     }
     Persistence::shared_instance().savePortfolios(m_Portfolios);
-    m_Mtx.unlock();
 }
 
 void PortfolioManager::setAsset(std::string ticker, double amount, const unsigned long portfolioId)
@@ -107,7 +103,7 @@ void PortfolioManager::setAsset(std::string ticker, double amount, const unsigne
         return;
     }
 
-    m_Mtx.lock();
+    std::lock_guard<std::mutex> guard(m_Mtx);
     portfolio *p;
     bool found = false;
 
@@ -145,12 +141,11 @@ void PortfolioManager::setAsset(std::string ticker, double amount, const unsigne
         }
     }
     Persistence::shared_instance().savePortfolios(m_Portfolios);
-    m_Mtx.unlock();
 }
 
 asset PortfolioManager::getPortfolioAsset(const unsigned long id, const std::string &ticker)
 {
-    m_Mtx.lock();
+    std::lock_guard<std::mutex> guard(m_Mtx);
     asset toReturn;
     toReturn.quantity = INVALID_ASSET;
     for (int i = m_Portfolios.size() - 1; i >= 0; --i)
@@ -168,13 +163,12 @@ asset PortfolioManager::getPortfolioAsset(const unsigned long id, const std::str
             }
         }
     }
-    m_Mtx.unlock();
     return toReturn;
 }
 
 portfolio PortfolioManager::getPortfolio(const unsigned long id)
 {
-    m_Mtx.lock();
+    std::lock_guard<std::mutex> guard(m_Mtx);
     portfolio toReturn;
     toReturn.id = INVALID_PORTFOLIO;
     for (int i = m_Portfolios.size() - 1; i >= 0; --i)
@@ -186,14 +180,13 @@ portfolio PortfolioManager::getPortfolio(const unsigned long id)
             break;
         }
     }
-    m_Mtx.unlock();
     return toReturn;
 }
 
 std::string PortfolioManager::listPortfolios(const std::int32_t investorId)
 {
+    std::lock_guard<std::mutex> guard(m_Mtx);
     std::string portfolios;
-    m_Mtx.lock();
     int numPortfolios = 0;
     for (const portfolio &p : m_Portfolios)
     {
@@ -203,7 +196,6 @@ std::string PortfolioManager::listPortfolios(const std::int32_t investorId)
             numPortfolios++;
         }
     }
-    m_Mtx.unlock();
 
     if (numPortfolios == 0)
     {
