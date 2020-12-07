@@ -29,16 +29,6 @@ Then in order to run the bot you will need to do:
 
 ```sudo apt-get install binutils libssl-dev libboost-system-dev zlib1g-dev libcurl4-openssl-dev```
 
-## HOW TO Install telegram library
-Go to:
-```externals/tgbot-cpp ```
-
-```mkdir build```
-```cd build```
-```cmake ..```
-```cmake --build .```
-```sudo make install```
-
 ## Commands
 
 ### Check Price
