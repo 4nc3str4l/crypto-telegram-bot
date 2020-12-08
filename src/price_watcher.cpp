@@ -83,12 +83,11 @@ unsigned long PriceWatcher::addConvertion(const double orAmount, const std::stri
 
 int PriceWatcher::deleteConvertion(unsigned long convId, const std::int32_t investorId)
 {
-    int idx = -1;
     int result = NOT_FOUND;
 
     std::lock_guard<std::mutex> guard(mtx);
     auto it = std::find_if(m_trackingConvertions.begin(), m_trackingConvertions.end(), 
-        [convId, investorId](const tracking_convertion &c){
+        [convId](const tracking_convertion &c){
             return c.id == convId;
         }
     );
