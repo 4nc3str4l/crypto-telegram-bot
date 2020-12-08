@@ -132,7 +132,7 @@ std::optional<tracking_convertion> PriceWatcher::getConvertionWithId(unsigned lo
             return c;
         }
     }
-    return std::nullopt;;
+    return std::nullopt;
 }
 
 PriceWatcher::~PriceWatcher()

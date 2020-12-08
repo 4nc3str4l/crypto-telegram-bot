@@ -35,14 +35,14 @@ void PortfolioIncrease::commandLogic()
         return;
     }
 
-    asset a = PortfolioManager::shared_instance().getPortfolioAsset(m_Id, ticker);
-    if (a.quantity == INVALID_ASSET)
+    std::optional<asset> a = PortfolioManager::shared_instance().getPortfolioAsset(m_Id, ticker);
+    if (!a.has_value())
     {
         PortfolioManager::shared_instance().setAsset(ticker, quantity, m_Id);
         send(fmt::format("Asset for portfolio {} set to {}{}", m_Id, quantity, ticker));
         return;
     }
-    double lastQuantity = a.quantity;
+    double lastQuantity = a.value().quantity;
     double newQuantity = lastQuantity + quantity;
     PortfolioManager::shared_instance().setAsset(ticker, newQuantity, m_Id);
     send(fmt::format("Asset for portfolio {} set from {}{} to {}{}", m_Id, lastQuantity, ticker, newQuantity, ticker));

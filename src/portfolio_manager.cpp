@@ -124,11 +124,9 @@ void PortfolioManager::setAsset(std::string ticker, double amount, const unsigne
     }
 }
 
-asset PortfolioManager::getPortfolioAsset(const unsigned long id, const std::string &ticker)
+std::optional<asset> PortfolioManager::getPortfolioAsset(const unsigned long id, const std::string &ticker)
 {
     std::lock_guard<std::mutex> guard(m_Mtx);
-    asset toReturn;
-    toReturn.quantity = INVALID_ASSET;
     for (int i = m_Portfolios.size() - 1; i >= 0; --i)
     {
         const portfolio &p = m_Portfolios[i];
@@ -138,30 +136,26 @@ asset PortfolioManager::getPortfolioAsset(const unsigned long id, const std::str
             {
                 if (a.ticker == ticker)
                 {
-                    toReturn = {a.ticker, a.quantity};
-                    break;
+                    return a;
                 }
             }
         }
     }
-    return toReturn;
+    return std::nullopt;
 }
 
-portfolio PortfolioManager::getPortfolio(const unsigned long id)
+std::optional<portfolio> PortfolioManager::getPortfolio(const unsigned long id)
 {
     std::lock_guard<std::mutex> guard(m_Mtx);
-    portfolio toReturn;
-    toReturn.id = INVALID_PORTFOLIO;
     for (int i = m_Portfolios.size() - 1; i >= 0; --i)
     {
         portfolio &p = m_Portfolios[i];
         if (p.id == id)
         {
-            toReturn = m_Portfolios[i];
-            break;
+            return p;
         }
     }
-    return toReturn;
+    return std::nullopt;;
 }
 
 std::string PortfolioManager::listPortfolios(const std::int32_t investorId)

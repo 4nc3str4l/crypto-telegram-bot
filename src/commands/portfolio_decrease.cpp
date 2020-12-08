@@ -30,14 +30,14 @@ void PortfolioDecrease::commandLogic()
 
     double quantity = getDouble();
     std::string ticker = getTicker();
-    asset a = PortfolioManager::shared_instance().getPortfolioAsset(m_Id, ticker);
-    if (a.quantity == INVALID_ASSET)
+    std::optional<asset> a = PortfolioManager::shared_instance().getPortfolioAsset(m_Id, ticker);
+    if (!a.has_value())
     {
         send(fmt::format("There is no {} in portfolio with id={}.", ticker, m_Id));
         return;
     }
 
-    double lastQuantity = a.quantity;
+    double lastQuantity = a.value().quantity;
     double newQuantity = lastQuantity - quantity;
     newQuantity = newQuantity < 0 ? 0 : newQuantity;
     PortfolioManager::shared_instance().setAsset(ticker, newQuantity, m_Id);

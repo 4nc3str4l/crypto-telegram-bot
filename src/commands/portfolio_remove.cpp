@@ -34,8 +34,8 @@ void PortfolioRemove::commandLogic()
         return;
     }
 
-    asset a = PortfolioManager::shared_instance().getPortfolioAsset(m_Id, ticker);
-    if (a.quantity == INVALID_ASSET)
+    std::optional<asset> a = PortfolioManager::shared_instance().getPortfolioAsset(m_Id, ticker);
+    if (!a.has_value())
     {
         send(fmt::format("Asset not found"));
         return;

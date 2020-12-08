@@ -29,7 +29,7 @@ void PortfolioInversionIncrease::commandLogic()
     }
 
     double invested = getDouble();
-    portfolio p = PortfolioManager::shared_instance().getPortfolio(m_Id);
+    portfolio p = PortfolioManager::shared_instance().getPortfolio(m_Id).value();
     double lastInvested = p.invested;
     double newInvested = p.invested + invested;
     newInvested = newInvested <= 0 ? 0 : newInvested;

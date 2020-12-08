@@ -29,7 +29,7 @@ void PortfolioInversionSet::commandLogic()
     }
 
     double invested = getDouble();
-    portfolio p = PortfolioManager::shared_instance().getPortfolio(m_Id);
+    portfolio p = PortfolioManager::shared_instance().getPortfolio(m_Id).value();
     PortfolioManager::shared_instance().updateInvested(m_Id, invested);
     double lastInvested = p.invested;
     send(fmt::format("Portfolio {} with id {} invested set from {}{} to {}{}.",

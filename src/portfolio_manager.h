@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdint>
 #include "./data/model.h"
+#include <optional>
 
 class PortfolioManager
 {
@@ -18,9 +19,9 @@ public:
     bool isOwnerOf(const std::int32_t investorId, const unsigned long id);
     void updateInvested(const unsigned long id, double amount);
     void setAsset(std::string ticker, double amount, const unsigned long portfolioId);
-    portfolio getPortfolio(const unsigned long id);
+    std::optional<portfolio> getPortfolio(const unsigned long id);
     std::string listPortfolios(const std::int32_t investorId);
-    asset getPortfolioAsset(const unsigned long id, const std::string &ticker);
+    std::optional<asset> getPortfolioAsset(const unsigned long id, const std::string &ticker);
 
 private:
     PortfolioManager();

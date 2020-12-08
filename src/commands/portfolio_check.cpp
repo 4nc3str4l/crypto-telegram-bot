@@ -1,5 +1,6 @@
 #include "portfolio_check.h"
 #include <fmt/core.h>
+#include <optional>
 
 #include "../portfolio_manager.h"
 #include "../constants.h"
@@ -29,6 +30,6 @@ void PortfolioCheck::commandLogic()
     {
         return;
     }
-    portfolio p = PortfolioManager::shared_instance().getPortfolio(m_Id);
-    send(getPorfolioInformation(p));
+    std::optional<portfolio> p = PortfolioManager::shared_instance().getPortfolio(m_Id);
+    send(getPorfolioInformation(p.value()));
 }
