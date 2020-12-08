@@ -60,33 +60,29 @@ int PortfolioManager::removePortfolio(const unsigned long id, const std::int32_t
 
 bool PortfolioManager::isOwnerOf(const std::int32_t investorId, const unsigned long id)
 {
-    bool isOwner = false;
     std::lock_guard<std::mutex> guard(m_Mtx);
-    for (int i = m_Portfolios.size() - 1; i >= 0; --i)
-    {
-        const portfolio &p = m_Portfolios[i];
-        if (p.id == id)
-        {
-            isOwner = p.investorId == investorId;
-            break;
+    auto it = std::find_if(m_Portfolios.begin(), m_Portfolios.end(), 
+        [id, investorId](const portfolio &p){
+            return p.id == id && p.investorId == investorId;
         }
-    }
-    return isOwner;
+    );
+    return it != m_Portfolios.end();
 }
 
 void PortfolioManager::updateInvested(const unsigned long id, double amount)
 {
     std::lock_guard<std::mutex> guard(m_Mtx);
-    for (int i = m_Portfolios.size() - 1; i >= 0; --i)
-    {
-        portfolio &p = m_Portfolios[i];
-        if (p.id == id)
-        {
-            p.invested = amount;
-            break;
+    auto it = std::find_if(m_Portfolios.begin(), m_Portfolios.end(), 
+        [id](const portfolio &p){
+            return p.id == id;
         }
+    );
+    
+    if(it != m_Portfolios.end())
+    {
+        (*it).invested = amount;
+        Persistence::shared_instance().savePortfolios(m_Portfolios);
     }
-    Persistence::shared_instance().savePortfolios(m_Portfolios);
 }
 
 void PortfolioManager::setAsset(std::string ticker, double amount, const unsigned long portfolioId)
@@ -97,43 +93,35 @@ void PortfolioManager::setAsset(std::string ticker, double amount, const unsigne
     }
 
     std::lock_guard<std::mutex> guard(m_Mtx);
-    portfolio *p;
-    bool found = false;
-
-    for (int i = m_Portfolios.size() - 1; i >= 0; --i)
-    {
-        p = &m_Portfolios[i];
-        if (p->id == portfolioId)
-        {
-            found = true;
-            break;
+    auto it = std::find_if(m_Portfolios.begin(), m_Portfolios.end(), 
+        [portfolioId](const portfolio &p){
+            return p.id == portfolioId;
         }
-    }
-
-    if (found)
+    );
+    
+    if(it != m_Portfolios.end())
     {
-        bool assetFound = false;
-        int idx = 0;
-        for (asset &a : p->assets)
-        {
-            if (a.ticker == ticker)
-            {
-                a.quantity = amount;
-                assetFound = true;
-                break;
+        auto assetIt = std::find_if((*it).assets.begin(), (*it).assets.end(), 
+            [ticker](const asset &a){
+                return a.ticker == ticker;
             }
-            ++idx;
-        }
+        );
+        
+        bool assetFound = assetIt != (*it).assets.end();
         if (!assetFound && amount > 0)
         {
-            p->assets.push_back({ticker, amount});
+            (*it).assets.push_back({ticker, amount});
         }
-        else if (amount == 0)
+        else if (assetFound && amount == 0)
         {
-            p->assets.erase(p->assets.begin() + idx);
+            (*it).assets.erase(assetIt);
         }
+        else
+        {
+            (*assetIt).quantity = amount;
+        }
+        Persistence::shared_instance().savePortfolios(m_Portfolios);
     }
-    Persistence::shared_instance().savePortfolios(m_Portfolios);
 }
 
 asset PortfolioManager::getPortfolioAsset(const unsigned long id, const std::string &ticker)
