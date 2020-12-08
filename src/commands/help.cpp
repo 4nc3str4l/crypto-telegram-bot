@@ -29,7 +29,7 @@ void HelpCommand::commandLogic()
         "*/help:* Legend of commands.\n"
         "*/pcheck:* Returns how much money is invested on a given portfolio.\n"
         "*/pdec:* Decrements the ammount of a current asset for a portfolio\n"
-        "*/pdel:* Creates a new portfolio (avoid using spaces).\n"
+        "*/pdel:* Deletes a portfolio.\n"
         "*/pinc:* Increments the ammount of a current asset for a portfolio\n"
         "*/pinvdec:* Decreases the amount of money invested on a portfolio.\n"
         "*/pinvinc:* Increases the amount of money inested on portfolio.\n"

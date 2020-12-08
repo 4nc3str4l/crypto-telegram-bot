@@ -37,28 +37,21 @@ int PortfolioManager::removePortfolio(const unsigned long id, const std::int32_t
 {
     int result = NOT_FOUND;
     std::lock_guard<std::mutex> guard(m_Mtx);
-    int idx = -1;
-    for (int i = m_Portfolios.size() - 1; i >= 0; --i)
-    {
-        const portfolio &p = m_Portfolios[i];
-        if (p.id == id)
-        {
-            if (p.investorId == investorId)
-            {
-                result = OK;
-                idx = i;
-            }
-            else
-            {
-                result = UNAUTHORIZED_OPERATION;
-            }
-            break;
+
+    auto it = std::find_if(m_Portfolios.begin(), m_Portfolios.end(), 
+        [id](const portfolio &p){
+            return p.id == id;
         }
+    );
+
+    if(it != m_Portfolios.end())
+    {
+        result = (*it).investorId == investorId ? OK : UNAUTHORIZED_OPERATION;
     }
 
     if (result == OK)
     {
-        m_Portfolios.erase(m_Portfolios.begin() + idx);
+        m_Portfolios.erase(it);
     }
 
     Persistence::shared_instance().savePortfolios(m_Portfolios);
