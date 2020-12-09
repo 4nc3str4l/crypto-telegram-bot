@@ -66,7 +66,6 @@ bool PriceChecker::shouldFetchPrice(const std::string &ticker)
     std::lock_guard<std::mutex> guard(m_mutex);
     if (this->m_cachedPrices.find(ticker) == this->m_cachedPrices.end())
     {
-        m_mutex.unlock();
         return true;
     }
 
