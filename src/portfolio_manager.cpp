@@ -127,35 +127,45 @@ void PortfolioManager::setAsset(std::string ticker, double amount, const unsigne
 std::optional<asset> PortfolioManager::getPortfolioAsset(const unsigned long id, const std::string &ticker)
 {
     std::lock_guard<std::mutex> guard(m_Mtx);
-    for (int i = m_Portfolios.size() - 1; i >= 0; --i)
+    auto it = std::find_if(m_Portfolios.begin(), m_Portfolios.end(), 
+        [id](const portfolio &p){
+            return p.id == id;
+        }
+    );
+
+    if(it != m_Portfolios.end())
     {
-        const portfolio &p = m_Portfolios[i];
-        if (p.id == id)
-        {
-            for (const asset &a : p.assets)
-            {
-                if (a.ticker == ticker)
-                {
-                    return a;
-                }
+        auto assetIt = std::find_if((*it).assets.begin(), (*it).assets.end(), 
+            [ticker](const asset &a){
+                return a.ticker == ticker;
             }
+        );
+
+        if(assetIt != (*it).assets.end())
+        {
+            return (*assetIt);
         }
     }
+
     return std::nullopt;
 }
 
 std::optional<portfolio> PortfolioManager::getPortfolio(const unsigned long id)
 {
     std::lock_guard<std::mutex> guard(m_Mtx);
-    for (int i = m_Portfolios.size() - 1; i >= 0; --i)
-    {
-        portfolio &p = m_Portfolios[i];
-        if (p.id == id)
-        {
-            return p;
+
+    auto it = std::find_if(m_Portfolios.begin(), m_Portfolios.end(), 
+        [id](const portfolio &p){
+            return p.id == id;
         }
+    );
+
+    if(it != m_Portfolios.end())
+    {
+        return (*it);
     }
-    return std::nullopt;;
+    
+    return std::nullopt;
 }
 
 std::string PortfolioManager::listPortfolios(const std::int32_t investorId)
