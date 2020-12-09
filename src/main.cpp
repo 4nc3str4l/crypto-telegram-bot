@@ -3,13 +3,23 @@
 #include <string>
 #include <fmt/core.h>
 #include <cstdint>
+#include <sol/sol.hpp>
 
 #include "price_checker.h"
 #include "price_watcher.h"
 #include "command_parsing.h"
 
+void lua_test()
+{
+    sol::state lua{};
+    lua.open_libraries(sol::lib::base);
+    lua.script("print('Hello World from Lua!')");
+}
+
 int main(int argc, char *argv[])
 {
+
+    lua_test();
 
     if (argc != 3)
     {
