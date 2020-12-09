@@ -41,7 +41,7 @@ void PriceWatcher::checkLoop()
 {
     while (m_running)
     {
-        std::lock_guard<std::mutex> guard(mtx);
+        m_mutex.lock();
         for (const tracking_convertion& conv : m_trackingConvertions)
         {
             std::string s = fmt::format("Or {} {} Target: {} {}\n", conv.orQuantity, conv.orTicker, conv.targetQuantity, conv.tTicker);
@@ -63,6 +63,7 @@ void PriceWatcher::checkLoop()
                 m_bot->getApi().sendMessage(conv.investorId, msg);
             }
         }
+        m_mutex.unlock();
         std::this_thread::sleep_for(std::chrono::seconds(m_checkInterval));
     }
     std::cout << "Thread Stopped" << std::endl;
@@ -71,7 +72,7 @@ void PriceWatcher::checkLoop()
 unsigned long PriceWatcher::addConvertion(const double orAmount, const std::string &orTicker, const double targetAmount, const std::string &targetTicker,
                                           const std::int32_t investorId)
 {
-    std::lock_guard<std::mutex> guard(mtx);
+    std::lock_guard<std::mutex> guard(m_mutex);
     unsigned long newId = tConvId++;
 
     // NOTE: Checks if the user is tracking convertions to higher values (to sell) or to lower (to buy)
@@ -85,7 +86,7 @@ int PriceWatcher::deleteConvertion(unsigned long convId, const std::int32_t inve
 {
     int result = NOT_FOUND;
 
-    std::lock_guard<std::mutex> guard(mtx);
+    std::lock_guard<std::mutex> guard(m_mutex);
     auto it = std::find_if(m_trackingConvertions.begin(), m_trackingConvertions.end(), 
         [convId](const tracking_convertion &c){
             return c.id == convId;
@@ -109,7 +110,7 @@ int PriceWatcher::deleteConvertion(unsigned long convId, const std::int32_t inve
 std::string PriceWatcher::getConvertionListFor(std::int32_t investorId)
 {
     std::string cList;
-    std::lock_guard<std::mutex> guard(mtx);
+    std::lock_guard<std::mutex> guard(m_mutex);
     for (int i = 0; i < m_trackingConvertions.size(); ++i)
     {
         const tracking_convertion &c = m_trackingConvertions[i];
@@ -123,15 +124,19 @@ std::string PriceWatcher::getConvertionListFor(std::int32_t investorId)
 
 std::optional<tracking_convertion> PriceWatcher::getConvertionWithId(unsigned long convId)
 {
-    std::lock_guard<std::mutex> guard(mtx);
-    for (int i = 0; i < m_trackingConvertions.size(); ++i)
-    {
-        const tracking_convertion& c = m_trackingConvertions[i];
-        if (c.id == convId)
-        {
-            return c;
+    std::lock_guard<std::mutex> guard(m_mutex);
+
+    auto it = std::find_if(m_trackingConvertions.begin(), m_trackingConvertions.end(), 
+        [convId](const tracking_convertion &tc){
+            return tc.id == convId;
         }
+    );
+
+    if(it != m_trackingConvertions.end())
+    {
+        return (*it);
     }
+
     return std::nullopt;
 }
 

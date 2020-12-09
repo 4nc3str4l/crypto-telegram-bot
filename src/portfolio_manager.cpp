@@ -23,7 +23,7 @@ void PortfolioManager::loadPortfolios()
 
 unsigned long PortfolioManager::addPortfolio(const std::int32_t investorId, const std::string name)
 {
-    std::lock_guard<std::mutex> guard(m_Mtx);
+    std::lock_guard<std::mutex> guard(m_mutex);
     unsigned int id = m_PortfolioIdCounter++;
     m_Portfolios.push_back({id,
                             investorId,
@@ -36,7 +36,7 @@ unsigned long PortfolioManager::addPortfolio(const std::int32_t investorId, cons
 int PortfolioManager::removePortfolio(const unsigned long id, const std::int32_t investorId)
 {
     int result = NOT_FOUND;
-    std::lock_guard<std::mutex> guard(m_Mtx);
+    std::lock_guard<std::mutex> guard(m_mutex);
 
     auto it = std::find_if(m_Portfolios.begin(), m_Portfolios.end(), 
         [id](const portfolio &p){
@@ -60,7 +60,7 @@ int PortfolioManager::removePortfolio(const unsigned long id, const std::int32_t
 
 bool PortfolioManager::isOwnerOf(const std::int32_t investorId, const unsigned long id)
 {
-    std::lock_guard<std::mutex> guard(m_Mtx);
+    std::lock_guard<std::mutex> guard(m_mutex);
     auto it = std::find_if(m_Portfolios.begin(), m_Portfolios.end(), 
         [id, investorId](const portfolio &p){
             return p.id == id && p.investorId == investorId;
@@ -71,7 +71,7 @@ bool PortfolioManager::isOwnerOf(const std::int32_t investorId, const unsigned l
 
 void PortfolioManager::updateInvested(const unsigned long id, double amount)
 {
-    std::lock_guard<std::mutex> guard(m_Mtx);
+    std::lock_guard<std::mutex> guard(m_mutex);
     auto it = std::find_if(m_Portfolios.begin(), m_Portfolios.end(), 
         [id](const portfolio &p){
             return p.id == id;
@@ -92,7 +92,7 @@ void PortfolioManager::setAsset(std::string ticker, double amount, const unsigne
         return;
     }
 
-    std::lock_guard<std::mutex> guard(m_Mtx);
+    std::lock_guard<std::mutex> guard(m_mutex);
     auto it = std::find_if(m_Portfolios.begin(), m_Portfolios.end(), 
         [portfolioId](const portfolio &p){
             return p.id == portfolioId;
@@ -126,7 +126,7 @@ void PortfolioManager::setAsset(std::string ticker, double amount, const unsigne
 
 std::optional<asset> PortfolioManager::getPortfolioAsset(const unsigned long id, const std::string &ticker)
 {
-    std::lock_guard<std::mutex> guard(m_Mtx);
+    std::lock_guard<std::mutex> guard(m_mutex);
     auto it = std::find_if(m_Portfolios.begin(), m_Portfolios.end(), 
         [id](const portfolio &p){
             return p.id == id;
@@ -152,7 +152,7 @@ std::optional<asset> PortfolioManager::getPortfolioAsset(const unsigned long id,
 
 std::optional<portfolio> PortfolioManager::getPortfolio(const unsigned long id)
 {
-    std::lock_guard<std::mutex> guard(m_Mtx);
+    std::lock_guard<std::mutex> guard(m_mutex);
 
     auto it = std::find_if(m_Portfolios.begin(), m_Portfolios.end(), 
         [id](const portfolio &p){
@@ -170,7 +170,7 @@ std::optional<portfolio> PortfolioManager::getPortfolio(const unsigned long id)
 
 std::string PortfolioManager::listPortfolios(const std::int32_t investorId)
 {
-    std::lock_guard<std::mutex> guard(m_Mtx);
+    std::lock_guard<std::mutex> guard(m_mutex);
     std::string portfolios;
     int numPortfolios = 0;
     for (const portfolio &p : m_Portfolios)

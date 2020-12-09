@@ -18,7 +18,7 @@ double PriceChecker::fetchPrice(const std::string &ticker)
 {
     if (!this->shouldFetchPrice(ticker))
     {
-        std::lock_guard<std::mutex> guard(m_mutex);
+        std::lock_guard<std::mutex> guard();
         double price = this->m_cachedPrices[ticker];
         return price;
     }

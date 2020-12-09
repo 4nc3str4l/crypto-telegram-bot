@@ -41,7 +41,7 @@ private:
     bool m_running;
     int m_checkInterval = 60;
     std::thread t;
-    std::mutex mtx;
+    std::mutex m_mutex;
     std::vector<tracking_convertion> m_trackingConvertions;
     unsigned long tConvId = 1;
 };

@@ -28,6 +28,6 @@ private:
     void loadPortfolios();
     unsigned long m_PortfolioIdCounter = 0;
 
-    std::mutex m_Mtx;
+    std::mutex m_mutex;
     std::vector<portfolio> m_Portfolios;
 };
