@@ -6,7 +6,7 @@
 #include "../constants.h"
 #include "../price_watcher.h"
 
-TrackConvertionCommand::TrackConvertionCommand(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_TRACK_CONV, 4, bot, chatId)
+TrackConvertionCommand::TrackConvertionCommand(const std::int64_t chatId) : Command(COMMAND_TRACK_CONV, 4, chatId)
 {
 }
 

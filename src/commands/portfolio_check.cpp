@@ -6,7 +6,7 @@
 #include "../constants.h"
 #include "../utils.h"
 
-PortfolioCheck::PortfolioCheck(TgBot::Bot &bot, const std::int64_t chatId) : PortfolioCommand(COMMAND_PORTFOLIO_CHECK, 1, bot, chatId)
+PortfolioCheck::PortfolioCheck(const std::int64_t chatId) : PortfolioCommand(COMMAND_PORTFOLIO_CHECK, 1, chatId)
 {
 }
 

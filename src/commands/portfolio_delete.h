@@ -5,7 +5,7 @@
 class PortfolioDelete : public PortfolioCommand
 {
 public:
-    PortfolioDelete(TgBot::Bot &bot, const std::int64_t chatId);
+    PortfolioDelete(const std::int64_t chatId);
     ~PortfolioDelete();
 
 protected:

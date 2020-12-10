@@ -4,7 +4,7 @@
 #include "../constants.h"
 #include "../utils.h"
 
-PriceCommand::PriceCommand(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_PRICE, 1, bot, chatId)
+PriceCommand::PriceCommand(const std::int64_t chatId) : Command(COMMAND_PRICE, 1, chatId)
 {
 }
 

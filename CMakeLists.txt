@@ -149,6 +149,9 @@ file(GLOB src_files
 
     "src/commands/**.h"
     "src/commands/**.cpp"
+
+    "src/scripting/**.h"
+    "src/scripting/**.cpp"
 )
 
 # CREATE THE EXECUTABLE

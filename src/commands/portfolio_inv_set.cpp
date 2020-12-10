@@ -3,7 +3,7 @@
 #include "../constants.h"
 #include "../portfolio_manager.h"
 
-PortfolioInversionSet::PortfolioInversionSet(TgBot::Bot &bot, const std::int64_t chatId) : PortfolioCommand(COMMAND_PORTFOLIO_INV_SET, 2, bot, chatId)
+PortfolioInversionSet::PortfolioInversionSet(const std::int64_t chatId) : PortfolioCommand(COMMAND_PORTFOLIO_INV_SET, 2, chatId)
 {
 }
 

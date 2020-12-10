@@ -5,7 +5,7 @@
 class HelpCommand : public Command
 {
 public:
-    HelpCommand(TgBot::Bot &bot, const std::int64_t chatId);
+    HelpCommand(const std::int64_t chatId);
     ~HelpCommand();
 
 protected:

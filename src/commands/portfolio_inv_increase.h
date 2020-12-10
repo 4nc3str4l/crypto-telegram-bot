@@ -5,7 +5,7 @@
 class PortfolioInversionIncrease : public PortfolioCommand
 {
 public:
-    PortfolioInversionIncrease(TgBot::Bot &bot, const std::int64_t chatId);
+    PortfolioInversionIncrease(const std::int64_t chatId);
     ~PortfolioInversionIncrease();
 
 protected:

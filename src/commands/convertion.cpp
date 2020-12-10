@@ -4,7 +4,7 @@
 #include "../utils.h"
 #include "../constants.h"
 
-ConvertionCommand::ConvertionCommand(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_CONV, 3, bot, chatId)
+ConvertionCommand::ConvertionCommand(const std::int64_t chatId) : Command(COMMAND_CONV, 3, chatId)
 {
 }
 

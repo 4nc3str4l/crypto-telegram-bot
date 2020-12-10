@@ -6,7 +6,7 @@
 #include "../constants.h"
 #include "../price_watcher.h"
 
-ListTrackingConvertions::ListTrackingConvertions(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_LIST_CONV, 0, bot, chatId)
+ListTrackingConvertions::ListTrackingConvertions(const std::int64_t chatId) : Command(COMMAND_LIST_CONV, 0, chatId)
 {
 }
 

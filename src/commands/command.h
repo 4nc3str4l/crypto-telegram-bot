@@ -13,14 +13,14 @@ class PriceChecker;
 class Command
 {
 public:
-  Command(const std::string &command, const unsigned short numArguments,
-          TgBot::Bot &bot, const std::int64_t chatId);
+  Command(const std::string &command, const unsigned short numArguments, const std::int64_t chatId);
   virtual ~Command(){};
   bool isNumArgmentsCorrect();
   void execute(const std::vector<std::string> &arguments);
-
-protected:
+  inline static void setupTgBot(TgBot::Bot &bot){ m_bot = &bot; }
+  static void ssend(const std::string &msg, const std::int64_t chatId);
   void send(const std::string &message);
+protected:
   double getDouble();
   int getInt();
   unsigned long getUnsignedLong();
@@ -36,7 +36,7 @@ protected:
 
 protected:
   std::string m_command;
-  TgBot::Bot *m_bot;
+  inline static TgBot::Bot *m_bot = nullptr;
   std::int64_t m_chatId;
   unsigned short m_numArguments;
   unsigned short m_indexRead = 1;

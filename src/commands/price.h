@@ -5,7 +5,7 @@
 class PriceCommand : public Command
 {
 public:
-    PriceCommand(TgBot::Bot &bot, const std::int64_t chatId);
+    PriceCommand(const std::int64_t chatId);
     ~PriceCommand();
 
 protected:

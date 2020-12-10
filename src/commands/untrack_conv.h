@@ -5,7 +5,7 @@
 class UnTrackConvertionCommand : public Command
 {
 public:
-    UnTrackConvertionCommand(TgBot::Bot &bot, const std::int64_t chatId);
+    UnTrackConvertionCommand(const std::int64_t chatId);
     ~UnTrackConvertionCommand();
 
 protected:

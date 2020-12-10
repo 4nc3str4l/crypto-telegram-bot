@@ -6,12 +6,10 @@
 
 #include "../price_checker.h"
 
-Command::Command(const std::string &command, const unsigned short numArguments,
-                 TgBot::Bot &bot, const std::int64_t chatId)
+Command::Command(const std::string &command, const unsigned short numArguments, const std::int64_t chatId)
 {
     this->m_command = command;
     this->m_numArguments = numArguments;
-    this->m_bot = &bot;
     this->m_chatId = chatId;
 }
 
@@ -165,15 +163,20 @@ void Command::printMsg(const std::string &msg, bool send = false)
     }
 }
 
-void Command::send(const std::string &message)
+void Command::ssend(const std::string &message, const std::int64_t chatId)
 {
     try
     {
-        this->m_bot->getApi().sendMessage(m_chatId, message, false, 0, std::make_shared<TgBot::GenericReply>(), "Markdown");
+        m_bot->getApi().sendMessage(chatId, message, false, 0, std::make_shared<TgBot::GenericReply>(), "Markdown");
     }
     catch (std::exception &e)
     {
-        printError(fmt::format("Could not send message: {} to chat id {}:\n", message, m_chatId));
+        fmt::print("Could not send message: {} to chat id {}:\n", message, chatId);
         std::cout << e.what() << std::endl;
     }
+}
+
+void Command::send(const std::string &msg)
+{
+    ssend(msg, m_chatId);
 }

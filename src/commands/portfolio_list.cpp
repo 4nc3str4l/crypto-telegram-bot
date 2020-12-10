@@ -3,7 +3,7 @@
 #include "../portfolio_manager.h"
 #include "../constants.h"
 
-PortfolioList::PortfolioList(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_PORTFOLIO_LIST, 0, bot, chatId)
+PortfolioList::PortfolioList(const std::int64_t chatId) : Command(COMMAND_PORTFOLIO_LIST, 0, chatId)
 {
 }
 

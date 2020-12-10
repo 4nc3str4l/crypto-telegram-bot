@@ -3,7 +3,7 @@
 #include "../portfolio_manager.h"
 #include "../constants.h"
 
-PortfolioDecrease::PortfolioDecrease(TgBot::Bot &bot, const std::int64_t chatId) : PortfolioCommand(COMMAND_PORTFOLIO_DECREASE, 3, bot, chatId)
+PortfolioDecrease::PortfolioDecrease(const std::int64_t chatId) : PortfolioCommand(COMMAND_PORTFOLIO_DECREASE, 3, chatId)
 {
 }
 

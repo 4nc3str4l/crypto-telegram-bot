@@ -8,7 +8,7 @@
 #include "../price_watcher.h"
 #include "../utils.h"
 
-ConvertionCheckCommand::ConvertionCheckCommand(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_CHECK_CONV, 1, bot, chatId)
+ConvertionCheckCommand::ConvertionCheckCommand(const std::int64_t chatId) : Command(COMMAND_CHECK_CONV, 1, chatId)
 {
 }
 

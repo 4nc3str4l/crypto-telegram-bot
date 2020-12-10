@@ -3,7 +3,7 @@
 #include "../price_checker.h"
 #include "../constants.h"
 
-HelpCommand::HelpCommand(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_HELP, 0, bot, chatId)
+HelpCommand::HelpCommand(const std::int64_t chatId) : Command(COMMAND_HELP, 0, chatId)
 {
 }
 

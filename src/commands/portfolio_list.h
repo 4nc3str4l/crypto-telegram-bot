@@ -5,7 +5,7 @@
 class PortfolioList : public Command
 {
 public:
-    PortfolioList(TgBot::Bot &bot, const std::int64_t chatId);
+    PortfolioList(const std::int64_t chatId);
     ~PortfolioList();
 
 protected:

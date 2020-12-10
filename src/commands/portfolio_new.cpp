@@ -4,7 +4,7 @@
 #include "../constants.h"
 #include "../portfolio_manager.h"
 
-PortfolioNew::PortfolioNew(TgBot::Bot &bot, const std::int64_t chatId) : Command(COMMAND_PORTFOLIO_NEW, 1, bot, chatId)
+PortfolioNew::PortfolioNew(const std::int64_t chatId) : Command(COMMAND_PORTFOLIO_NEW, 1, chatId)
 {
 }
 

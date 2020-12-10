@@ -4,7 +4,7 @@
 #include "../constants.h"
 #include <optional>
 
-PortfolioInversionDecrease::PortfolioInversionDecrease(TgBot::Bot &bot, const std::int64_t chatId) : PortfolioCommand(COMMAND_PORTFOLIO_INV_DECREASE, 2, bot, chatId)
+PortfolioInversionDecrease::PortfolioInversionDecrease(const std::int64_t chatId) : PortfolioCommand(COMMAND_PORTFOLIO_INV_DECREASE, 2, chatId)
 {
 }
 
