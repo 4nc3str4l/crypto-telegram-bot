@@ -13,7 +13,7 @@ void lua_test()
 {
     sol::state lua{};
     lua.open_libraries(sol::lib::base);
-    lua.script("print('Hello World from Lua!')");
+    lua.script_file("lua_commands/price.lua");
 }
 
 int main(int argc, char *argv[])

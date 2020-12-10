@@ -176,3 +176,9 @@ target_include_directories(
     ${PROJECT_NAME}
     PRIVATE externals/lua # as of sol2 3.2.2, lua.hpp must be accesible through root include '#include <lua.hpp>'
 )
+
+# MOVE THE LUA SOURCE AFTER BUILDING
+add_custom_command(
+    TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E  create_symlink ${CMAKE_SOURCE_DIR}/src/lua_commands ${CMAKE_CURRENT_BINARY_DIR}/lua_commands
+)
