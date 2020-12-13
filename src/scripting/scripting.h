@@ -13,6 +13,8 @@ typedef std::function<std::string(void)> fstring_data;
 
 
 void setupLua();
+bool executeLuaCommand(const std::string& comand, const std::vector<std::string>& args, const std::int64_t chatId);
+
 double checkPrice(const std::string& ticker);
 double sendMessage(const std::string& message, const std::int64_t chatId);
-bool executeLuaCommand(const std::string& comand, const std::vector<std::string>& args, const std::int64_t chatId);
+double strToDouble(const std::string& d);

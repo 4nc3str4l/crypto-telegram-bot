@@ -7,6 +7,7 @@
 #include <vector>
 
 #include <iostream>
+#include <memory>
 #include <experimental/filesystem>
 
 namespace fs = std::experimental::filesystem;
@@ -20,6 +21,7 @@ void setupLua()
     lua.open_libraries(sol::lib::base);
     lua.set_function("check_price", &checkPrice);
     lua.set_function("send_message", &sendMessage);
+    lua.set_function("to_double", &strToDouble);
     
     lua["commands"] = lua.create_table();
 
@@ -50,8 +52,15 @@ double sendMessage(const std::string& message, const std::int64_t chatId)
     Command::ssend(message, chatId);
 }
 
+double strToDouble(const std::string& d)
+{
+    std::cout << d << std::endl;
+    return std::stod(d);
+}
+
 bool executeLuaCommand(const std::string& comand, const std::vector<std::string>& args, const std::int64_t chatId)
 {
+    strToDouble("2.34");
     auto cmd = lua["commands"][comand];
     if(cmd.valid())
     {
