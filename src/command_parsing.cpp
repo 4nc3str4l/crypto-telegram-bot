@@ -162,9 +162,19 @@ void parseMessage(const std::string& message, const std::int64_t chatId)
     }
     else
     {
-        Command::ssend("Command not found:", chatId);
-        HelpCommand cmd(chatId);
-        exec(cmd, chatId, message);
+        // try to execute a LUA command
+        if (!Persistence::shared_instance().isWhiteListed(chatId))
+        {   
+            Command::ssend("Unauthorized", chatId);
+            return;
+        }
+
+        if(!executeLuaCommand(command, getCommandArguments(message), chatId))
+        {
+            Command::ssend("Command not found:", chatId);
+            HelpCommand cmd(chatId);
+            exec(cmd, chatId, message);
+        }
         return;
     }
 
