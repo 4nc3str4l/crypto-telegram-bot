@@ -25,7 +25,7 @@ public:
 
 private:
     bool shouldFetchPrice(const std::string &ticker);
-    void cachePrice(const std::string &ticker, double price);
+    void cachePrice(std::string ticker, double price);
 
 private:
     std::string m_apiKey;

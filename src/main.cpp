@@ -22,10 +22,10 @@ int main(int argc, char *argv[])
     std::string telegramKey(argv[1]);
     PriceChecker::shared_instance().setApiKey(std::string(argv[2]));
     TgBot::Bot bot(telegramKey);
-    Command::setupTgBot(bot);
 
     // Start the price watcher
     PriceWatcher::shared_instance().start(&bot);
+    Command::setupTgBot(bot);
 
     // Configure the LUA scripting system
     setupLua();

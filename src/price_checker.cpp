@@ -74,7 +74,7 @@ bool PriceChecker::shouldFetchPrice(const std::string &ticker)
     return duration > std::chrono::seconds(CACHE_PRICE_SECS);
 }
 
-void PriceChecker::cachePrice(const std::string &ticker, double price)
+void PriceChecker::cachePrice(std::string ticker, double price)
 {
     t to = Time::now();
     std::lock_guard<std::mutex> guard(m_mutex);
