@@ -13,7 +13,7 @@ typedef std::function<int(void)> fnum_args;
 typedef std::function<std::string(void)> fstring_data;
 
 
-double checkPrice(const std::string& ticker);
+double check_price(const std::string& ticker);
 double sendMessage(const std::string& message, const std::int64_t chatId);
 double strToDouble(const std::string& d);
 

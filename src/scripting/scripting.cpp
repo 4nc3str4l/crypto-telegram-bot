@@ -24,7 +24,7 @@ Scripting::Scripting()
 void Scripting::setupLua()
 {
     lua.open_libraries(sol::lib::base);
-    lua.set_function("check_price", &checkPrice);
+    lua.set_function("check_price", &check_price);
     lua.set_function("send_message", &sendMessage);
     lua.set_function("to_double", &strToDouble);
     
@@ -48,7 +48,7 @@ void Scripting::setupLua()
     data();
 }
 
-double checkPrice(const std::string& ticker)
+double check_price(const std::string& ticker)
 {
     return PriceChecker::shared_instance().fetchPrice(ticker);
 }
