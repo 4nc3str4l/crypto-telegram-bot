@@ -14,7 +14,7 @@ typedef std::function<std::string(void)> fstring_data;
 
 
 double check_price(const std::string& ticker);
-double sendMessage(const std::string& message, const std::int64_t chatId);
+void sendMessage(const std::string& message, const std::int64_t chatId);
 double strToDouble(const std::string& d);
 
 class Scripting

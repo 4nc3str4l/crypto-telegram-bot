@@ -53,7 +53,7 @@ double check_price(const std::string& ticker)
     return PriceChecker::shared_instance().fetchPrice(ticker);
 }
 
-double sendMessage(const std::string& message, const std::int64_t chatId)
+void sendMessage(const std::string& message, const std::int64_t chatId)
 {
     Command::ssend(message, chatId);
 }
