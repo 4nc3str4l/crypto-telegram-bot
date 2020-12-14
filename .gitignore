@@ -19,4 +19,5 @@ build/
 
 # personal scripts and info to accelerate workflow
 build_and_run.sh
+debug_and_run.sh
 keys.json

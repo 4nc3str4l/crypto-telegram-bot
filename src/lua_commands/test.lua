@@ -1,5 +1,3 @@
--- Command Logic
-
 local cmd = {}
 
 function cmd.logic(arguments, chat_id)
@@ -12,6 +10,10 @@ end
 
 function cmd.help()
      return "/test"
+end
+
+function cmd.instructions()
+    return "Test extension command."
 end
 
 commands["/test"] = cmd

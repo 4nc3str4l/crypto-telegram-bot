@@ -27,8 +27,7 @@ int main(int argc, char *argv[])
     PriceWatcher::shared_instance().start(&bot);
     Command::setupTgBot(bot);
 
-    // Configure the LUA scripting system
-    setupLua();
+    Scripting::shared_instance();
 
     bot.getEvents().onAnyMessage([&bot](TgBot::Message::Ptr message) {
         parseMessage(message->text, message->chat->id);

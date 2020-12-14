@@ -16,7 +16,12 @@ namespace fs = std::experimental::filesystem;
 #include "../commands/command.h"
 
 
-void setupLua()
+Scripting::Scripting()
+{
+    setupLua();
+}
+
+void Scripting::setupLua()
 {
     lua.open_libraries(sol::lib::base);
     lua.set_function("check_price", &checkPrice);
@@ -24,9 +29,7 @@ void setupLua()
     lua.set_function("to_double", &strToDouble);
     
     lua["commands"] = lua.create_table();
-
-    lua.script_file("lua_commands/price.lua");
-
+    lua["utils"] = lua.create_table();
 
     for(const auto& entry : fs::directory_iterator(SCRIPTS_PATH))
     {
@@ -40,6 +43,9 @@ void setupLua()
             std::cerr << e.what() << std::endl;
         }   
     }
+
+    const fstring_data& data = lua["utils"]["get_commands"];
+    data();
 }
 
 double checkPrice(const std::string& ticker)
@@ -54,13 +60,12 @@ double sendMessage(const std::string& message, const std::int64_t chatId)
 
 double strToDouble(const std::string& d)
 {
-    std::cout << d << std::endl;
     return std::stod(d);
 }
 
-bool executeLuaCommand(const std::string& comand, const std::vector<std::string>& args, const std::int64_t chatId)
+bool Scripting::executeLuaCommand(const std::string& comand, const std::vector<std::string>& args, const std::int64_t chatId)
 {
-    strToDouble("2.34");
+    std::lock_guard<std::mutex> guard(m_mutex);
     auto cmd = lua["commands"][comand];
     if(cmd.valid())
     {
@@ -89,4 +94,11 @@ bool executeLuaCommand(const std::string& comand, const std::vector<std::string>
         }
     }
     return false;
+}
+
+std::string Scripting::getCommands()
+{
+    std::lock_guard<std::mutex> guard(m_mutex);
+    const fstring_data& extraCommands = lua["utils"]["get_commands"];
+    return lua["utils"]["get_commands"]();
 }

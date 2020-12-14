@@ -169,13 +169,14 @@ void parseMessage(const std::string& message, const std::int64_t chatId)
             return;
         }
 
-        if(!executeLuaCommand(command, getCommandArguments(message), chatId))
+        if(!Scripting::shared_instance().executeLuaCommand(command, getCommandArguments(message), chatId))
         {
             Command::ssend("Command not found:", chatId);
             HelpCommand cmd(chatId);
             exec(cmd, chatId, message);
+            return;
         }
-        return;
+
     }
 
     if (foundMessage)

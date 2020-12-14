@@ -15,4 +15,8 @@ function cmd.help()
      return "/lprice <ticker>"
 end
 
+function cmd.instructions()
+    return "Price command implemented in lua."
+end
+
 commands["/lprice"] = cmd

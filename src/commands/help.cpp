@@ -2,6 +2,7 @@
 #include <fmt/core.h>
 #include "../price_checker.h"
 #include "../constants.h"
+#include "../scripting/scripting.h"
 
 HelpCommand::HelpCommand(const std::int64_t chatId) : Command(COMMAND_HELP, 0, chatId)
 {
@@ -23,7 +24,7 @@ HelpCommand::~HelpCommand()
 
 void HelpCommand::commandLogic()
 {
-    send(std::string(
+    std::string instructions = std::string(
         "*Command List:*\n"
         "*/conv:* Converts from a currency amount to another.\n"
         "*/help:* Legend of commands.\n"
@@ -45,5 +46,16 @@ void HelpCommand::commandLogic()
         "*/tconv:* Sets an alarm when a certain conversion rate is reached.\n"
         "*/tconvcheck:* Check the status of a convertion.\n"
         "*/tconvdel:* Stops a tracking alarm.\n"
-        "*/tconvlist:* Lists convertions being tracked.\n"));
+        "*/tconvlist:* Lists convertions being tracked.\n");
+    
+
+    try
+    {
+        send(instructions + Scripting::shared_instance().getCommands());
+    }
+    catch(std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+
 }

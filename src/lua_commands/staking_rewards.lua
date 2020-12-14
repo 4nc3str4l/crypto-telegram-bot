@@ -17,7 +17,6 @@ function cmd.logic(arguments, chat_id)
     -- TODO: I need to get the fiat symbol
     msg = "Return year=" .. year_yield .. " month=" .. month .. "$ week=" .. week .. "$ day =" .. day .. "$ hour=" .. hour .. "$."
     send_message(msg, chat_id)
-
 end
 
 function cmd.num_arguments()
@@ -26,6 +25,10 @@ end
 
 function cmd.help()
      return "/srewards <amount> <ticker> <apy>"
+end
+
+function cmd.instructions()
+    return "Computes stacking rewards based on a quantity and the apy."
 end
 
 commands["/srewards"] = cmd

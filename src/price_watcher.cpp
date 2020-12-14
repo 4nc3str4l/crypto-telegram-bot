@@ -18,7 +18,7 @@ void PriceWatcher::start(TgBot::Bot *bot)
 
 void PriceWatcher::loadInitialData()
 {
-    for (const tracking_convertion& tc : Persistence::shared_instance().data.convertions)
+    for (const tracking_convertion &tc : Persistence::shared_instance().data.convertions)
     {
         this->tConvId = tc.id > this->tConvId ? tc.id : this->tConvId;
         m_trackingConvertions.push_back(tc);
@@ -42,7 +42,7 @@ void PriceWatcher::checkLoop()
     while (m_running)
     {
         m_mutex.lock();
-        for (const tracking_convertion& conv : m_trackingConvertions)
+        for (const tracking_convertion &conv : m_trackingConvertions)
         {
             std::string s = fmt::format("Or {} {} Target: {} {}\n", conv.orQuantity, conv.orTicker, conv.targetQuantity, conv.tTicker);
             fmt::print(s);
@@ -76,7 +76,7 @@ unsigned long PriceWatcher::addConvertion(const double orAmount, const std::stri
     unsigned long newId = tConvId++;
 
     // NOTE: Checks if the user is tracking convertions to higher values (to sell) or to lower (to buy)
-    bool isSell = computeConv(orAmount, orTicker, targetTicker) < targetAmount; 
+    bool isSell = computeConv(orAmount, orTicker, targetTicker) < targetAmount;
     m_trackingConvertions.push_back({newId, orTicker, orAmount, targetTicker, targetAmount, investorId, isSell});
     Persistence::shared_instance().saveConvertions(m_trackingConvertions);
     return newId;
@@ -87,13 +87,12 @@ int PriceWatcher::deleteConvertion(unsigned long convId, const std::int32_t inve
     int result = NOT_FOUND;
 
     std::lock_guard<std::mutex> guard(m_mutex);
-    auto it = std::find_if(m_trackingConvertions.begin(), m_trackingConvertions.end(), 
-        [convId](const tracking_convertion &c){
-            return c.id == convId;
-        }
-    );
+    auto it = std::find_if(m_trackingConvertions.begin(), m_trackingConvertions.end(),
+                           [convId](const tracking_convertion &c) {
+                               return c.id == convId;
+                           });
 
-    if(it != m_trackingConvertions.end())
+    if (it != m_trackingConvertions.end())
     {
         result = (*it).investorId == investorId ? OK : UNAUTHORIZED_OPERATION;
     }
@@ -126,13 +125,12 @@ std::optional<tracking_convertion> PriceWatcher::getConvertionWithId(unsigned lo
 {
     std::lock_guard<std::mutex> guard(m_mutex);
 
-    auto it = std::find_if(m_trackingConvertions.begin(), m_trackingConvertions.end(), 
-        [convId](const tracking_convertion &tc){
-            return tc.id == convId;
-        }
-    );
+    auto it = std::find_if(m_trackingConvertions.begin(), m_trackingConvertions.end(),
+                           [convId](const tracking_convertion &tc) {
+                               return tc.id == convId;
+                           });
 
-    if(it != m_trackingConvertions.end())
+    if (it != m_trackingConvertions.end())
     {
         return (*it);
     }

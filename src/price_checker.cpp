@@ -16,10 +16,12 @@ void PriceChecker::setApiKey(const std::string &apiKey)
 
 double PriceChecker::fetchPrice(const std::string &ticker)
 {
+    std::cout << "Trying to fetch price " << std::endl;
     if (!this->shouldFetchPrice(ticker))
     {
-        std::lock_guard<std::mutex> guard();
+        m_mutex.lock();
         double price = this->m_cachedPrices[ticker];
+        m_mutex.unlock();
         return price;
     }
 
