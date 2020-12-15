@@ -29,7 +29,7 @@
 
 #include "scripting/scripting.h"
 
-std::map<std::int64_t, std::string> lastMessage;
+std::unordered_map<std::int64_t, std::string> lastMessage;
 
 const std::vector<std::string> getCommandArguments(const std::string &command)
 {

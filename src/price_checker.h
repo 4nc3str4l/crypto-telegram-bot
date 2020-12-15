@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <chrono>
 #include <mutex>
 
@@ -25,11 +25,11 @@ public:
 
 private:
     bool shouldFetchPrice(const std::string &ticker);
-    void cachePrice(std::string ticker, double price);
+    void cachePrice(const std::string &ticker, double price);
 
 private:
     std::string m_apiKey;
     std::mutex m_mutex;
-    std::map<std::string, double> m_cachedPrices;
-    std::map<std::string, t> m_cachedTimes;
+    std::unordered_map<std::string, double> m_cachedPrices;
+    std::unordered_map<std::string, t> m_cachedTimes;
 };
