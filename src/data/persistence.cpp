@@ -91,6 +91,7 @@ void Persistence::savePortfolios(const std::vector<portfolio> &portfolios)
             {"investorId", c.investorId},
             {"invested", c.invested},
             {"name", c.name},
+            {"target", c.target},
         };
 
         auto assets = json::array();
@@ -172,6 +173,7 @@ void Persistence::loadTrackingPortfolios(const json &d)
             p["investorId"],
             p["invested"],
             p["name"],
+            p["target"]
         };
 
         auto assets = p["assets"];

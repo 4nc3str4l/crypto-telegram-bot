@@ -16,6 +16,7 @@ struct portfolio
     std::int32_t investorId;
     double invested;
     std::string name;
+    double target;
     std::vector<asset> assets;
 };
 

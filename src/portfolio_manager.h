@@ -22,7 +22,8 @@ public:
     std::optional<portfolio> getPortfolio(const unsigned long id);
     std::string listPortfolios(const std::int32_t investorId);
     std::optional<asset> getPortfolioAsset(const unsigned long id, const std::string &ticker);
-
+    void updateTarget(const unsigned long id, double amount);
+    
 private:
     PortfolioManager();
     void loadPortfolios();
@@ -31,3 +32,4 @@ private:
     std::mutex m_mutex;
     std::vector<portfolio> m_Portfolios;
 };
+

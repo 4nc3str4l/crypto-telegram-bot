@@ -23,6 +23,7 @@
 #include "commands/portfolio_list.h"
 #include "commands/portfolio_new.h"
 #include "commands/portfolio_remove.h"
+#include "commands/portfolio_target_set.h"
 #include "commands/repeat.h"
 
 #include "constants.h"
@@ -117,6 +118,11 @@ void parseMessage(const std::string& message, const std::int64_t chatId)
     else if (command == COMMAND_PORTFOLIO_SET)
     {
         PortfolioSet cmd(chatId);
+        exec(cmd, chatId, message);
+    }
+    else if (command == COMMAND_PORFOLIO_TAGET)
+    {
+        PortfolioTargetSet cmd(chatId);
         exec(cmd, chatId, message);
     }
     else if (command == COMMAND_PORTFOLIO_INV_DECREASE)

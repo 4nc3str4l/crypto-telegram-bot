@@ -35,6 +35,7 @@ void HelpCommand::commandLogic()
         "*/pinvdec:* Decreases the amount of money invested on a portfolio.\n"
         "*/pinvinc:* Increases the amount of money inested on portfolio.\n"
         "*/pinvset:* Sets the amount of money inested in portfolio.\n"
+        "*/ptarget:* Sets the expected amount to earn with the current portfolio.\n"
         "*/plist:* Returns a list with all portfolios.\n"
         "*/pnew:* Creates a new portfolio (avoid using spaces).\n"
         "*/prem:* Removes an asset from a portfolio.\n"

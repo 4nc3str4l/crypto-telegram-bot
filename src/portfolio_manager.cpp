@@ -85,6 +85,24 @@ void PortfolioManager::updateInvested(const unsigned long id, double amount)
     }
 }
 
+void PortfolioManager::updateTarget(const unsigned long id, double amount)
+{
+    std::lock_guard<std::mutex> guard(m_mutex);
+    auto it = std::find_if(m_Portfolios.begin(), m_Portfolios.end(), 
+        [id](const portfolio &p){
+            return p.id == id;
+        }
+    );
+    
+    if(it != m_Portfolios.end())
+    {
+        (*it).target = amount;
+        Persistence::shared_instance().savePortfolios(m_Portfolios);
+    }
+}
+
+
+
 void PortfolioManager::setAsset(std::string ticker, double amount, const unsigned long portfolioId)
 {
     if (amount < 0)

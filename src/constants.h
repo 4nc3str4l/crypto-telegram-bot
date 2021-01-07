@@ -25,6 +25,7 @@
 #define COMMAND_PORTFOLIO_INV_SET       "/pinvset"
 #define COMMAND_PORTFOLIO_LIST          "/plist"
 #define COMMAND_PORTFOLIO_REMOVE        "/prem"
+#define COMMAND_PORFOLIO_TAGET          "/ptarget"
 
 // HELP AND MYSC
 #define COMMAND_HELP                    "/help"

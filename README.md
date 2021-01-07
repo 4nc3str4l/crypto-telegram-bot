@@ -173,6 +173,17 @@ sends a message to the user when the convertion is valid.
 (Sets the the FIAT invested on a the portfolio 1 to 1000€)
 
 
+### Set Target For Portfolio
+**Description**: Sets how much FIAT currency you would like to have in  your portfolio
+
+```/ptarget <id> <fiat_quantity>```
+
+**example:**
+
+```/pset 1 1000```
+
+(Sets the the FIAT invested on the portfolio 1 to 1000€)
+
 ### Increase Invested in Portfolio
 **Description**: Increases  how much FIAT currency has been invested on the portfolio
 

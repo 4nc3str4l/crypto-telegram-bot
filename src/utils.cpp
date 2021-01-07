@@ -57,6 +57,7 @@ std::string getPorfolioInformation(const portfolio &p)
     double totalHoldings = 0;
     double gains = 0;
     double performace = 0;
+    double target = p.target;
     std::string assetString;
     for (const asset &a : p.assets)
     {
@@ -64,8 +65,12 @@ std::string getPorfolioInformation(const portfolio &p)
         totalHoldings += assetValue;
         assetString += fmt::format("*{}:* {} ({}{})\n", a.ticker, a.quantity, roundTo(assetValue, 2), CURRENCY_TICKER);
     }
+    
     gains = totalHoldings - p.invested;
     performace = ((totalHoldings / p.invested) - 1) * 100;
+    double missingToTarget = target-totalHoldings;
+    double percentage = totalHoldings / target * 100;
+
     std::string info(fmt::format("ID=*{}* *{}*\n", p.id, p.name));
     info += fmt::format("Invested: {}{}\n", p.invested, CURRENCY_TICKER);
     info += fmt::format("Total Holdings: {}{}\n", roundTo(totalHoldings, 2), CURRENCY_TICKER);
@@ -74,6 +79,13 @@ std::string getPorfolioInformation(const portfolio &p)
     {
         info += fmt::format("Performance: {}%\n", roundTo(performace, 2));
     }
+
+    if(totalHoldings == 0)
+    {
+        percentage = 0;
+    }
+    
+    info += fmt::format("Target: {}{} (Progress:{}%)\n", roundTo(target, 2), CURRENCY_TICKER, roundTo(percentage, 2));
     info += fmt::format("*Assets:*\n");
     info += assetString;
     return info;
